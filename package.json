@@ -30,7 +30,7 @@
   "scripts": {
     "clean": "rm -rf node_modules && rm -rf ./dist",
     "build": "npm run compile-enchanted-css && tsc",
-    "prepare-for-publish": "cp ./package.json ./dist/package.json && cp ./README.md ./dist/README.md && cp ./LICENSE.txt ./dist/LICENSE.txt && cp ./enchanted.css ./dist/enchanted.css && cp -r ./src/styles ./dist && rm -rf ./dist/_tests_ && rm -rf ./dist/stories",
+    "prepare-for-publish": "cp ./package.json ./dist/package.json && cp ./README.md ./dist/README.md && cp ./LICENSE.txt ./dist/LICENSE.txt && cp ./enchanted.css ./dist/enchanted.css && cp -r ./src/styles ./dist && cp -r ./src/eslint ./dist && rm -rf ./dist/_tests_ && rm -rf ./dist/stories",
     "lint": "eslint src",
     "lint-fix": "eslint src --fix",
     "test": "npm run test-unit",
