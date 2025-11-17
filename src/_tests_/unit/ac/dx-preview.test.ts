@@ -90,6 +90,7 @@ describe('DxPreview component testing', () => {
   };
 
   before(async () => {
+    await browser.setWindowSize(1600, 1200);
     await initSessionStorage();
     fetchMock.restore();
   });
@@ -607,9 +608,7 @@ describe('DxPreview component testing', () => {
     await expect(zoomPercentageButton).toHaveText('25%');
   });
 
-  // TODO: skip this test case for now since it is failing intermittently in pr checks
-  // This will be fixed on this ticket https://hclsw-jirads.atlassian.net/browse/DXQ-46193
-  it.skip('DxPreview - should toggle between 100% and fit-to-screen-percentage', async () => {
+  it('DxPreview - should toggle between 100% and fit-to-screen-percentage', async () => {
     render(
       html`
         <dx-preview open .items=${[mockImageItem]} ></dx-preview>
@@ -617,31 +616,42 @@ describe('DxPreview component testing', () => {
       document.body
     );
     const component = await $('dx-preview').getElement();
-    let zoomPercentageButton = await component.$(`>>>dx-button[data-testid="dx-preview-zoom-percentage-button"]`);
+    const getZoomPercentageButton = () => {
+      return component.$(`>>>dx-button[data-testid="dx-preview-zoom-percentage-button"]`);
+    };
+    let zoomPercentageButton = await getZoomPercentageButton();
     await zoomPercentageButton.waitForClickable();
-    await expect(zoomPercentageButton).toHaveText('50%');
 
-    await zoomPercentageButton.moveTo();
-    zoomPercentageButton = await component.$(`>>>dx-button[data-testid="dx-preview-zoom-percentage-button"]`);
-    await zoomPercentageButton.click();
-    await browser.waitUntil(
-      async () => {return (await zoomPercentageButton.getText() === '100%', {
-        timeout: 5000,
-        timeoutMsg: 'Expected zoom percentage to become "100%" after first click'
-      });}
-    );
-    await expect(zoomPercentageButton).toHaveText('100%');
+    const initialZoomText = await zoomPercentageButton.getText();
+    await expect(initialZoomText).not.toBe('100%');
 
+    zoomPercentageButton = await getZoomPercentageButton();
     await zoomPercentageButton.moveTo();
-    zoomPercentageButton = await component.$(`>>>dx-button[data-testid="dx-preview-zoom-percentage-button"]`);
     await zoomPercentageButton.click();
+
     await browser.waitUntil(
-      async () => {return (await zoomPercentageButton.getText() === '50%', {
+      async () => {
+        const btn = await getZoomPercentageButton();
+        return (await btn.getText() === '100%');
+      }, {
         timeout: 5000,
-        timeoutMsg: 'Expected zoom percentage to become "50%" after second click'
-      });}
+        timeoutMsg: `Expected zoom to become '100%' after first click (was: ${initialZoomText})`,
+      }
     );
-    await expect(zoomPercentageButton).toHaveText('50%');
+
+    zoomPercentageButton = await getZoomPercentageButton();
+    await zoomPercentageButton.moveTo();
+    await zoomPercentageButton.click();
+
+    await browser.waitUntil(
+      async () => {
+        const btn = await getZoomPercentageButton();
+        return (await btn.getText() === initialZoomText);
+      }, {
+        timeout: 5000,
+        timeoutMsg: `Expected zoom to return to '${initialZoomText}' after second click`,
+      }
+    );
   }); 
 
   it('DxPreview - should disable zoom-out buttons at min zoom level', async () => {
