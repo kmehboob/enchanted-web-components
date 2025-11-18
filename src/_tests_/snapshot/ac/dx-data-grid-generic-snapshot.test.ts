@@ -447,7 +447,7 @@ describe('DxDataGridGeneric - Snapshot testing', () => {
     await dataGrid.waitForDisplayed();
 
     await browser.setWindowSize(2000, SNAPSHOT_WINDOW_HEIGHT);
-    await expect(browser).toMatchFullPageSnapshot('dx-data-grid-generic-with-picker-width-of-2000-2', 100);
+    await expect(browser).toMatchFullPageSnapshot('dx-data-grid-generic-with-picker-width-of-2000-3');
 
     document.head.removeChild(link);
   });

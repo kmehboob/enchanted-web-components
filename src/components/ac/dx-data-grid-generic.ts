@@ -657,6 +657,14 @@ export class DxDataGridGeneric extends DxAcBaseElement {
     }
   }
 
+  public async focusOnLoadingContainer() {
+    await this.updateComplete;
+    const loadingContainer = this.renderRoot.querySelector('#table-loading-container') as HTMLDivElement;
+    if (loadingContainer) {
+      loadingContainer.focus();
+    }
+  }
+
   handleCellHeaderFocus(evt: FocusEvent, currentHoverField: string, index: number) {
     evt.stopPropagation();
     evt.preventDefault();
@@ -843,7 +851,13 @@ export class DxDataGridGeneric extends DxAcBaseElement {
       const columnsObj = this.columns as DxDataGridColDef[];
       if (this.isLoading === 'true') {
         return html`
-          <div part="${DATA_GRID_PARTS.TABLE_BODY_CONTAINER}">
+          <div
+            id="table-loading-container"
+            part="${DATA_GRID_PARTS.TABLE_BODY_CONTAINER}" 
+            role="status" 
+            tabindex="-1"
+            aria-label="${this.getMessage('output.message.loading.search.results')}"
+          >
             <dx-circular-progress></dx-circular-progress>
             <p data-testid="table-loading-text" part="${DATA_GRID_PARTS.TABLE_LOADING_TEXT}">${this.getMessage('output.message.loading.search.results')}</p>
           </div>
@@ -876,7 +890,7 @@ export class DxDataGridGeneric extends DxAcBaseElement {
               aria-rowindex="${index + 2}"
             >
               ${this.checkboxSelection === 'true' ? html`
-              <td part="${DATA_GRID_PARTS.TABLE_SELECT_CHECKBOX_CONTAINER}" role="cell">
+              <td part="${DATA_GRID_PARTS.TABLE_SELECT_CHECKBOX_CONTAINER}" role="gridcell">
                 <input
                   @click=${(evt: MouseEvent) => { return this.handleSelection(evt, index); }}
                   part=${this.getPartRowCheckbox(index)} 
@@ -897,7 +911,7 @@ export class DxDataGridGeneric extends DxAcBaseElement {
               return html`
               <td 
                 part="${DATA_GRID_PARTS.TABLE_CELL_CONTAINER} ${this.customeTableCellPart.replace('{index}', ind.toString())}"
-                role="cell"
+                role="gridcell"
               >
                 <div part="${DATA_GRID_PARTS.TABLE_COLUMN_AUTHORING_DIV.replace('{index}', ind.toString())}">
                   <div part="${DATA_GRID_PARTS.TABLE_COLUMN_AUTHORING_DIV_0.replace('{index}', ind.toString())}">
@@ -1209,9 +1223,20 @@ export class DxDataGridGeneric extends DxAcBaseElement {
     return this.invalidColDef
       ? html`<p data-testid="dx-invalid-columns-label">${this.getMessage('data.grid.invalid.column.definition')}</p>`
       : html`
-        <table part="${DATA_GRID_PARTS.TABLE_CONTAINER}" role="table">
-          ${this.renderTableHeader()}
-          ${this.renderTableBody()}
+        <table 
+          part="${DATA_GRID_PARTS.TABLE_CONTAINER}" 
+          role="grid" 
+          tabindex="-1" 
+          aria-colcount="${this.columns ? this.columns.length + (this.checkboxSelection === 'true' ? 1 : 0) : 1}"
+          aria-rowcount="${this.data?.searchItems ? this.data.searchItems.length + 1 : 2}"
+          aria-busy="${this.isLoading === 'true'}"
+        >
+          <thead>
+            ${this.renderTableHeader()}
+          </thead>
+          <tbody>
+            ${this.renderTableBody()}
+          </tbody>
         </table>
       `;
   }

@@ -815,4 +815,32 @@ describe('Data Grid Generic testing', () => {
     const focusedElement = element.shadowRoot?.activeElement?.getAttribute('data-testid');
     await expect(focusedElement).toBe(`dx-table-row-${rowIndexToFocus}`);
   });
+
+  it('DxDataGridGeneric - should focus on the loading container when focusOnLoadingContainer is called', async () => {
+    render(
+      html`
+        <dx-data-grid-generic .columns=${testColDef} isLoading=${true}></dx-data-grid-generic>
+      `,
+      document.body
+    );
+
+    const grid = document.querySelector('dx-data-grid-generic');
+
+    await waitFor(() => {
+      expect(grid).not.toBeNull();
+      expect(grid?.shadowRoot).not.toBeNull();
+    });
+
+    let loadingContainer: HTMLElement | null = null;
+    await waitFor(() => {
+      loadingContainer = grid!.shadowRoot!.querySelector('#table-loading-container');
+      expect(loadingContainer).toBeInstanceOf(HTMLElement);
+    });
+
+    await grid!.focusOnLoadingContainer();
+
+    await waitFor(() => {
+      expect(grid!.shadowRoot!.activeElement).toBe(loadingContainer);
+    });
+  });
 });
