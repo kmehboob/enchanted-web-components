@@ -8,6 +8,7 @@
 - Added `subtitle` part to `dx-data-grid-generic` component.
 
 ### Fixed
+- Improved accessibility of `dx-breadcrumbs` component for screen readers
 - Fix `dx-preview` component bug of previewing the same item will open the first index item in preview.
 
 ### Changed
