@@ -84,6 +84,8 @@ export class DxInputSelect extends DxAcBaseElement {
   
   @property({ type: String })
   ariaLabel = '';
+
+  private ignoreNextFocusOut = false;
   
   connectedCallback(): void {
     super.connectedCallback();
@@ -173,16 +175,14 @@ export class DxInputSelect extends DxAcBaseElement {
     }
   }
 
-  private ignoreNextFocusOut = false;
-
   private handleFocusOut(event: FocusEvent) {
-      // If user interacted with the dropdown list (e.g., scrollbar), ignore this focusout
+    // If user interacted with the dropdown list (e.g., scrollbar), ignore this focusout
     if (this.ignoreNextFocusOut) {
       this.ignoreNextFocusOut = false;
       return;
     }
     const related = event.relatedTarget as Element | null;
-      // If focus moves anywhere inside this component, do nothing
+    // If focus moves anywhere inside this component, do nothing
     if (related && this.contains(related)) {
       return;
     }
