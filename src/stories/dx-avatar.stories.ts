@@ -3,6 +3,10 @@ import { html } from 'lit';
 import '../components/ac/dx-avatar';
 import { AVATAR_VARIANT, AVATAR_TYPE, AVATAR_COLOR } from '../types/cssClassEnums';
 
+import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/link';
+import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/template';
+import testAvatarImageUrl from '../_tests_/assets/test-avatar-image.jpg';
+
 const meta: Meta = {
   title: 'Data display/dx-avatar',
   component: 'dx-avatar',
@@ -49,7 +53,7 @@ const meta: Meta = {
     imgUrl: {
       control: 'text',
       description: 'Image URL',
-      defaultValue: '',
+      defaultValue: testAvatarImageUrl,
     },
     iconUrl: {
       control: 'text',
@@ -71,10 +75,10 @@ const meta: Meta = {
     variant: AVATAR_VARIANT.AVATAR_LETTER,
     type: AVATAR_TYPE.AVATAR_ROUNDED,
     color: AVATAR_COLOR.AVATAR_DEFAULT_COLOR,
-    imgUrl: '',
-    iconUrl: '',
+    imgUrl: testAvatarImageUrl,
+    iconUrl: html`<icon-link></icon-link>`,
     avatarText: 'AB',
-    iconTemplate: '',
+    iconTemplate: html`<icon-template></icon-template>`,
   },
   parameters: {
     docs: {

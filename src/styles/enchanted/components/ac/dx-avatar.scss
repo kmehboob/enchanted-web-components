@@ -65,13 +65,13 @@
     height: 16px;
     width: 16px;
     border-radius: 2px;
-    padding: 4px;
+    --icon-theme-size: 16px;
   }
 
   &::part(avatar-icon-circular) {
-    height: 10px;
-    width: 12px;
-    padding: 5px;
+    line-height: 0;
+    box-sizing: border-box;
+    --icon-theme-size: 16px;
   }
 
   &::part(avatar-icon-template-rounded) {
@@ -81,13 +81,9 @@
   }
 
   &::part(avatar-icon-template-circular) {
-    height: 10px;
-    width: 12px;
     line-height: 0;
     box-sizing: border-box;
-    padding: 5px;
-    --icon-theme-height: 10px;
-    --icon-theme-width: 12px;
+    --icon-theme-size: 16px;
   }
 
   &::part(avatar-image-rounded) {
