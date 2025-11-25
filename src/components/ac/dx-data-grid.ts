@@ -44,8 +44,8 @@ import { TOOLTIP_PLACEMENT } from '../../types/cssClassEnums';
 import '@hcl-software/enchanted-icons-web-component/dist/apps/es/items--search--empty';
 import '@hcl-software/enchanted-icons-web-component/dist/apps/es/items--search--initial';
 
-import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/chevron--sort--up';
-import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/chevron--sort--down';
+import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/arrow--up';
+import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/arrow--down';
 import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/edit';
 import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/overflow-menu--horizontal';
 
@@ -764,7 +764,7 @@ export class DxDataGrid extends DxAcBaseElement {
 								<div part="${DATA_GRID_PARTS.TABLE_SORT_BUTTON_CONTAINER}">
 									<dx-icon-button
 										data-testid="dx-data-grid-sort-button-${SortOrder.ASC}-${index}"
-										.icon="${html`<icon-chevron-sort-up></icon-chevron-sort-up>`}"
+										.icon="${html`<icon-arrow-up></icon-arrow-up>`}"
 										id="dx-data-grid-sort-button-${SortOrder.ASC}-${index}"
 										tabindex=0
 										part="${this.getPartHeaderSort(sortHeaderField, SortOrder.ASC)} ${DATA_GRID_PARTS.TABLE_HEADER_ICON_BUTTON}"
@@ -777,7 +777,7 @@ export class DxDataGrid extends DxAcBaseElement {
 									</dx-icon-button>
 									<dx-icon-button
 										data-testid="dx-data-grid-sort-button-${SortOrder.DESC}-${index}"
-										.icon="${html`<icon-chevron-sort-down></icon-chevron-sort-down>`}"
+										.icon="${html`<icon-arrow-down></icon-arrow-down>`}"
 										tabindex=0
 										id="dx-data-grid-sort-button-${SortOrder.DESC}-${index}"
 										part="${this.getPartHeaderSort(sortHeaderField, SortOrder.DESC)} ${DATA_GRID_PARTS.TABLE_HEADER_ICON_BUTTON}"
