@@ -7,6 +7,7 @@
 ### Fixed
 
 ### Changed
+- Changed `dx-dialog` live region styling from a CSS class selector to a `part` attribute with `::part()` selector, ensuring proper accessibility and visual hiding inside shadow DOM. This resolves issues with screen reader announcements and visible text flashes on dialog open.
 
 ### Breaking changes
 
