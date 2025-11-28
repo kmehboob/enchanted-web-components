@@ -65,11 +65,6 @@ const meta: Meta = {
       description: 'Applies internal padding to the popover content',
     },
 
-    autoShowOnLoad: {
-      control: 'boolean',
-      description: 'Automatically shows the popover on component load',
-    },
-
     disableHover: {
       control: 'boolean',
       description: 'Disables hover-based show/hide behavior',
@@ -91,7 +86,6 @@ const meta: Meta = {
     inverse: 'light',
     arrow: undefined,
     withpadding: false,
-    autoShowOnLoad: false,
     disableHover: false,
     buttontext: 'Hover or Click Me',
   },
@@ -118,7 +112,6 @@ type Story = StoryObj<{
   inverse: 'light';
   arrow: DxPopoverArrowPosition | undefined;
   withpadding: boolean;
-  autoShowOnLoad: boolean;
   disableHover: boolean;
   buttontext: string;
 }>;
@@ -138,7 +131,6 @@ export const DxPopoverStory: Story = {
       .inverse=${args.inverse}
       .arrow=${args.arrow}
       ?withpadding=${args.withpadding}
-      ?autoShowOnLoad=${args.autoShowOnLoad}
       ?disableHover=${args.disableHover}
       style="position: absolute; margin-left: 10%;"
     >
