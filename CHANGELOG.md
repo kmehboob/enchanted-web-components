@@ -3,10 +3,12 @@
 ## Unreleased
 
 ### Added
+- Added new `placement` and `size` property for `dx-menu` component.
 
 ### Fixed
 
 ### Changed
+- Refactored menu placement logic using a switch statement for clarity and maintainability.
 
 ### Breaking changes
 
@@ -16,6 +18,7 @@
 - Added a new storybook component for `dx-popover`.
 - Added new property for disabling popover on hover in `dx-popover`.
 - Prevent dropdown closing when dragging scrollbar inside `<dx-input-select>`.
+
 
 ### Fixed
 - Fixed the disabled state bug of `dx-icon-button`.

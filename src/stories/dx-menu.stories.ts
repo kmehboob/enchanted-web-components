@@ -2,41 +2,73 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import '../components/ac/dx-menu';
 import '../components/ac/dx-menu-item';
+import '../components/ac/dx-button';
+import { DxMenuPlacement, DxMenuSize } from '../types/dx-menu';
+
+// Styling constants to avoid overly long inline style lines and satisfy max-len lint rule
+const containerStyle = [
+  'display: flex',
+  'justify-content: center',
+  'align-items: center',
+  'min-height: 400px',
+  'padding: 40px'
+].join('; ') + ';';
 
 /**
  * @typedef DxMenuProps
  * Props for the dx-menu web component.
  *
- * @property items - The menu items as an array of objects with label.
- * @property role - The ARIA role for the menu.
+ * @property items - The menu items as an array of objects with text and value.
+ * @property menuDelay - Delay in ms before opening the menu.
+ * @property placement - Menu placement relative to anchor: 'bottom-start' or 'bottom-end'.
+ * @property size - Menu size: 'sm' or 'md'.
  */
 export interface DxMenuProps {
-  items?: { label: string }[];
-  role?: string;
+  items?: { text: string; value: string }[];
+  menuDelay?: number;
+  placement?: DxMenuPlacement;
+  size?: DxMenuSize;
+  dropdownMinWidth?: string;
 }
 
 const meta: Meta<DxMenuProps> = {
   title: 'Navigation/dx-menu',
   tags: ['autodocs'],
   argTypes: {
-    items: { control: 'object', description: 'The menu items as an array of objects with label.', table: { defaultValue: { summary: '[]' } } },
-    role: { control: 'text', description: 'The ARIA role for the menu.', table: { defaultValue: { summary: '' } } },
+    items: { control: 'object', description: 'The menu items as an array of objects with text and value.', table: { defaultValue: { summary: '[]' } } },
+    menuDelay: { control: 'number', description: 'Delay in ms before opening the menu.', table: { defaultValue: { summary: '300' } } },
+    placement: { control: 'select', options: Object.values(DxMenuPlacement), description: 'Menu placement relative to anchor.', table: { defaultValue: { summary: DxMenuPlacement.BOTTOM_START } } },
+    size: { control: 'select', options: Object.values(DxMenuSize), description: 'Menu size.', table: { defaultValue: { summary: DxMenuSize.MEDIUM } } },
+    dropdownMinWidth: { control: 'text', description: 'CSS var --dropdown-menu-min-width (e.g., 240px).', table: { defaultValue: { summary: '' } } },
   },
   args: {
     items: [
-      { label: 'Menu 1' },
-      { label: 'Menu 2' },
-      { label: 'Menu 3' },
+      { text: 'Menu Item 1', value: '1' },
+      { text: 'Menu Item 2', value: '2' },
+      { text: 'Menu Item 3', value: '3' },
     ],
-    role: '',
+    menuDelay: 300,
+    placement: DxMenuPlacement.BOTTOM_START,
+    size: DxMenuSize.MEDIUM,
+    dropdownMinWidth: '240px',
   },
   render: (args) => {
     return html`
-      <dx-menu role="${args.role}">
-        ${args.items && args.items.map(item => {return html`<dx-menu-item label="${item.label}"></dx-menu-item>`;})}
-      </dx-menu>
+      <div style="${containerStyle}">
+        <dx-menu 
+          style=${args.dropdownMinWidth ? `--dropdown-menu-min-width: ${args.dropdownMinWidth};` : ''}
+          menuDelay=${args.menuDelay}
+          placement=${args.placement}
+          size=${args.size}
+        >
+          <dx-button slot="target-anchor" variant="contained" size="large" buttontext="Menu"></dx-button>
+          ${args.items && args.items.map((item) => { return html`
+            <dx-menu-item slot="menu-items" text="${item.text}" value="${item.value}"></dx-menu-item>
+          `; })}
+        </dx-menu>
+      </div>
     `;
-  },
+  },  
 };
 
 export default meta;
@@ -46,33 +78,121 @@ export const Default: Story = {};
 
 export const AllStates: Story = {
   render: () => {
+    const items = [
+      { text: 'Option 1', value: '1' },
+      { text: 'Option 2', value: '2' },
+      { text: 'Option 3', value: '3' },
+      { text: 'Option 4', value: '4' },
+    ];
+
+    const gridStyle = [
+      'display: grid',
+      'grid-template-columns: repeat(2, 1fr)',
+      'gap: 60px',
+      'padding: 40px',
+      'min-height: 600px'
+    ].join('; ') + ';';
+
+    const itemContainerStyle = [
+      'display: flex',
+      'flex-direction: column',
+      'align-items: center',
+      'gap: 20px'
+    ].join('; ') + ';';
+
+    const labelStyle = [
+      'font-weight: 600',
+      'font-size: 14px',
+      'color: #333'
+    ].join('; ') + ';';
+
+    // Open all menus via their public toggle to trigger internal scroll-lock/anchor
+    setTimeout(() => {
+      const menus = document.querySelectorAll('dx-menu');
+      menus.forEach((menu) => {
+        // eslint-why: Accessing component instance methods for testing convenience
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const menuElement = menu as any;
+
+        // Call the component's toggle once to open and lock scroll on its container
+        if (!menuElement.openMenu && typeof menuElement.toggleMenuOpen === 'function') {
+          menuElement.toggleMenuOpen(new MouseEvent('click'));
+        }
+
+        // Keep it open for snapshots: ignore subsequent toggles that would close
+        const originalToggle = menuElement.toggleMenuOpen;
+        menuElement.toggleMenuOpen = function(evt: MouseEvent | KeyboardEvent) {
+          if (!menuElement.openMenu) {
+            originalToggle.call(menuElement, evt);
+          }
+          // Do nothing if already open (prevents closing)
+        };
+      });
+    }, 200);
+
     return html`
-      <div style="display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-start;">
-        <div>
-          <div>Default</div>
-          <dx-menu>
-            <dx-menu-item label="Menu 1"></dx-menu-item>
-            <dx-menu-item label="Menu 2"></dx-menu-item>
-            <dx-menu-item label="Menu 3"></dx-menu-item>
+      <div style="${gridStyle}">
+        <!-- Small size, Bottom Start -->
+        <div style="${itemContainerStyle}">
+          <span style="${labelStyle}">Size: Small, Placement: Bottom Start</span>
+          <dx-menu 
+            style="--dropdown-menu-min-width: 240px;"
+            menuDelay="300"
+            placement="${DxMenuPlacement.BOTTOM_START}"
+            size="${DxMenuSize.SMALL}"
+          >
+            <dx-button slot="target-anchor" variant="contained" size="large" buttontext="Small - Bottom Start"></dx-button>
+            ${items.map((item) => { return html`
+              <dx-menu-item slot="menu-items" text="${item.text}" value="${item.value}"></dx-menu-item>
+            `; })}
           </dx-menu>
         </div>
-        <div>
-          <div>With role="menubar"</div>
-          <dx-menu role="menubar">
-            <dx-menu-item label="File"></dx-menu-item>
-            <dx-menu-item label="Edit"></dx-menu-item>
-            <dx-menu-item label="View"></dx-menu-item>
+
+        <!-- Small size, Bottom End -->
+        <div style="${itemContainerStyle}">
+          <span style="${labelStyle}">Size: Small, Placement: Bottom End</span>
+          <dx-menu 
+            style="--dropdown-menu-min-width: 240px;"
+            menuDelay="300"
+            placement="${DxMenuPlacement.BOTTOM_END}"
+            size="${DxMenuSize.SMALL}"
+          >
+            <dx-button slot="target-anchor" variant="contained" size="large" buttontext="Small - Bottom End"></dx-button>
+            ${items.map((item) => { return html`
+              <dx-menu-item slot="menu-items" text="${item.text}" value="${item.value}"></dx-menu-item>
+            `; })}
           </dx-menu>
         </div>
-        <div>
-          <div>Empty Menu</div>
-          <dx-menu></dx-menu>
+
+        <!-- Medium size, Bottom Start -->
+        <div style="${itemContainerStyle}">
+          <span style="${labelStyle}">Size: Medium, Placement: Bottom Start</span>
+          <dx-menu 
+            style="--dropdown-menu-min-width: 240px;"
+            menuDelay="300"
+            placement="${DxMenuPlacement.BOTTOM_START}"
+            size="${DxMenuSize.MEDIUM}"
+          >
+            <dx-button slot="target-anchor" variant="contained" size="large" buttontext="Medium - Bottom Start"></dx-button>
+            ${items.map((item) => { return html`
+              <dx-menu-item slot="menu-items" text="${item.text}" value="${item.value}"></dx-menu-item>
+            `; })}
+          </dx-menu>
         </div>
-        <div>
-          <div>Custom Content</div>
-          <dx-menu>
-            <li style="color: green;">Custom HTML Item</li>
-            <dx-menu-item label="Standard Item"></dx-menu-item>
+
+        <!-- Medium size, Bottom End -->
+        <div style="${itemContainerStyle}">
+          <span style="${labelStyle}">Size: Medium, Placement: Bottom End</span>
+          <dx-menu 
+            style="--dropdown-menu-min-width: 240px;"
+            menuDelay="300"
+            placement="${DxMenuPlacement.BOTTOM_END}"
+            size="${DxMenuSize.MEDIUM}"
+          >
+            <dx-button slot="target-anchor" variant="contained" size="large" buttontext="Medium - Bottom End"></dx-button>
+            ${items.map((item) => { return html`
+              <dx-menu-item slot="menu-items" text="${item.text}" value="${item.value}"></dx-menu-item>
+            `; })}
           </dx-menu>
         </div>
       </div>
