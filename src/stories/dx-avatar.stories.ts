@@ -20,8 +20,11 @@ const meta: Meta = {
         AVATAR_VARIANT.AVATAR_ICON_TEMPLATE,
         AVATAR_VARIANT.AVATAR_IMG,
       ],
-      description: 'Avatar variant',
-      defaultValue: AVATAR_VARIANT.AVATAR_LETTER,
+      description: 'Defines the content type displayed in the avatar (letter, icon, icon template, or image)',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: AVATAR_VARIANT.AVATAR_LETTER },
+      },
     },
     type: {
       control: { type: 'radio' },
@@ -29,8 +32,11 @@ const meta: Meta = {
         AVATAR_TYPE.AVATAR_ROUNDED,
         AVATAR_TYPE.AVATAR_CIRCULAR,
       ],
-      description: 'Avatar type',
-      defaultValue: AVATAR_TYPE.AVATAR_ROUNDED,
+      description: 'Defines the shape of the avatar (rounded corners or fully circular)',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: AVATAR_TYPE.AVATAR_ROUNDED },
+      },
     },
     color: {
       control: { type: 'radio' },
@@ -47,24 +53,35 @@ const meta: Meta = {
         AVATAR_COLOR.AVATAR_PURPLE,
         AVATAR_COLOR.AVATAR_PINK,
       ],
-      description: 'Avatar color',
-      defaultValue: AVATAR_COLOR.AVATAR_DEFAULT_COLOR,
+      description: 'Defines the background color of the avatar',
+      table: {
+        type: { summary: 'AVATAR_COLOR' },
+        defaultValue: { summary: AVATAR_COLOR.AVATAR_DEFAULT_COLOR },
+      },
     },
     imgUrl: {
-      control: 'text',
-      description: 'Image URL',
+      control: { type: 'text' },
+      description: 'URL of the image to display when variant is set to AVATAR_IMG',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
     },
     iconUrl: {
-      control: 'object',
-      description: 'Icon URL',
+      control: { type: 'object' },
+      description: 'Icon component to display when variant is set to AVATAR_ICON (Lit TemplateResult)',
     },
     avatarText: {
-      control: 'text',
-      description: 'Avatar text',
+      control: { type: 'text' },
+      description: 'Text to display when variant is set to AVATAR_LETTER (max 2 characters)',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'undefined' },
+      },
     },
     iconTemplate: {
-      control: 'object',
-      description: 'Icon template (SVG string)',
+      control: { type: 'object' },
+      description: 'Icon template to display when variant is set to AVATAR_ICON_TEMPLATE (Lit TemplateResult)',
     },
   },
   args: {
@@ -79,10 +96,12 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component: 'Avatar component with controls for type, variant, color, and content.'
-      }
-    }
-  }
+        component: 'Avatar component for displaying user profile pictures, initials, or icons. '
+          + 'Supports multiple variants (letter, icon, icon template, image), shapes (rounded, circular), '
+          + 'and a variety of color options. Letter avatars automatically truncate text to 2 characters.',
+      },
+    },
+  },
 };
 
 export default meta;
@@ -111,5 +130,13 @@ export const DxAvatar: Story = {
       ></dx-avatar>
     `;
   },
-  name: 'DxAvatar',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Default avatar with customizable variant, type, color, and content. '
+          + 'Switch between variants to see letters, icons, or images. '
+          + 'Try different colors and shapes to match your design requirements.',
+      },
+    },
+  },
 };
