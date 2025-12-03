@@ -46,6 +46,14 @@ export class DxMenu extends DxAcBaseElement {
   @state() componentId = uuid();
   @state() openMenu = false;
 
+  private scrollParent: HTMLElement | null = null;
+
+  private OnViewportChange = debounce(() => {
+    if (this.openMenu) {
+      this.anchorMenuToTarget();
+    }
+  }, 100);
+
   connectedCallback(): void {
     this.openMenu = this.open;
     super.connectedCallback();
@@ -57,8 +65,28 @@ export class DxMenu extends DxAcBaseElement {
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
+    if (this.scrollParent) {
+      this.scrollParent.style.overflow = '';
+    }
+    // Clean listeners
+    window.removeEventListener('resize', this.OnViewportChange);
   }
 
+  private getScrollableParent(element: HTMLElement | null): HTMLElement | null {
+    if (!element) return null;
+    let el: HTMLElement | null = element;
+    while (el && el !== document.body) {
+      const style = window.getComputedStyle(el);
+      const overflowY = style.overflowY;
+
+      if (overflowY === 'auto' || overflowY === 'scroll') {
+        return el;
+      }
+      el = el.parentElement;
+    }
+    return document.body;
+    
+  }
   anchorMenuToTarget() {
     const target: HTMLElement | null = this.renderRoot.querySelector(`#target${this.componentId}`);
     const menu: HTMLElement | null = this.renderRoot.querySelector(`#menu${this.componentId}`);
@@ -90,6 +118,20 @@ export class DxMenu extends DxAcBaseElement {
     evt.stopPropagation();
     evt.preventDefault();
     this.openMenu = !this.openMenu;
+    if (this.openMenu) {
+      this.scrollParent = this.getScrollableParent(this);
+      if (this.scrollParent) {
+        this.scrollParent.style.overflow = 'hidden';
+      }
+      // Listen for window resize to keep dropdown aligned
+      window.addEventListener('resize', this.OnViewportChange);
+    } else {
+      if (this.scrollParent) {
+        this.scrollParent.style.overflow = '';
+      }
+      window.removeEventListener('resize', this.OnViewportChange);
+    }
+
     // timeout is necessary to wait for the menu to be rendered
     setTimeout(() => {
       this.anchorMenuToTarget();

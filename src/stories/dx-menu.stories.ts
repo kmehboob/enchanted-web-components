@@ -106,31 +106,27 @@ export const AllStates: Story = {
       'color: #333'
     ].join('; ') + ';';
 
-    // Open all menus after they are rendered and prevent them from closing
+    // Open all menus via their public toggle to trigger internal scroll-lock/anchor
     setTimeout(() => {
       const menus = document.querySelectorAll('dx-menu');
       menus.forEach((menu) => {
-        // eslint-why: Need to access internal menu properties (openMenu, toggleMenuOpen, anchorMenuToTarget) not in public type
+        // eslint-why: Accessing component instance methods for testing convenience
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const menuElement = menu as any;
-        
-        // Override the toggleMenuOpen method to keep menus always open
+
+        // Call the component's toggle once to open and lock scroll on its container
+        if (!menuElement.openMenu && typeof menuElement.toggleMenuOpen === 'function') {
+          menuElement.toggleMenuOpen(new MouseEvent('click'));
+        }
+
+        // Keep it open for snapshots: ignore subsequent toggles that would close
         const originalToggle = menuElement.toggleMenuOpen;
         menuElement.toggleMenuOpen = function(evt: MouseEvent | KeyboardEvent) {
           if (!menuElement.openMenu) {
             originalToggle.call(menuElement, evt);
           }
-          // Prevent closing - do nothing if already open
+          // Do nothing if already open (prevents closing)
         };
-        
-        // Open the menu
-        menuElement.openMenu = true;
-        if (menuElement.requestUpdate) {
-          menuElement.requestUpdate();
-        }
-        setTimeout(() => {
-          menuElement.anchorMenuToTarget();
-        }, 350);
       });
     }, 200);
 
