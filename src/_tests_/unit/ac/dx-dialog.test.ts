@@ -418,13 +418,8 @@ describe('DxDialog component testing', () => {
         document.body
       );
       let component = await $('dx-dialog').getElement();
-      
-      // Tab to focus the close button
-      await browser.keys(['Tab']);
-      await browser.pause(100);
       await browser.keys(['Enter']);
       await browser.pause(400);
-      
       await expect(component).not.toHaveAttribute('open');
     });
 
@@ -437,9 +432,6 @@ describe('DxDialog component testing', () => {
       );
       let component = await $('dx-dialog').getElement();
       
-      // Tab to focus the close button
-      await browser.keys(['Tab']);
-      await browser.pause(100);
       await browser.keys([' ']);
       await browser.pause(400);
       
