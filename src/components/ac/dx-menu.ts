@@ -26,6 +26,7 @@ import './dx-list';
 // Helper imports
 import { BUTTON_PARTS, LIST_PARTS, MENU_PARTS } from '../../types/cssClassEnums';
 import { isLTR } from '../localization';
+import { DxMenuPlacement, DxMenuSize } from '../../types/dx-menu';
 
 @customElement('dx-menu')
 @localized()
@@ -36,8 +37,22 @@ export class DxMenu extends DxAcBaseElement {
   @property({ type: Number })
   menuDelay = 300;
 
+  @property({ type: String, reflect: true })
+  placement: DxMenuPlacement = DxMenuPlacement.BOTTOM_START;
+
+  @property({ type: String, reflect: true })
+  size: DxMenuSize = DxMenuSize.MEDIUM;
+
   @state() componentId = uuid();
   @state() openMenu = false;
+
+  private scrollParent: HTMLElement | null = null;
+
+  private OnViewportChange = debounce(() => {
+    if (this.openMenu) {
+      this.anchorMenuToTarget();
+    }
+  }, 100);
 
   connectedCallback(): void {
     this.openMenu = this.open;
@@ -50,8 +65,28 @@ export class DxMenu extends DxAcBaseElement {
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
+    if (this.scrollParent) {
+      this.scrollParent.style.overflow = '';
+    }
+    // Clean listeners
+    window.removeEventListener('resize', this.OnViewportChange);
   }
 
+  private getScrollableParent(element: HTMLElement | null): HTMLElement | null {
+    if (!element) return null;
+    let el: HTMLElement | null = element;
+    while (el && el !== document.body) {
+      const style = window.getComputedStyle(el);
+      const overflowY = style.overflowY;
+
+      if (overflowY === 'auto' || overflowY === 'scroll') {
+        return el;
+      }
+      el = el.parentElement;
+    }
+    return document.body;
+    
+  }
   anchorMenuToTarget() {
     const target: HTMLElement | null = this.renderRoot.querySelector(`#target${this.componentId}`);
     const menu: HTMLElement | null = this.renderRoot.querySelector(`#menu${this.componentId}`);
@@ -61,10 +96,21 @@ export class DxMenu extends DxAcBaseElement {
       const targetLeft = targetPosition.left;
       const targetRight = targetPosition.right;
       const targetTop = targetPosition.top + targetPosition.height;
+      const menuWidth = menu.offsetWidth;
       menu.style.position = 'absolute';
-      menu.style.left = `${isLTR() ? targetLeft : targetRight-100}px`;
       menu.style.top = `${targetTop}px`;
       menu.style.visibility = 'visible';
+
+      switch (this.placement) {
+        case DxMenuPlacement.BOTTOM_START:
+          menu.style.left = `${isLTR() ? targetLeft : targetRight - menuWidth}px`;
+          break;
+        case DxMenuPlacement.BOTTOM_END:
+          menu.style.left = `${targetRight - menuWidth}px`;
+          break;
+        default:
+          menu.style.left = `${isLTR() ? targetLeft : targetRight - menuWidth}px`;   
+      }  
     }
   }
 
@@ -72,6 +118,20 @@ export class DxMenu extends DxAcBaseElement {
     evt.stopPropagation();
     evt.preventDefault();
     this.openMenu = !this.openMenu;
+    if (this.openMenu) {
+      this.scrollParent = this.getScrollableParent(this);
+      if (this.scrollParent) {
+        this.scrollParent.style.overflow = 'hidden';
+      }
+      // Listen for window resize to keep dropdown aligned
+      window.addEventListener('resize', this.OnViewportChange);
+    } else {
+      if (this.scrollParent) {
+        this.scrollParent.style.overflow = '';
+      }
+      window.removeEventListener('resize', this.OnViewportChange);
+    }
+
     // timeout is necessary to wait for the menu to be rendered
     setTimeout(() => {
       this.anchorMenuToTarget();
