@@ -265,6 +265,8 @@ export enum INPUT_TEXTFIELD_PARTS {
   INPUT_ICON_CLEAR_RTL = 'input-icon-clear-rtl',
   INPUT_ICON_BOTH = 'input-icon-both',
   INPUT_ICON_BOTH_RTL = 'input-icon-both-rtl',
+  LABEL = 'label',
+  LABEL_DISABLED = 'label-disabled',
   ICON = 'icon',
   ICON_CLEAR = 'icon-clear',
   ICON_CLEAR_RTL = 'icon-clear-rtl',

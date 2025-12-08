@@ -31,6 +31,11 @@
     font-weight: 600;
     font-size: 12px;
     font-style: normal;
+    color: palette.clr(light, text, secondary);
+  }
+
+  &::part(label-disabled) {
+    color: palette.clr(light, text, disabled);
   }
 
   &::part(input) {
@@ -46,6 +51,10 @@
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
+  }
+
+  &::part(input-disabled) {
+    background-color: palette.clr(light, action, disabledBackground);
   }
 
   &::part(input)::placeholder {
