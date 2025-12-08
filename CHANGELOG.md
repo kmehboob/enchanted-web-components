@@ -4,7 +4,7 @@
 
 ### Added
 - Add `dx-data-grid-generic` storybook story
-- Add `iconUrl` property to the `dx-chip` component
+- Add `icon` property to the `dx-chip` component
 
 ### Fixed
 - Fix the `XS` size of the `dx-dialog` component
@@ -21,7 +21,6 @@
 - Adjust `dx-snackbar` stylings
 
 ### Breaking changes
-- Adjust the `dx-chip` interface, `iconUrl` is renamed to `icon`
 
 ## 1.4.0
 
