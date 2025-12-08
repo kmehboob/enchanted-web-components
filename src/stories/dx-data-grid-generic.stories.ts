@@ -34,12 +34,12 @@ import { DxDataGridContextType } from '../components/ac/contexts/dx-data-grid-co
  * @property tableHover - Enables hover effects on table rows
  */
 export interface DxDataGridGenericProps {
-  isLoading?: string;
+  isLoading?: boolean;
   data?: DxDataGridContextType;
   columns?: DxDataGridColDef[];
-  hasMiddlewareError?: string;
-  hasContentSourceAvailable?: string;
-  checkboxSelection?: string;
+  hasMiddlewareError?: boolean;
+  hasContentSourceAvailable?: boolean;
+  checkboxSelection?: boolean;
   isFeatureTagCloudEnabled?: boolean;
   specialFields?: string[];
   isRowClickable?: boolean;
@@ -91,14 +91,13 @@ const meta: Meta<DxDataGridGenericProps> = {
   tags: ['autodocs'],
   argTypes: {
     isLoading: {
-      control: { type: 'radio' },
-      options: ['true', 'false'],
-      description: 'Indicates if the data grid is in a loading state, showing a loading spinner. Use string "true" or "false" values.',
-      table: { category: 'State', type: { summary: 'string' }, defaultValue: { summary: '"false"' } },
+      control: { type: 'boolean' },
+      description: 'Indicates if the data grid is in a loading state, showing a loading spinner.',
+      table: { category: 'State', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     data: {
       control: { type: 'object' },
-      description: 'The data context containing rows to display in the grid. Should be an object with a rows array property containing row data objects.',
+      description: 'The data context containing search items to display in the grid. Should be an object with searchItems array, total count, page, pageSize, and sorting info.',
       table: { category: 'Content', type: { summary: 'DxDataGridContextType' }, defaultValue: { summary: '{}' } },
     },
     columns: {
@@ -107,22 +106,19 @@ const meta: Meta<DxDataGridGenericProps> = {
       table: { category: 'Content', type: { summary: 'DxDataGridColDef[]' }, defaultValue: { summary: '[]' } },
     },
     hasMiddlewareError: {
-      control: { type: 'radio' },
-      options: ['true', 'false'],
+      control: { type: 'boolean' },
       description: 'Indicates if there\'s a middleware error preventing data loading. When true, shows error state UI instead of data.',
-      table: { category: 'State', type: { summary: 'string' }, defaultValue: { summary: '"false"' } },
+      table: { category: 'State', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     hasContentSourceAvailable: {
-      control: { type: 'radio' },
-      options: ['true', 'false'],
+      control: { type: 'boolean' },
       description: 'Indicates if content source is available for the grid. When false, may show empty state or limited functionality.',
-      table: { category: 'State', type: { summary: 'string' }, defaultValue: { summary: '"false"' } },
+      table: { category: 'State', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     checkboxSelection: {
-      control: { type: 'radio' },
-      options: ['true', 'false'],
+      control: { type: 'boolean' },
       description: 'Enables checkbox selection for rows. When true, adds checkboxes to each row for multi-selection capabilities.',
-      table: { category: 'Behavior', type: { summary: 'string' }, defaultValue: { summary: '"false"' } },
+      table: { category: 'Behavior', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     isFeatureTagCloudEnabled: {
       control: { type: 'boolean' },
@@ -153,16 +149,16 @@ const meta: Meta<DxDataGridGenericProps> = {
       control: { type: 'radio' },
       options: ['true', 'false'],
       description: 'Enables hover effects on table rows. When true, rows highlight on mouse hover for better visual feedback.',
-      table: { category: 'Display', type: { summary: 'string' }, defaultValue: { summary: '"false"' } },
+      table: { category: 'Display', type: { summary: 'string' }, defaultValue: { summary: 'false' } },
     },
   },
   args: {
-    isLoading: 'false',
+    isLoading: false,
     data: sampleData,
     columns: sampleColumns,
-    hasMiddlewareError: 'false',
-    hasContentSourceAvailable: 'false',
-    checkboxSelection: 'false',
+    hasMiddlewareError: false,
+    hasContentSourceAvailable: false,
+    checkboxSelection: false,
     isFeatureTagCloudEnabled: false,
     specialFields: [],
     isRowClickable: false,
@@ -193,9 +189,9 @@ export const DxDataGridGeneric: Story = {
         .hasMiddlewareError=${args.hasMiddlewareError}
         .hasContentSourceAvailable=${args.hasContentSourceAvailable}
         .checkboxSelection=${args.checkboxSelection}
-        ?isFeatureTagCloudEnabled=${args.isFeatureTagCloudEnabled}
+        .isFeatureTagCloudEnabled=${args.isFeatureTagCloudEnabled}
         .specialFields=${args.specialFields}
-        ?isRowClickable=${args.isRowClickable}
+        .isRowClickable=${args.isRowClickable}
         .customTableHeaderPart=${args.customTableHeaderPart}
         .customeTableCellPart=${args.customeTableCellPart}
         .tableHover=${args.tableHover}
@@ -242,7 +238,7 @@ export const AllStates: Story = {
         <div>
           <h3 style="margin: 0 0 16px 0;">Basic Data Grid</h3>
           <dx-data-grid-generic
-            .isLoading=${'false'}
+            ?isLoading=${false}
             .data=${sampleData}
             .columns=${sampleColumns}
           ></dx-data-grid-generic>
@@ -252,10 +248,10 @@ export const AllStates: Story = {
         <div>
           <h3 style="margin: 0 0 16px 0;">With Checkbox Selection</h3>
           <dx-data-grid-generic
-            .isLoading=${'false'}
+            ?isLoading=${false}
             .data=${sampleData}
             .columns=${sampleColumns}
-            .checkboxSelection=${'true'}
+            ?checkboxSelection=${true}
           ></dx-data-grid-generic>
         </div>
 
@@ -263,7 +259,7 @@ export const AllStates: Story = {
         <div>
           <h3 style="margin: 0 0 16px 0;">With Table Hover</h3>
           <dx-data-grid-generic
-            .isLoading=${'false'}
+            ?isLoading=${false}
             .data=${sampleData}
             .columns=${sampleColumns}
             .tableHover=${'true'}
@@ -274,7 +270,7 @@ export const AllStates: Story = {
         <div>
           <h3 style="margin: 0 0 16px 0;">Clickable Rows</h3>
           <dx-data-grid-generic
-            .isLoading=${'false'}
+            ?isLoading=${false}
             .data=${sampleData}
             .columns=${sampleColumns}
             ?isRowClickable=${true}
@@ -286,7 +282,7 @@ export const AllStates: Story = {
         <div>
           <h3 style="margin: 0 0 16px 0;">With Action Columns</h3>
           <dx-data-grid-generic
-            .isLoading=${'false'}
+            ?isLoading=${false}
             .data=${sampleData}
             .columns=${columnsWithActions}
           ></dx-data-grid-generic>
@@ -296,7 +292,7 @@ export const AllStates: Story = {
         <div>
           <h3 style="margin: 0 0 16px 0;">Loading State</h3>
           <dx-data-grid-generic
-            .isLoading=${'true'}
+            ?isLoading=${true}
             .data=${sampleData}
             .columns=${sampleColumns}
           ></dx-data-grid-generic>
@@ -306,7 +302,7 @@ export const AllStates: Story = {
         <div>
           <h3 style="margin: 0 0 16px 0;">Empty State (No Data)</h3>
           <dx-data-grid-generic
-            .isLoading=${'false'}
+            ?isLoading=${false}
             .data=${{ searchItems: [] }}
             .columns=${sampleColumns}
           ></dx-data-grid-generic>
@@ -316,10 +312,10 @@ export const AllStates: Story = {
         <div>
           <h3 style="margin: 0 0 16px 0;">Error State (Middleware Error)</h3>
           <dx-data-grid-generic
-            .isLoading=${'false'}
+            ?isLoading=${false}
             .data=${sampleData}
             .columns=${sampleColumns}
-            .hasMiddlewareError=${'true'}
+            ?hasMiddlewareError=${true}
           ></dx-data-grid-generic>
         </div>
       </div>

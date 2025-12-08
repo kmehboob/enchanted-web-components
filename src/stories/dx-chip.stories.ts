@@ -12,7 +12,7 @@ const meta: Meta = {
     name: {
       control: { type: 'text' },
       description: 'The text label displayed on the chip. This is the primary content that identifies the chip.',
-      table: { category: 'Content', type: { summary: 'string' }, defaultValue: { summary: "''" } },
+      table: { category: 'Content', type: { summary: 'string' }, defaultValue: { summary: '' } },
     },
     count: {
       control: { type: 'number', min: 0, max: 99, step: 1 },
@@ -73,7 +73,7 @@ export const DxChip: Story = {
       <dx-chip
         .name=${args.name}
         .count=${args.count}
-        .iconUrl=${html`<icon-checkmark size='16'></icon-checkmark>`}
+        .icon=${html`<icon-checkmark size='16'></icon-checkmark>`}
         ?showChipCount=${args.showChipCount}
         ?showAvatar=${args.showAvatar}
         ?clearIcon=${args.clearIcon}
@@ -104,8 +104,8 @@ export const AllStates: StoryObj = {
         <div>
           <h3>Chips with Avatar</h3>
           <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-            <dx-chip .name=${'Avatar Chip'} .iconUrl=${html`<icon-checkmark size='16'></icon-checkmark>`} ?showAvatar=${true}></dx-chip>
-            <dx-chip .name=${'Avatar + Count'} .count=${12} .iconUrl=${html`<icon-checkmark size='16'></icon-checkmark>`} ?showAvatar=${true} ?showChipCount=${true}></dx-chip>
+            <dx-chip .name=${'Avatar Chip'} .icon=${html`<icon-checkmark size='16'></icon-checkmark>`} ?showAvatar=${true}></dx-chip>
+            <dx-chip .name=${'Avatar + Count'} .count=${12} .icon=${html`<icon-checkmark size='16'></icon-checkmark>`} ?showAvatar=${true} ?showChipCount=${true}></dx-chip>
           </div>
         </div>
 
@@ -118,7 +118,7 @@ export const AllStates: StoryObj = {
             <dx-chip .name=${'Clear + Count'} .count=${8} ?clearIcon=${true} ?showChipCount=${true}>
               <div slot="clear-icon"><icon-close size='16'></icon-close></div>
             </dx-chip>
-            <dx-chip .name=${'Clear + Avatar'} ?clearIcon=${true} .iconUrl=${html`<icon-checkmark size='16'></icon-checkmark>`} ?showAvatar=${true}>
+            <dx-chip .name=${'Clear + Avatar'} ?clearIcon=${true} .icon=${html`<icon-checkmark size='16'></icon-checkmark>`} ?showAvatar=${true}>
               <div slot="clear-icon"><icon-close size='16'></icon-close></div>
             </dx-chip>
           </div>
@@ -127,7 +127,7 @@ export const AllStates: StoryObj = {
         <div>
           <h3>All Features Combined</h3>
           <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-            <dx-chip .name=${'Full Featured'} .count=${25} .iconUrl=${html`<icon-checkmark size='16'></icon-checkmark>`} ?showAvatar=${true} ?showChipCount=${true} ?clearIcon=${true}>
+            <dx-chip .name=${'Full Featured'} .count=${25} .icon=${html`<icon-checkmark size='16'></icon-checkmark>`} ?showAvatar=${true} ?showChipCount=${true} ?clearIcon=${true}>
               <div slot="clear-icon"><icon-close size='16'></icon-close></div>
             </dx-chip>
           </div>
@@ -138,14 +138,14 @@ export const AllStates: StoryObj = {
           <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
             <dx-chip .name=${'Disabled Basic'} ?disabled=${true}></dx-chip>
             <dx-chip .name=${'Disabled + Count'} .count=${7} ?disabled=${true} ?showChipCount=${true}></dx-chip>
-            <dx-chip .name=${'Disabled + Avatar'} .iconUrl=${html`<icon-checkmark size='16'></icon-checkmark>`} ?disabled=${true} ?showAvatar=${true}></dx-chip>
+            <dx-chip .name=${'Disabled + Avatar'} .icon=${html`<icon-checkmark size='16'></icon-checkmark>`} ?disabled=${true} ?showAvatar=${true}></dx-chip>
             <dx-chip .name=${'Disabled + Clear'} ?disabled=${true} ?clearIcon=${true}>
               <div slot="clear-icon"><icon-close size='16'></icon-close></div>
             </dx-chip>
             <dx-chip
               .name=${'Disabled Full'}
               .count=${42}
-              .iconUrl=${html`<icon-checkmark size='16'></icon-checkmark>`}
+              .icon=${html`<icon-checkmark size='16'></icon-checkmark>`}
               ?disabled=${true}
               ?showAvatar=${true}
               ?showChipCount=${true}
@@ -163,7 +163,7 @@ export const AllStates: StoryObj = {
             <dx-chip
               .name=${'Long Name with Features'}
               .count=${99}
-              .iconUrl=${html`<icon-checkmark size='16'></icon-checkmark>`}
+              .icon=${html`<icon-checkmark size='16'></icon-checkmark>`}
               ?showAvatar=${true}
               ?showChipCount=${true}
               ?clearIcon=${true}
