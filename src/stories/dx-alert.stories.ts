@@ -39,7 +39,7 @@ const meta: Meta = {
       description: 'The message text to display in the alert',
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: '""' },
+        defaultValue: { summary: '' },
       },
     },
     width: {

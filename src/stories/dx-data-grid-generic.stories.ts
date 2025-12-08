@@ -142,12 +142,12 @@ const meta: Meta<DxDataGridGenericProps> = {
     customTableHeaderPart: {
       control: { type: 'text' },
       description: 'Custom CSS part name for table header styling. Allows external styling of header elements through CSS shadow parts.',
-      table: { category: 'Styling', type: { summary: 'string' }, defaultValue: { summary: '""' } },
+      table: { category: 'Styling', type: { summary: 'string' }, defaultValue: { summary: '' } },
     },
     customeTableCellPart: {
       control: { type: 'text' },
       description: 'Custom CSS part name for table cell styling. Allows external styling of cell elements through CSS shadow parts.',
-      table: { category: 'Styling', type: { summary: 'string' }, defaultValue: { summary: '""' } },
+      table: { category: 'Styling', type: { summary: 'string' }, defaultValue: { summary: '' } },
     },
     tableHover: {
       control: { type: 'radio' },

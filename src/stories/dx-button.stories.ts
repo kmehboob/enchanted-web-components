@@ -100,12 +100,12 @@ const meta: Meta<DxButtonProps> = {
     ariaLabel: {
       control: 'text',
       description: 'Accessible label for screen readers when button text is insufficient to describe the action, particularly important for icon-only buttons.',
-      table: { category: 'Accessibility', type: { summary: 'string' }, defaultValue: { summary: '""' } },
+      table: { category: 'Accessibility', type: { summary: 'string' }, defaultValue: { summary: '' } },
     },
     ariaHasPopup: {
       control: 'text',
       description: 'ARIA attribute indicating the button opens a popup element (menu, dialog, listbox, etc.). Helps screen readers announce popup behavior.',
-      table: { category: 'Accessibility', type: { summary: 'string' }, defaultValue: { summary: '""' } },
+      table: { category: 'Accessibility', type: { summary: 'string' }, defaultValue: { summary: '' } },
     },
     ariaExpanded: {
       control: 'text',

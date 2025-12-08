@@ -53,7 +53,7 @@ const meta: Meta = {
       description: 'Main label text displayed in the accordion header',
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: '""' },
+        defaultValue: { summary: '' },
       },
     },
     secondaryText: {
@@ -61,7 +61,7 @@ const meta: Meta = {
       description: 'Secondary text displayed below the label (when showSecondaryText is true)',
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: '""' },
+        defaultValue: { summary: '' },
       },
     },
   },
