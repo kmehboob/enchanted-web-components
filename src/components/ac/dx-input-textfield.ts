@@ -61,9 +61,6 @@ export class DxInputTextfield extends DxAcBaseElement {
   @property({ type: Boolean })
   disabled = false;
 
-  @property({ type: Boolean }) 
-  ignoreDisable = false;
-
   @property({ type: String })
   clearIconUrl = '';
 
@@ -239,6 +236,9 @@ export class DxInputTextfield extends DxAcBaseElement {
 
         if (this.disabled) part = `${part} ${INPUT_TEXTFIELD_PARTS.ICON_ACTION_DISABLED}`;
         break;
+      case INPUT_TEXTFIELD_PARTS.LABEL:
+        part = this.disabled ? `${INPUT_TEXTFIELD_PARTS.LABEL} ${INPUT_TEXTFIELD_PARTS.LABEL_DISABLED}` : INPUT_TEXTFIELD_PARTS.LABEL;
+        break;
       default:
         break;
     }    
@@ -254,7 +254,7 @@ export class DxInputTextfield extends DxAcBaseElement {
     return html`
       <div part="div">
         ${this.label
-          ? html`<label data-testid="dx-input-textfield-label" for=${`input-${this.field}`} part="label">${this.label}</label>`
+          ? html`<label data-testid="dx-input-textfield-label" for=${`input-${this.field}`} part="${this.getInputParts(INPUT_TEXTFIELD_PARTS.LABEL)}">${this.label}</label>`
           : nothing }
         <input
           tabIndex=1
@@ -269,7 +269,7 @@ export class DxInputTextfield extends DxAcBaseElement {
           @focus=${this.handleFocus}
           id=${`input-${this.field}`}
           .value=${this.value}
-          ?disabled=${this.ignoreDisable ? false : this.disabled}
+          ?disabled=${this.disabled}
           autocomplete=${this.autocomplete}
           aria-label=${this.ariaLabel || this.placeholder || this.getMessage('input.textfield.placeholder.type.to.search')}
         />

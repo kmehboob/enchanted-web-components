@@ -3,12 +3,28 @@
 ## Unreleased
 
 ### Added
+- Add `dx-data-grid-generic` storybook story
+- Add `icon` property to the `dx-chip` component
 
 ### Fixed
+- Fix the `XS` size of the `dx-dialog` component
+- Fix the `disabled` state for the `dx-header` component
 
 ### Changed
+- Check and rework all storybook stories
+- Adjust `dx-chip` stylings
+- Adjust `dx-datepicker` stylings
+- Adjust `dx-input-select` stylings
+- Adjust `dx-input-textfield` stylings
+- Adjust `dx-multiple-select-chip` stylings
+- Adjust `dx-snackbar` stylings
 
 ### Breaking changes
+- Remove unused `error` property from the `dx-multiple-select-chip` component
+- Remove unused `color` property from the `dx-header` component
+- Change `dx-data-grid-generic` interface propertie types (isLoading, hasMiddlewareError, hasContentSourceAvailable, checkboxSelection)
+- Remove the `ignoreDisable` property from the `dx-input-textfield` component
+- Remove useless `open` property from `dx-menu` component
 
 ## 1.4.0
 
