@@ -13,7 +13,6 @@ import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/search';
  * @property label - The label for the textfield.
  * @property placeholder - The placeholder text for the textfield.
  * @property disabled - If true, disables the textfield.
- * @property ignoreDisable - If true, ignores disabled state for specific use cases.
  * @property clearIconUrl - The URL or SVG template for the clear icon.
  * @property actionIconUrl - The URL or SVG template for the action icon.
  * @property field - Field type or name for the input textfield.
@@ -27,7 +26,6 @@ export interface DxInputTextfieldProps {
   label?: string;
   placeholder?: string;
   disabled?: boolean;
-  ignoreDisable?: boolean;
   clearIconUrl?: string | unknown;
   actionIconUrl?: string | unknown;
   field?: string;
@@ -74,11 +72,6 @@ const meta: Meta<DxInputTextfieldProps> = {
       description: 'Disables the textfield, preventing user input and interaction. The field appears grayed out and does not accept focus or keyboard input.',
       table: { category: 'State', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
-    ignoreDisable: {
-      control: { type: 'boolean' },
-      description: 'Ignores the disabled state for specific use cases. Advanced property for custom disabled behavior handling in complex scenarios.',
-      table: { category: 'State', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
-    },
     clearIconUrl: {
       control: { type: 'object' },
       description: 'URL or SVG template for the clear icon button. Displays when the field has content, allowing users to quickly clear the input value.',
@@ -114,7 +107,6 @@ const meta: Meta<DxInputTextfieldProps> = {
     label: 'Text Field',
     placeholder: 'Enter text',
     disabled: false,
-    ignoreDisable: false,
     clearIconUrl: html`<icon-close size="16" color="black"></icon-close>`,
     actionIconUrl: html`<icon-search size="16" color="black"></icon-search>`,
     field: '',
@@ -129,7 +121,6 @@ const meta: Meta<DxInputTextfieldProps> = {
       label="${args.label}"
       placeholder="${args.placeholder}"
       ?disabled=${args.disabled}
-      ?ignoreDisable=${args.ignoreDisable}
       .clearIconUrl=${args.clearIconUrl}
       .actionIconUrl=${args.actionIconUrl}
       field="${args.field}"

@@ -61,9 +61,6 @@ export class DxInputTextfield extends DxAcBaseElement {
   @property({ type: Boolean })
   disabled = false;
 
-  @property({ type: Boolean }) 
-  ignoreDisable = false;
-
   @property({ type: String })
   clearIconUrl = '';
 
@@ -272,7 +269,7 @@ export class DxInputTextfield extends DxAcBaseElement {
           @focus=${this.handleFocus}
           id=${`input-${this.field}`}
           .value=${this.value}
-          ?disabled=${this.ignoreDisable ? false : this.disabled}
+          ?disabled=${this.disabled}
           autocomplete=${this.autocomplete}
           aria-label=${this.ariaLabel || this.placeholder || this.getMessage('input.textfield.placeholder.type.to.search')}
         />

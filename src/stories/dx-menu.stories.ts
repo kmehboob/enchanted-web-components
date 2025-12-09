@@ -23,7 +23,6 @@ const containerStyle = [
  * @property placement - Menu placement relative to anchor: 'bottom-start' or 'bottom-end'.
  * @property size - Menu size: 'sm' or 'md'.
  * @property dropdownMinWidth - CSS custom property for minimum dropdown width.
- * @property open - Initial open state of the menu.
  */
 export interface DxMenuProps {
   items?: { text: string; value: string }[];
@@ -31,7 +30,6 @@ export interface DxMenuProps {
   placement?: DxMenuPlacement;
   size?: DxMenuSize;
   dropdownMinWidth?: string;
-  open?: boolean;
 }
 
 const meta: Meta<DxMenuProps> = {
@@ -65,11 +63,6 @@ const meta: Meta<DxMenuProps> = {
       description: 'Minimum width for the dropdown menu. Set via CSS custom property --dropdown-menu-min-width. Example values: "240px", "200px", "300px".',
       table: { category: 'Styling', type: { summary: 'string' }, defaultValue: { summary: '' } },
     },
-    open: {
-      control: { type: 'boolean' },
-      description: 'Controls initial open state of the menu. When true, menu displays on mount. Use for programmatic control of menu visibility.',
-      table: { category: 'State', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
-    },
   },
   args: {
     items: [
@@ -81,7 +74,6 @@ const meta: Meta<DxMenuProps> = {
     placement: DxMenuPlacement.BOTTOM_START,
     size: DxMenuSize.MEDIUM,
     dropdownMinWidth: '240px',
-    open: false,
   },
   parameters: {
     docs: {
@@ -100,7 +92,6 @@ const meta: Meta<DxMenuProps> = {
           menuDelay=${args.menuDelay}
           placement=${args.placement}
           size=${args.size}
-          ?open=${args.open}
         >
           <dx-button slot="target-anchor" variant="contained" size="large" buttontext="Menu"></dx-button>
           ${args.items && args.items.map((item) => { return html`
