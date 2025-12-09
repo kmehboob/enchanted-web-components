@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-dialog';
+import '../components/atomic-component/enchanted-dialog';
 import { DialogSizes } from '../types/enchanted-dialog';
 
 const meta: Meta = {

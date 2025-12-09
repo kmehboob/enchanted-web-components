@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-header';
+import '../components/atomic-component/enchanted-header';
 import { HEADER_VARIANT } from '../types/cssClassEnums';
 
 const meta: Meta = {

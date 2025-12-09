@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-item-type-avatar';
+import '../components/atomic-component/enchanted-item-type-avatar';
 import { ICON_ITEM_TYPE } from '../types/enchanted-svg-icon';
 
 /**

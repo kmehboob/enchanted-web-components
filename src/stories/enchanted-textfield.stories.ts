@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-textfield';
+import '../components/atomic-component/enchanted-textfield';
 import { svgIconClear } from '../_tests_/assets/svg-clear';
 import { svgIconSearch } from '../_tests_/assets/svg-search';
 

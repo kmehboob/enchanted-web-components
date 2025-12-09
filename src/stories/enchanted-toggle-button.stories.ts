@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-toggle-button';
-import '../components/ac/enchanted-badge';
-import '../components/ac/enchanted-icon-button';
+import '../components/atomic-component/enchanted-toggle-button';
+import '../components/atomic-component/enchanted-badge';
+import '../components/atomic-component/enchanted-icon-button';
 // Icon imports
 import tagUrl from '../_tests_/assets/tag.svg';
 import listUrl from '../_tests_/assets/list.svg';

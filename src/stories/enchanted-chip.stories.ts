@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-chip';
+import '../components/atomic-component/enchanted-chip';
 
 const meta: Meta = {
   title: 'Data display/enchanted-chip',

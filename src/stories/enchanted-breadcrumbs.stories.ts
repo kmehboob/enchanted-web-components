@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-breadcrumbs';
+import '../components/atomic-component/enchanted-breadcrumbs';
 
 const meta: Meta = {
   title: 'Navigation/enchanted-breadcrumbs',

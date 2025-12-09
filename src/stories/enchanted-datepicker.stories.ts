@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-datepicker';
+import '../components/atomic-component/enchanted-datepicker';
 import { DEFAULT_CALENDAR_LOCALE } from '../types/enchanted-datepicker';
 
 const meta: Meta = {

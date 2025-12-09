@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-accordion';
+import '../components/atomic-component/enchanted-accordion';
 
 const meta: Meta = {
   title: 'Navigation/enchanted-accordion',

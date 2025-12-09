@@ -7,7 +7,7 @@ npm install @hcl-software/enchanted-web-components
 ```
 
 ```typescript
-import '@hcl-software/enchanted-web-components/dist/components/ac/enchanted-button';
+import '@hcl-software/enchanted-web-components/dist/components/atomic-component/enchanted-button';
 
 ...
 

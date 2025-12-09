@@ -14,7 +14,7 @@
  * ======================================================================== */
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { EnchantedAcBaseElement } from '../../../components/ac/enchanted-ac-base-element';
+import { EnchantedAcBaseElement } from '../../../components/atomic-component/enchanted-ac-base-element';
 
 /**
  * TEST COMPONENT - DO NOT USE IN PRODUCTION

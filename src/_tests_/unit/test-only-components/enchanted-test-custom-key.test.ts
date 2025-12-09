@@ -49,11 +49,11 @@ import { expect } from '@wdio/globals';
 
 // Component imports
 import './enchanted-test-custom-key'; // Test component in same directory
-import '../../../components/ac/enchanted-avatar'; // Using enchanted-avatar as example of base class usage
+import '../../../components/atomic-component/enchanted-avatar'; // Using enchanted-avatar as example of base class usage
 
 // Helper imports
 import { EnchantedTestCustomKey } from './enchanted-test-custom-key';
-import { EnchantedAcBaseElement } from '../../../components/ac/enchanted-ac-base-element';
+import { EnchantedAcBaseElement } from '../../../components/atomic-component/enchanted-ac-base-element';
 import { SHADOW_ROOT_MODE_KEY } from '../../../components/constants';
 
 describe('EnchantedTestCustomKey - Shadow Root Mode Override', () => {

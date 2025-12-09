@@ -8,6 +8,8 @@
 
 ### Changed
 
+- Refactored folder structure: renamed `ac` directories to `atomic-component` across the codebase.
+
 ### Breaking changes
 
 #### Type Renaming
@@ -24,7 +26,7 @@ All web components have been renamed from `dx-*` prefix to `enchanted-*` prefix:
 | dx-accordion-summary | enchanted-accordion-summary |
 | dx-ac-base-element | enchanted-ac-base-element |
 | dx-alert | enchanted-alert |
-| dx-anchor | enchanted-anchor |
+| dx-anchor | enchanted-link |
 | dx-avatar | enchanted-avatar |
 | dx-badge | enchanted-badge |
 | dx-breadcrumbs | enchanted-breadcrumbs |

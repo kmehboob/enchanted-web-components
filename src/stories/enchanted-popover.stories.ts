@@ -15,8 +15,8 @@
 
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-popover';
-import '../components/ac/enchanted-button';
+import '../components/atomic-component/enchanted-popover';
+import '../components/atomic-component/enchanted-button';
 import { EnchantedPopoverArrowPosition } from '../types/enchanted-popover';
 
 const meta: Meta = {

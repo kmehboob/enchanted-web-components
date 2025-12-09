@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-tooltip';
-import '../components/ac/enchanted-button';
+import '../components/atomic-component/enchanted-tooltip';
+import '../components/atomic-component/enchanted-button';
 import { TOOLTIP_PLACEMENT } from '../types/cssClassEnums';
 
 /**

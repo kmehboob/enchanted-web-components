@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-avatar';
+import '../components/atomic-component/enchanted-avatar';
 import { AVATAR_VARIANT, AVATAR_TYPE, AVATAR_COLOR } from '../types/cssClassEnums';
 
 import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/link';

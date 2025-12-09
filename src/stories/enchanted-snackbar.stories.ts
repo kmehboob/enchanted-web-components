@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-snackbar';
-import '../components/ac/enchanted-button';
+import '../components/atomic-component/enchanted-snackbar';
+import '../components/atomic-component/enchanted-button';
 import { SNACKBAR_TYPE } from '../types/cssClassEnums';
 
 /**

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-menu';
-import '../components/ac/enchanted-menu-item';
-import '../components/ac/enchanted-button';
+import '../components/atomic-component/enchanted-menu';
+import '../components/atomic-component/enchanted-menu-item';
+import '../components/atomic-component/enchanted-button';
 import { EnchantedMenuPlacement, EnchantedMenuSize } from '../types/enchanted-menu';
 
 // Styling constants to avoid overly long inline style lines and satisfy max-len lint rule

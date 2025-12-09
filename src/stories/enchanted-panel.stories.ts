@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-panel';
-import '../components/ac/enchanted-button';
+import '../components/atomic-component/enchanted-panel';
+import '../components/atomic-component/enchanted-button';
 
 /**
  * @typedef EnchantedPanelProps

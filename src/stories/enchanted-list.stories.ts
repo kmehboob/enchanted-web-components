@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-list';
-import '../components/ac/enchanted-list-item';
+import '../components/atomic-component/enchanted-list';
+import '../components/atomic-component/enchanted-list-item';
 
 /**
  * @typedef EnchantedListProps

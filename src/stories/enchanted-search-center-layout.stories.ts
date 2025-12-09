@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import '../components/ac/enchanted-search-center-layout';
+import '../components/atomic-component/enchanted-search-center-layout';
 
 /**
  * @typedef EnchantedSearchCenterLayoutProps
