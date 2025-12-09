@@ -459,5 +459,32 @@ describe('DxDialog component testing', () => {
       
       await expect(component).toHaveText(customTitle);
     });
+
+    it('DxDialog - should support RTL layout for dialog title', async () => {
+      document.documentElement.dir = 'rtl';
+      
+      render(
+        html`
+          <dx-dialog open dialogTitle="Test Dialog RTL" .localization=${dxLocalization}>
+            <div slot="content">
+              <input type="text" />
+            </div>
+          </dx-dialog>
+        `,
+        document.body
+      );
+      await browser.pause(150);
+      
+      let component = await $('dx-dialog').getElement();
+      let titleRootRTL = await component.$(`>>>[part="${DIALOG_PARTS.TITLE_ROOT_RTL}"]`);
+      let titleTextRTL = await component.$(`>>>[part="${DIALOG_PARTS.TITLE_TEXT_RTL}"]`);
+      let closeIcon = await component.$(`>>>[part="${DIALOG_PARTS.ICON_CLOSE}"]`);
+      
+      await expect(titleRootRTL).toBeExisting();
+      await expect(titleTextRTL).toBeExisting();
+      await expect(closeIcon).toBeExisting();
+      
+      document.documentElement.dir = 'ltr';
+    });
   });
 });
