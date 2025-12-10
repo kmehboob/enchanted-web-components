@@ -201,6 +201,7 @@ export enum DIALOG_PARTS {
   PAPER_XS = 'paper-xs',
   TITLE = 'title',
   TITLE_ROOT = 'title-root',
+  TITLE_ROOT_RTL = 'title-root-rtl',
   TITLE_TEXT = 'title-text',
   TITLE_TEXT_RTL = 'title-text-rtl',
   ICON_ROOT = 'icon-root',

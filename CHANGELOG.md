@@ -9,10 +9,14 @@
 - Add `dx-data-grid-generic` storybook story
 - Add `icon` property to the `dx-chip` component
 - Added a new storybook for the theme inspector and also added some new color tokens.
+- Added comprehensive accessibility focus tests for `dx-dialog` component.
+- Added RTL support for `dx-dialog` default title layout.
 
 ### Fixed
 - Fix the `XS` size of the `dx-dialog` component
 - Fix the `disabled` state for the `dx-header` component
+- Fixed `dx-dialog` close button positioning.
+- Truncated title text in `dx-dialog` if overflowing.
 
 ### Changed
 - Refactored menu placement logic using a switch statement for clarity and maintainability.
@@ -35,6 +39,7 @@
 - Remove `dx-search-center-layout` component
 - Remove the `ignoreDisable` property from the `dx-input-textfield` component
 - Remove useless `open` property from `dx-menu` component
+- Changed `dx-dialog` focus behavior to immediately focus the first focusable element (prioritizing slotted content) instead of focusing the dialog element first.
 
 ## 1.4.0
 

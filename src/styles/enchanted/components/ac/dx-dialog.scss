@@ -149,30 +149,19 @@
     -webkit-box-pack: justify;
     justify-content: space-between;
     padding: 12px;
-    height: 24px;
   }
 
-  &::part(title-text) {
-    @include typography.subtitle1;
-    width: 90%;
-    padding-left: 16px;
-  }
-
+  &::part(title-text),
   &::part(title-text-rtl) {
     @include typography.subtitle1;
-    width: 90%;
-    padding-right: 16px;
-  }
-
-  &::part(title-root) {
-    width: 100%;
-  }
-
-  &::part(icon-root) {
-    width: 10%;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &::part(title-root),
+  &::part(title-root-rtl),
   &::part(icon-root) {
     flex-direction: row;
     -webkit-box-pack: center;
@@ -182,9 +171,18 @@
     align-items: center;
   }
 
+  &::part(title-root) {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &::part(title-root-rtl) {
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: row-reverse;
+  }
+
   &::part(icon-close) {
-    height: 16px;
-    width: 16px;
     flex-direction: column;
     -webkit-box-pack: center;
     justify-content: center;
@@ -276,16 +274,5 @@
     color: map.get(themeMap.$enchantedPalette, HCLSOFTWAREBLUE06) !important;
     background-color: palette.clr(light, background, paper) !important;
     height: 28px !important;
-  }
-
-  // Visually hidden live region for screen reader announcements
-  // Uses the "visually hidden" pattern to hide content from sighted users
-  // while keeping it accessible to screen readers
-  &::part(live-region) {
-    position: absolute;
-    left: -10000px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
   }
 }
