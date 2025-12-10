@@ -48,7 +48,7 @@ export class DxThemeInspector extends DxAcBaseElement {
   protected _themePrefix = 'theme';
 
   @state()
-  protected _shadeKeys: number[] = [100, 150, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1000_80, 1100];
+  protected _shadeKeys: (number | string)[] = [100, 150, 200, 300, '300_DARK', 400, 500, 600, 700, 800, '800_DARK', 900, 1000, 1000_80, 1100];
   
   @state()
   protected _colorKeys: string[] = ['GREY', 'BLACK', 'BLUE', 'GREEN', 'HCLSOFTWAREBLUE', 'INDIGO', 'LIME', 'ORANGE', 'PINK', 'PURPLE', 'RED', 'TEAL', 'WHITE', 'YELLOW'];
@@ -60,7 +60,7 @@ export class DxThemeInspector extends DxAcBaseElement {
   protected _whiteKeys: string[] = ['100P', '93P', '80P', '70P', '55P', '40P', '38P', '24P', '15P', '12P', '8P'];
 
   @state()
-  protected _hclSoftwareBlueKeys: string[] = ['01', '02', '03', '04', '05', '06', '07', '07_20', '07_12', '07_8', '08', '09', '09_20', '09_12', '09_8'];
+  protected _hclSoftwareBlueKeys: string[] = ['01', '02', '03', '04', '05', '06', '07', '07_20', '07_12', '07_8', '08', '09', '09_20', '09_12', '09_8', '07_DARK', '09_DARK'];
 
   @state()
   protected _theme: ThemeType | undefined;
@@ -73,7 +73,7 @@ export class DxThemeInspector extends DxAcBaseElement {
   renderColors() {
     return html`
       ${this._colorKeys.map((color) => {
-        let shades: string[] | number[] = this._shadeKeys;
+        let shades: (number | string)[] = this._shadeKeys;
 
         if (color === 'BLACK') {
           shades = this._blackKeys;
