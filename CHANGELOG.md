@@ -5,7 +5,6 @@
 ### Added
 - Add `dx-data-grid-generic` storybook story
 - Add `icon` property to the `dx-chip` component
-
 - Added a new storybook for the theme inspector and also added some new color tokens.
 
 ### Fixed
