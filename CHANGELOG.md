@@ -3,6 +3,16 @@
 ## Unreleased
 
 ### Added
+
+### Fixed
+
+### Changed
+
+### Breaking changes
+
+## 2.0.0
+
+### Added
 - Added new `placement` and `size` property for `dx-menu` component.
 - Added `icons` property to `dx-toggle-button` component to support enchanted-icons (TemplateResult array) alongside existing `iconUrls` (string array) for dual-button mode.
 - Added `clearIcon` and `actionIcon` properties to `dx-input-textfield` component to support enchanted-icons (TemplateResult) for icon rendering.
