@@ -75,3 +75,59 @@ export const Default: Story = {
     `;
   },
 };
+
+export const AllStates: Story = {
+  render: () => {
+    const gridStyle = [
+      'display: grid',
+      'grid-template-columns: repeat(2, 1fr)',
+      'gap: 48px',
+      'padding: 40px',
+      'min-height: 400px',
+      'justify-items: center',
+      'align-items: center'
+    ].join('; ') + ';';
+
+    const itemContainerStyle = [
+      'display: flex',
+      'flex-direction: column',
+      'align-items: center',
+      'gap: 16px'
+    ].join('; ') + ';';
+
+    const labelStyle = [
+      'font-weight: 600',
+      'font-size: 14px',
+      'color: #333'
+    ].join('; ') + ';';
+
+    return html`
+      <div style="${gridStyle}">
+        <div style="${itemContainerStyle}">
+          <span style="${labelStyle}">Default</span>
+          <dx-circular-progress size="40" strokewidth="3.6" trackcolor="#D6D6D6" progresscolor="#0550DC"></dx-circular-progress>
+        </div>
+        <div style="${itemContainerStyle}">
+          <span style="${labelStyle}">Large Size</span>
+          <dx-circular-progress size="100" strokewidth="3.6" trackcolor="#D6D6D6" progresscolor="#0550DC"></dx-circular-progress>
+        </div>
+        <div style="${itemContainerStyle}">
+          <span style="${labelStyle}">Custom Colors</span>
+          <dx-circular-progress size="40" strokewidth="3.6" trackcolor="#D6D6D6" progresscolor="#e61010"></dx-circular-progress>
+        </div>
+        <div style="${itemContainerStyle}">
+          <span style="${labelStyle}">Thick Stroke</span>
+          <dx-circular-progress size="40" strokewidth="8" trackcolor="#D6D6D6" progresscolor="#0550DC"></dx-circular-progress>
+        </div>
+      </div>
+    `;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comprehensive showcase of all main visual states: default, large, custom colors, and thick stroke. Demonstrates appearance and customization options for dx-circular-progress.'
+      }
+    },
+    controls: { disable: true },
+  },
+};
