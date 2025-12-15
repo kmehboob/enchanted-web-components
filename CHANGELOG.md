@@ -10,78 +10,81 @@
 
 ### Breaking changes
 
-#### Type Renaming
+## 3.0.0
 
-All type, enum and interface have been renamed from `DX*` prefix to `Enchanted*` prefix:
+### Breaking changes
 
-| **Old Name (Dx)** | **New Name (Enchanted)** |
-|-------------------|---------------------------|
-| DxDataGridColDef | EnchantedDataGridColDef |
-| DxMenuPlacement | EnchantedMenuPlacement |
-| DxMenuSize | EnchantedMenuSize |
+- Type Renaming
 
-#### Folder Restructuring
+    All type, enum and interface have been renamed from `Dx*` prefix to `Enchanted*` prefix:
 
-- Refactored folder structure: renamed `ac` directories to `atomic-component` across the codebase.
+    | **Old Name (Dx)** | **New Name (Enchanted)** |
+    |-------------------|---------------------------|
+    | DxDataGridColDef | EnchantedDataGridColDef |
+    | DxMenuPlacement | EnchantedMenuPlacement |
+    | DxMenuSize | EnchantedMenuSize |
 
-#### SCSS File and Styling Prefix Renaming
+- Folder Restructuring
 
-All SCSS files in `src/styles/enchanted/components/atomic-component/` have been renamed from `dx-*.scss` to `enchanted-*.scss`:
+    Refactored folder structure: renamed `ac` directories to `atomic-component` across the codebase.
 
-- Renamed all component SCSS files to use `enchanted-` prefix instead of `dx-` prefix
-- Updated all mixin names from `dx-*-base-styles` to `enchanted-*-base-styles` across all component stylesheets
-- Updated all CSS part selectors and class references to use `enchanted-` prefix for consistency
+- SCSS File and Styling Prefix Renaming
 
-**Examples:**
-- `dx-button.scss` → `enchanted-button.scss` with mixin `enchanted-button-base-styles`
-- `dx-preview.scss` → `enchanted-preview.scss` with mixin `enchanted-preview-base-styles`
-- `dx-select.scss` → `enchanted-select.scss` with mixin `enchanted-select-base-styles`
+    All SCSS files in `src/styles/enchanted/components/atomic-component/` have been renamed from `dx-*.scss` to `enchanted-*.scss`:
 
-#### Web Component Renaming
+    - Renamed all component SCSS files to use `enchanted-` prefix instead of `dx-` prefix
+    - Updated all mixin names from `dx-*-base-styles` to `enchanted-*-base-styles` across all component stylesheets
+    - Updated all CSS part selectors and class references to use `enchanted-` prefix for consistency
 
-All web components have been renamed from `dx-*` prefix to `enchanted-*` prefix:
+    **Examples:**
+    - `dx-button.scss` → `enchanted-button.scss` with mixin `enchanted-button-base-styles`
+    - `dx-preview.scss` → `enchanted-preview.scss` with mixin `enchanted-preview-base-styles`
+    - `dx-select.scss` → `enchanted-select.scss` with mixin `enchanted-select-base-styles`
 
-| **Old Name (dx-)** | **New Name (enchanted-)** |
-|-------------------|---------------------------|
-| dx-ac-base-element | enchanted-ac-base-element |
-| dx-accordion | enchanted-accordion |
-| dx-accordion-summary | enchanted-accordion-summary |
-| dx-alert | enchanted-alert |
-| dx-anchor | enchanted-link |
-| dx-avatar | enchanted-avatar |
-| dx-badge | enchanted-badge |
-| dx-breadcrumbs | enchanted-breadcrumbs |
-| dx-breadcrumbs-item | enchanted-breadcrumbs-item |
-| dx-button | enchanted-button |
-| dx-chip | enchanted-chip |
-| dx-circular-progress | enchanted-circular-progress |
-| dx-data-grid | enchanted-data-grid |
-| dx-data-grid-generic | enchanted-data-grid-generic |
-| dx-datepicker | enchanted-datepicker |
-| dx-dialog | enchanted-dialog |
-| dx-header | enchanted-header |
-| dx-header-layout | enchanted-header-layout |
-| dx-icon-button | enchanted-icon-button |
-| dx-input-select | enchanted-select |
-| dx-input-textfield | enchanted-textfield |
-| dx-item-type-avatar | enchanted-item-type-avatar |
-| dx-list | enchanted-list |
-| dx-list-item | enchanted-list-item |
-| dx-menu | enchanted-menu |
-| dx-menu-item | enchanted-menu-item |
-| dx-multiple-select-chip | enchanted-multiple-select-chip |
-| dx-panel | enchanted-panel |
-| dx-popover | enchanted-popover |
-| dx-preview | enchanted-preview |
-| dx-search-center-layout | enchanted-search-center-layout |
-| dx-snackbar | enchanted-snackbar |
-| dx-svg-icon | enchanted-svg-icon |
-| dx-switch | enchanted-switch |
-| dx-table-pagination | enchanted-table-pagination |
-| dx-theme-inspector | enchanted-theme-inspector |
-| dx-toggle-button | enchanted-toggle-button |
-| dx-tooltip | enchanted-tooltip |
+- Web Component Renaming
 
+    All web components have been renamed from `dx-*` prefix to `enchanted-*` prefix:
+
+    | **Old Name (dx-)** | **New Name (enchanted-)** |
+    |-------------------|---------------------------|
+    | dx-ac-base-element | enchanted-ac-base-element |
+    | dx-accordion | enchanted-accordion |
+    | dx-accordion-summary | enchanted-accordion-summary |
+    | dx-alert | enchanted-alert |
+    | dx-anchor | enchanted-link |
+    | dx-avatar | enchanted-avatar |
+    | dx-badge | enchanted-badge |
+    | dx-breadcrumbs | enchanted-breadcrumbs |
+    | dx-breadcrumbs-item | enchanted-breadcrumbs-item |
+    | dx-button | enchanted-button |
+    | dx-chip | enchanted-chip |
+    | dx-circular-progress | enchanted-circular-progress |
+    | dx-data-grid | enchanted-data-grid |
+    | dx-data-grid-generic | enchanted-data-grid-generic |
+    | dx-datepicker | enchanted-datepicker |
+    | dx-dialog | enchanted-dialog |
+    | dx-header | enchanted-header |
+    | dx-header-layout | enchanted-header-layout |
+    | dx-icon-button | enchanted-icon-button |
+    | dx-input-select | enchanted-select |
+    | dx-input-textfield | enchanted-textfield |
+    | dx-item-type-avatar | enchanted-item-type-avatar |
+    | dx-list | enchanted-list |
+    | dx-list-item | enchanted-list-item |
+    | dx-menu | enchanted-menu |
+    | dx-menu-item | enchanted-menu-item |
+    | dx-multiple-select-chip | enchanted-multiple-select-chip |
+    | dx-panel | enchanted-panel |
+    | dx-popover | enchanted-popover |
+    | dx-preview | enchanted-preview |
+    | dx-search-center-layout | enchanted-search-center-layout |
+    | dx-snackbar | enchanted-snackbar |
+    | dx-svg-icon | enchanted-svg-icon |
+    | dx-switch | enchanted-switch |
+    | dx-table-pagination | enchanted-table-pagination |
+    | dx-theme-inspector | enchanted-theme-inspector |
+    | dx-toggle-button | enchanted-toggle-button |
+    | dx-tooltip | enchanted-tooltip |
 
 ## 2.0.0
 
