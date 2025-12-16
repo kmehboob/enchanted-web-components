@@ -36,7 +36,6 @@
 @use 'components/atomic-component/enchanted-toggle-button.scss';
 @use 'components/atomic-component/enchanted-tooltip.scss';
 @use 'components/atomic-component/enchanted-authoring-item-type-avatar.scss';
-@use 'components/atomic-component/enchanted-circular-progress.scss';
 @use 'components/atomic-component/enchanted-breadcrumbs.scss';
 @use 'components/atomic-component/enchanted-preview.scss';
 @use 'components/atomic-component/enchanted-alert.scss';
@@ -67,10 +66,6 @@ enchanted-button {
 
 enchanted-chip {
   @include enchanted-chip.enchanted-chip-base-styles;
-}
-
-enchanted-circular-progress {
-  @include enchanted-circular-progress.enchanted-circular-progress-base-styles;
 }
 
 enchanted-data-grid {

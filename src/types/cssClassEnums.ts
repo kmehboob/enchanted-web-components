@@ -191,6 +191,14 @@ export enum SWITCH_PARTS {
   SWITCH_SLIDER_CHECKED_DISABLED = 'switch-slider-checked-disabled',
 }
 
+export enum CIRCULAR_PROGRESS_PARTS {
+  ROOT = 'circular-progress-root',
+  SVG = 'circular-progress-svg',
+  TRACK = 'circular-progress-track',
+  CIRCLE = 'circular-progress-circle',
+  CIRCLE_DISABLE_SHRINK = 'circular-progress-circle-disable-shrink',
+}
+
 export enum DIALOG_PARTS {
   DIALOG_ROOT = 'dialog-root',
   DIALOG_ROOT_CHAT = 'dialog-root-chat',

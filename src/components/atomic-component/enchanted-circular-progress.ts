@@ -26,6 +26,32 @@ import { EnchantedAcBaseElement } from './enchanted-ac-base-element';
  */
 @customElement('enchanted-circular-progress')
 export class EnchantedCircularProgress extends EnchantedAcBaseElement {
+  /**
+   * Inline styles are required for this component due to Shadow DOM encapsulation.
+   * 
+   * IMPORTANT: Unlike other components that use external SCSS with ::part() selectors,
+   * this component MUST use inline `static styles` because:
+   * 
+   * 1. **CSS Animations in Shadow DOM**: The @keyframes animations (enchanted-circular-rotate 
+   *    and enchanted-circular-dash) must be defined in the same stylesheet where they are 
+   *    referenced. External CSS cannot inject animations into Shadow DOM.
+   * 
+   * 2. **Shadow Boundary Limitation**: External stylesheets (even with ::part() selectors) 
+   *    cannot penetrate the Shadow DOM boundary to apply animations to internal elements.
+   *    The ::part() mechanism only allows styling of exposed parts from outside, not animating them.
+   * 
+   * 3. **Animation Timing Critical**: The indeterminate progress animation requires precise
+   *    coordination between SVG rotation and stroke-dash animations. These must be encapsulated
+   *    within the component's Shadow DOM for reliable cross-browser behavior.
+   * 
+   * 4. **Performance**: Inline styles in Shadow DOM are more performant for animated components
+   *    as they don't require style recalculation across the Shadow boundary.
+   * 
+   * This pattern is consistent with Material UI and other animation-heavy web component libraries.
+   * 
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM
+   * @see https://lit.dev/docs/components/styles/#static-styles
+   */
   static styles = css`
     :host {
       display: inline-block;
