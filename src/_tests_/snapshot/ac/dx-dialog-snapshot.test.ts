@@ -202,4 +202,165 @@ describe('DxDialog - Snapshot testing', () => {
 
     document.head.removeChild(link);
   });
+
+  it('DxDialog - should capture DxDialog component with xs size', async () => {
+    const link = appendEnchantedStylingLink();
+
+    render(
+      html`
+        <div>
+          <dx-dialog open size="xs" .localization=${dxLocalization}></dx-dialog>
+        </div>
+      `,
+      document.body,
+    );
+
+    // The `toMatchFullPageSnapshot` method will let fail the whole test for a mismatch. 
+    // Therefore the 100% mismatch threshold was added, but the mismatch image will be generated anyway.
+    await expect(browser).toMatchFullPageSnapshot('dx-dialog-snapshot-baseline-with-xs-size', 100);
+
+    document.head.removeChild(link);
+  });
+
+  it('DxDialog - should capture DxDialog component with chat size', async () => {
+    const link = appendEnchantedStylingLink();
+
+    render(
+      html`
+        <div>
+          <dx-dialog open size="chat" .localization=${dxLocalization}></dx-dialog>
+        </div>
+      `,
+      document.body,
+    );
+
+    // The `toMatchFullPageSnapshot` method will let fail the whole test for a mismatch. 
+    // Therefore the 100% mismatch threshold was added, but the mismatch image will be generated anyway.
+    await expect(browser).toMatchFullPageSnapshot('dx-dialog-snapshot-baseline-with-chat-size', 100);
+
+    document.head.removeChild(link);
+  });
+
+  it('DxDialog - should capture DxDialog component with removeBorder attribute', async () => {
+    const link = appendEnchantedStylingLink();
+
+    render(
+      html`
+        <div>
+          <dx-dialog open removeBorder title="Dialog without border" .localization=${dxLocalization}>
+            <div slot="content">
+              <label>Content without border styling</label>
+            </div>
+          </dx-dialog>
+        </div>
+      `,
+      document.body,
+    );
+
+    // The `toMatchFullPageSnapshot` method will let fail the whole test for a mismatch. 
+    // Therefore the 100% mismatch threshold was added, but the mismatch image will be generated anyway.
+    await expect(browser).toMatchFullPageSnapshot('dx-dialog-snapshot-baseline-with-removeBorder', 100);
+
+    document.head.removeChild(link);
+  });
+
+  it('DxDialog - should capture DxDialog component with overrideTitle and content', async () => {
+    const link = appendEnchantedStylingLink();
+
+    render(
+      html`
+        <div>
+          <dx-dialog open overrideTitle .localization=${dxLocalization}>
+            <div slot="title">
+              <label style="color: #0066B0; margin: 5px;">Custom Title</label>
+            </div>
+            <div slot="content">
+              <label>Dialog content with overridden title</label>
+            </div>
+          </dx-dialog>
+        </div>
+      `,
+      document.body,
+    );
+
+    // The `toMatchFullPageSnapshot` method will let fail the whole test for a mismatch. 
+    // Therefore the 100% mismatch threshold was added, but the mismatch image will be generated anyway.
+    await expect(browser).toMatchFullPageSnapshot('dx-dialog-snapshot-baseline-with-overrideTitle-and-content', 100);
+
+    document.head.removeChild(link);
+  });
+
+  it('DxDialog - should capture DxDialog component with pagination slot', async () => {
+    const link = appendEnchantedStylingLink();
+
+    render(
+      html`
+        <div>
+          <dx-dialog open title="Dialog with Pagination" .localization=${dxLocalization}>
+            <div slot="content">
+              <label>Content with pagination</label>
+            </div>
+            <div slot="pagination">
+              <dx-table-pagination />
+            </div>
+          </dx-dialog>
+        </div>
+      `,
+      document.body,
+    );
+
+    // The `toMatchFullPageSnapshot` method will let fail the whole test for a mismatch. 
+    // Therefore the 100% mismatch threshold was added, but the mismatch image will be generated anyway.
+    await expect(browser).toMatchFullPageSnapshot('dx-dialog-snapshot-baseline-with-pagination', 100);
+
+    document.head.removeChild(link);
+  });
+
+  it('DxDialog - should capture DxDialog component with all slots filled', async () => {
+    const link = appendEnchantedStylingLink();
+
+    render(
+      html`
+        <div>
+          <dx-dialog open title="Complete Dialog" .localization=${dxLocalization}>
+            <div slot="content">
+              <label>This dialog has all slots: content, pagination, and footer</label>
+            </div>
+            <div slot="pagination">
+              <dx-table-pagination />
+            </div>
+            <div slot="footer">
+              <dx-authoring-dialog-footer />
+            </div>
+          </dx-dialog>
+        </div>
+      `,
+      document.body,
+    );
+
+    // The `toMatchFullPageSnapshot` method will let fail the whole test for a mismatch. 
+    // Therefore the 100% mismatch threshold was added, but the mismatch image will be generated anyway.
+    await expect(browser).toMatchFullPageSnapshot('dx-dialog-snapshot-baseline-complete', 100);
+
+    document.head.removeChild(link);
+  });
+
+  it('DxDialog - should capture DxDialog component with closed state', async () => {
+    const link = appendEnchantedStylingLink();
+
+    render(
+      html`
+        <div>
+          <dx-dialog title="Closed Dialog" .localization=${dxLocalization}></dx-dialog>
+        </div>
+      `,
+      document.body,
+    );
+
+    // The `toMatchFullPageSnapshot` method will let fail the whole test for a mismatch. 
+    // Therefore the 100% mismatch threshold was added, but the mismatch image will be generated anyway.
+    await expect(browser).toMatchFullPageSnapshot('dx-dialog-snapshot-baseline-closed-state', 100);
+
+    document.head.removeChild(link);
+  });
 });
