@@ -55,34 +55,34 @@ enchanted-fab::part(label) {
 }
 
 enchanted-fab[type="contained"]::part(fab){
-    background: map.get($enchantedPalette, "HCLSOFTWAREBLUE06");
-    color:  map.get($enchantedPalette, "WHITE100P");
+    background: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
+    color:  map.get(themeMap.$enchantedPalette, "WHITE100P");
 }
 
 enchanted-fab[type="contained"]::part(fab):hover{
-    background: map.get($enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
-    color:  map.get($enchantedPalette, "WHITE100P");
+    background: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
+    color:  map.get(themeMap.$enchantedPalette, "WHITE100P");
 }
 
 enchanted-fab[type="contained"]::part(fab):focus{
     border-radius: 7px;
-    outline: 2px solid map.get($enchantedPalette, "HCLSOFTWAREBLUE06");
+    outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
     outline-offset: 1px;
 }
 
 enchanted-fab[type="contained"]::part(fab):hover:focus{
-    outline: 2px solid map.get($enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
+    outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
     outline-offset: 1px;
     border-radius: 7px;
-    color: map.get($enchantedPalette, "WHITE100P");
+    color: map.get(themeMap.$enchantedPalette, "WHITE100P");
 }
 
 // Outlined FAB styles
 
 enchanted-fab[type="outlined"]::part(fab){
-    background: map.get($enchantedPalette, "WHITE100P");
-    border: 2px solid map.get($enchantedPalette, "HCLSOFTWAREBLUE06");
-    color: map.get($enchantedPalette, "HCLSOFTWAREBLUE06");
+    background: map.get(themeMap.$enchantedPalette, "WHITE100P");
+    border: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
+    color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
     display: flex;
     align-items: center;
     justify-content: center;
@@ -91,54 +91,54 @@ enchanted-fab[type="outlined"]::part(fab){
 
 enchanted-fab[type="outlined"]::part(fab):hover{
     background: rgba(0,0,0,0.04);
-    border-color: map.get($enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
-    color: map.get($enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
+    border-color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
+    color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
 }
 enchanted-fab[type="outlined"]::part(fab):focus{
-    outline: 2px solid map.get($enchantedPalette, "HCLSOFTWAREBLUE06");
+    outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
     outline-offset: 1px;
     border-radius: 7px;
 }
 enchanted-fab[type="outlined"]::part(fab):hover:focus{
     background: rgba(0,0,0,0.04);
-    outline: 2px solid map.get($enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
+    outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
     outline-offset: 1px;
     border-radius: 7px;
-    color: map.get($enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
+    color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
 
 }
 
 // AI FAB styles
 enchanted-fab[type="AI"]::part(fab){
-    background: map.get($enchantedPalette, "BLUE300_DARK");
-    color:  map.get($enchantedPalette, "HCLSOFTWAREBLUE06");
+    background: map.get(themeMap.$enchantedPalette, "BLUE300_DARK");
+    color:  map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
 
 }
 
 enchanted-fab[type="AI"]::part(fab):hover{
-    background: map.get($enchantedPalette, "BLUE300");
-    color: map.get($enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
+    background: map.get(themeMap.$enchantedPalette, "BLUE300");
+    color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
 
 }
 enchanted-fab[type="AI"]::part(fab):focus{
-    outline: 2px solid map.get($enchantedPalette, "HCLSOFTWAREBLUE06");
+    outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
     outline-offset: 1px;
     border-radius: 7px;
 }
 enchanted-fab[type="AI"]::part(fab):hover:focus{
-    background: map.get($enchantedPalette, "BLUE300");
-    outline: 2px solid map.get($enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
+    background: map.get(themeMap.$enchantedPalette, "BLUE300");
+    outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
     outline-offset: 1px;
     border-radius: 7px;
-    color: map.get($enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
+    color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
 }
 
 
 // Disabled FAB styles
 
 enchanted-fab::part(fab):disabled{
-    background: map.get($enchantedPalette, "NG150");
-    color: map.get($enchantedPalette, "BLACK38P");
+    background: map.get(themeMap.$enchantedPalette, "NG150");
+    color: map.get(themeMap.$enchantedPalette, "BLACK38P");
     border-color: transparent;
     box-shadow: 
         0 8px 10px -5px rgba(0,0,0,0.20),
@@ -148,7 +148,7 @@ enchanted-fab::part(fab):disabled{
 }
 enchanted-fab::part(fab):disabled:hover,
 enchanted-fab::part(fab):disabled:focus{
-    background: map.get($enchantedPalette, "NG150") ;
+    background: map.get(themeMap.$enchantedPalette, "NG150") ;
     box-shadow: 
         0 8px 10px -5px rgba(0,0,0,0.20),
         0 16px 24px 2px rgba(0,0,0,0.14),
@@ -171,23 +171,23 @@ enchanted-fab::part(label-rtl) {
 }
 
 enchanted-fab[type="contained"]::part(fab-rtl) {
-    background: map.get($enchantedPalette, "HCLSOFTWAREBLUE06");
-    color: map.get($enchantedPalette, "WHITE100P");
+    background: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
+    color: map.get(themeMap.$enchantedPalette, "WHITE100P");
 }
 
 enchanted-fab[type="outlined"]::part(fab-rtl) {
-    background: map.get($enchantedPalette, "WHITE100P");
-    border: 2px solid map.get($enchantedPalette, "HCLSOFTWAREBLUE06");
-    color: map.get($enchantedPalette, "HCLSOFTWAREBLUE06");
+    background: map.get(themeMap.$enchantedPalette, "WHITE100P");
+    border: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
+    color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
 }
 
 enchanted-fab[type="AI"]::part(fab-rtl) {
-    background: map.get($enchantedPalette, "BLUE300_DARK");
-    color: map.get($enchantedPalette, "HCLSOFTWAREBLUE06");
+    background: map.get(themeMap.$enchantedPalette, "BLUE300_DARK");
+    color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
 }
 
 enchanted-fab::part(fab-rtl):disabled {
-    background: map.get($enchantedPalette, "NG150");
-    color: map.get($enchantedPalette, "BLACK38P");
+    background: map.get(themeMap.$enchantedPalette, "NG150");
+    color: map.get(themeMap.$enchantedPalette, "BLACK38P");
     border-color: transparent;
 }
