@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
+
+// Component imports
 import '../components/atomic-component/enchanted-badge';
+
+// Helper imports
+import { EnchantedBadgeColor, EnchantedBadgeBorder, EnchantedBadgeType } from '../types/cssClassEnums';
 
 const meta: Meta = {
   title: 'Components/EnchantedBadge',
@@ -9,9 +14,9 @@ const meta: Meta = {
   argTypes: {
     badge: {
       control: { type: 'select' },
-      options: ['text', 'dot'],
+      options: Object.values(EnchantedBadgeType),
       description: 'Type of badge to display.',
-      table: { category: 'Appearance', type: { summary: 'text | dot' }, defaultValue: { summary: 'text' } },
+      table: { category: 'Appearance', type: { summary: Object.values(EnchantedBadgeType).join(' | ') }, defaultValue: { summary: EnchantedBadgeType.TEXT } },
     },
     text: {
       control: { type: 'text' },
@@ -20,15 +25,15 @@ const meta: Meta = {
     },
     color: {
       control: { type: 'select' },
-      options: ['primary', 'error', 'error-inverse', 'primary-inverse'],
+      options: Object.values(EnchantedBadgeColor),
       description: 'Color of the badge.',
-      table: { category: 'Appearance', type: { summary: 'primary | error | error-inverse | primary-inverse' }, defaultValue: { summary: 'primary' } },
+      table: { category: 'Appearance', type: { summary: Object.values(EnchantedBadgeColor).join(' | ') }, defaultValue: { summary: EnchantedBadgeColor.PRIMARY } },
     },
     border: {
       control: { type: 'select' },
-      options: ['paper', 'default', 'secondary', 'tertiary', 'dark', 'darker', 'none'],
+      options: Object.values(EnchantedBadgeBorder),
       description: 'Border style of the badge.',
-      table: { category: 'Appearance', type: { summary: 'paper | default | secondary | tertiary | dark | darker | none' }, defaultValue: { summary: 'none' } },
+      table: { category: 'Appearance', type: { summary: Object.values(EnchantedBadgeBorder).join(' | ') }, defaultValue: { summary: EnchantedBadgeBorder.DEFAULT } },
     },
   },
 };
@@ -39,10 +44,10 @@ type Story = StoryObj;
 
 export const Default: Story = {
   args: {
-    badge: 'text',
+    badge: EnchantedBadgeType.TEXT,
     text: '12',
-    color: 'primary',
-    border: 'none',
+    color: EnchantedBadgeColor.PRIMARY,
+    border: EnchantedBadgeBorder.NONE,
   },
   render: ({ badge, text, color, border }) => {
     return html`
@@ -62,11 +67,11 @@ export const AllVariants: Story = {
       <div>
         <h3>Badge Variants - Text</h3>
         <div style="display: flex; gap: 18px; flex-wrap: wrap; align-items: center;">
-          ${['primary', 'error', 'error-inverse', 'primary-inverse'].map((color) => {
+          ${Object.values(EnchantedBadgeColor).map((color) => {
             return html`
               <div style="position: relative; width: 50px; height: 50px; text-align: center;">
                 <button style="width: 100%; height: 100%; position: absolute; border: none; background: none;"></button>
-                <enchanted-badge badge="text" text="12" color="${color}" border="default"></enchanted-badge>
+                <enchanted-badge badge="${EnchantedBadgeType.TEXT}" text="12" color="${color}" border="${EnchantedBadgeBorder.DEFAULT}"></enchanted-badge>
                 <div style="margin-top: 8px; font-size: 12px;">Color: ${color}</div>
               </div>
             `;
@@ -77,11 +82,11 @@ export const AllVariants: Story = {
       <div>
         <h3>Badge Variants - Dot</h3>
         <div style="display: flex; gap: 18px; flex-wrap: wrap; align-items: center;">
-          ${['primary', 'error', 'error-inverse', 'primary-inverse'].map((color) => {
+          ${Object.values(EnchantedBadgeColor).map((color) => {
             return html`
               <div style="position: relative; width: 50px; height: 50px; text-align: center;">
                 <button style="width: 100%; height: 100%; position: absolute; border: none; background: none;"></button>
-                <enchanted-badge badge="dot" color="${color}" border="default"></enchanted-badge>
+                <enchanted-badge badge="${EnchantedBadgeType.DOT}" color="${color}" border="${EnchantedBadgeBorder.DEFAULT}"></enchanted-badge>
                 <div style="margin-top: 8px; font-size: 12px;">Color: ${color}</div>
               </div>
             `;
@@ -92,11 +97,11 @@ export const AllVariants: Story = {
       <div>
         <h3>Badge Borders</h3>
         <div style="display: flex; gap: 18px; flex-wrap: wrap; align-items: center;">
-          ${['paper', 'default', 'secondary', 'tertiary', 'dark', 'darker', 'none'].map((border) => {
+          ${Object.values(EnchantedBadgeBorder).map((border) => {
             return html`
               <div style="position: relative; width: 50px; height: 50px; text-align: center;">
                 <button style="width: 100%; height: 100%; position: absolute; border: none; background: none;"></button>
-                <enchanted-badge badge="text" text="B" color="primary" border="${border}"></enchanted-badge>
+                <enchanted-badge badge="${EnchantedBadgeType.TEXT}" text="B" color="${EnchantedBadgeColor.PRIMARY}" border="${border}"></enchanted-badge>
                 <div style="margin-top: 8px; font-size: 12px;">Border: ${border}</div>
               </div>
             `;

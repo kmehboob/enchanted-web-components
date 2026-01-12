@@ -21,26 +21,22 @@ import { EnchantedAcBaseElement } from './enchanted-ac-base-element';
 
 // Helper imports
 import { isLTR } from '../localization';
+import { EnchantedBadgeColor, EnchantedBadgeBorder, EnchantedBadgeType } from '../../types/cssClassEnums';
  
 @customElement('enchanted-badge')
 export class EnchantedBadge extends EnchantedAcBaseElement {
 
 
-  @property({ reflect: true }) color: 'primary' | 'error' | 'error-inverse' | 'primary-inverse' = 'primary';
+  @property({ reflect: true }) color: EnchantedBadgeColor = EnchantedBadgeColor.PRIMARY;
 
-  @property({ reflect: true }) border: 'paper' | 'default' | 'secondary' | 'tertiary' | 'dark' 
-  | 'darker' | 'none' = 'default';
+  @property({ reflect: true }) border: EnchantedBadgeBorder = EnchantedBadgeBorder.DEFAULT;
 
-  @property({ reflect: true }) badge: 'text' | 'dot' = 'text';
+  @property({ reflect: true }) badge: EnchantedBadgeType = EnchantedBadgeType.TEXT;
 
   @property() text: string = ''; // Added property to allow user to pass any string for badge:text
 
-  /**
-    * **Performance**: Inline styles in Shadow DOM are more performant for animated components 
-    *   as they don't require style recalculation across the Shadow boundary.
-  **/
   static styles = css`
-
+  
     :host {
       position: absolute;
       display: inline-flex;
@@ -70,11 +66,10 @@ export class EnchantedBadge extends EnchantedAcBaseElement {
       }
 
     :host([color="primary"]) {
-      background-color: #0550dc;
+      background-color: #0550DC;
       color: #FFFFFF;
     }
     
-
     :host([color="error"]) {
       background-color: #C10C0D;
       color: #FFFFFF;
@@ -82,35 +77,35 @@ export class EnchantedBadge extends EnchantedAcBaseElement {
 
     :host([color="error-inverse"]) {
       background-color: #FFADAD;
-      color: #000000 · 87%;
+      color: rgba(0, 0, 0, .87);
     }
 
     :host([color="primary-inverse"]) {
-      background-color:  #B3D9F8;
-      color: #000000 · 87%;
+      background-color: #B3D9F8;
+      color: rgba(0, 0, 0, .87);
     }
 
     :host([border="paper"]) {
-      border: 2px solid var(--background-paper, #FFF);
+      border: 2px solid  #FFFFFF;
     }
 
     :host([border="default"]) {
-      border: 2px solid var(--background-default, #F6F6F6);
+      border: 2px solid  #F6F6F6;
     }
     
     :host([border="secondary"]) {
-      border: 2px solid var(--background-secondary, #E5E5E5);
+      border: 2px solid  #E5E5E5;
     }
     
     :host([border="tertiary"]) {
-      border: 2px solid var(--background-tertiary, #D6D6D6);
+      border: 2px solid  #D6D6D6;
     }
     
     :host([border="dark"]) {
-      border: 2px solid var(--background-dark, #383838);
+      border: 2px solid  #383838;
     }
     :host([border="darker"]) {
-      border: 2px solid var(--background-darker, #1E1E1E);
+      border: 2px solid  #1E1E1E;
     }
     .badge.ltr {
       text-align: left;
@@ -129,7 +124,7 @@ export class EnchantedBadge extends EnchantedAcBaseElement {
         color="${this.color}"
         data-testid="enchanted-badge"
       >
-        ${this.badge === 'text' ? this.text : ''} <!-- Render user-provided text -->
+        ${this.badge === EnchantedBadgeType.TEXT ? this.text : ''} <!-- Render user-provided text -->
       </div>
     `;
   }

@@ -18,12 +18,14 @@ import { customElement, property, state } from "lit/decorators.js";
 // Helper imports
 import { getCurrentDirection } from "../localization";
 import { LOCALE_DIRECTIONS } from "../constants";
-import { FAB_PARTS } from '../../types/cssClassEnums';
+import { FAB_PARTS, EnchantedFabType } from '../../types/cssClassEnums';
+
+// Component imports
 import  "./enchanted-badge";
 
 @customElement('enchanted-fab')
 export class EnchantedFab extends LitElement {
-  @property({ reflect: true }) type: 'contained' | 'outlined' | 'AI' = 'contained';
+  @property({ reflect: true }) type: EnchantedFabType = EnchantedFabType.CONTAINED;
   @property({ type: Boolean, reflect: true }) extended = false;
   @property({ type: Boolean, reflect: true }) disabled = false;
   @property({ type: Object }) icon?: TemplateResult;
@@ -38,11 +40,11 @@ export class EnchantedFab extends LitElement {
       return 'rgba(0, 0, 0, 0.38)'; // Disabled color
     }
     switch (this.type) {
-      case 'contained':
+      case EnchantedFabType.CONTAINED:
         return '#FFFFFF'; // White for contained
-      case 'outlined':
+      case EnchantedFabType.OUTLINED:
         return '#0550dc'; // Primary color for outlined
-      case 'AI':
+      case EnchantedFabType.AI:
         return '#0550dc'; // Accent color for AI
       default:
         return '#0550dc'; // Fallback to primary color

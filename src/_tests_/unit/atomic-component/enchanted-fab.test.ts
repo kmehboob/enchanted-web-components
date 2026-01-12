@@ -18,6 +18,7 @@ import { expect, $ } from "@wdio/globals";
 
 // Helper import
 import { renderComponent } from "../../utils";
+import { EnchantedFabType } from '../../../types/cssClassEnums';
 
 // Component import
 import "../../../components/atomic-component/enchanted-fab";
@@ -33,7 +34,7 @@ describe("enchanted-fab - component test", () => {
 
   it("enchanted-fab - should render the component with correct content", async () => {
     renderComponent(html`<enchanted-fab
-      type="contained"
+      type="${EnchantedFabType.CONTAINED}"
       label="Test FAB"
       extended
       badge
@@ -49,7 +50,7 @@ describe("enchanted-fab - component test", () => {
   });
 
   it("enchanted-fab - should not render badge when badge property is not enabled", async () => {
-    renderComponent(html`<enchanted-fab type="contained" label="No Badge"></enchanted-fab>`);
+    renderComponent(html`<enchanted-fab type="${EnchantedFabType.CONTAINED}" label="No Badge"></enchanted-fab>`);
     const badge = await $("enchanted-fab enchanted-badge");
     await expect(badge).not.toBeExisting();
   });
@@ -58,7 +59,7 @@ describe("enchanted-fab - component test", () => {
     renderComponent(html`<enchanted-fab></enchanted-fab>`);
     const fab = await $("enchanted-fab");
     await expect(fab).toBeExisting();
-    await expect(fab).toHaveAttribute("type", "contained");
+    await expect(fab).toHaveAttribute("type", EnchantedFabType.CONTAINED);
     await expect(fab).not.toHaveAttribute("extended");
     await expect(fab).not.toHaveAttribute("disabled");
     const label = await fab.shadow$("span[part='label']");
@@ -66,14 +67,14 @@ describe("enchanted-fab - component test", () => {
   });
 
   it("enchanted-fab - should apply disabled state", async () => {
-    renderComponent(html`<enchanted-fab type="contained" label="Disabled FAB" disabled></enchanted-fab>`);
+    renderComponent(html`<enchanted-fab type="${EnchantedFabType.CONTAINED}" label="Disabled FAB" disabled></enchanted-fab>`);
     const fab = await $("enchanted-fab");
     await expect(fab).toHaveAttribute("disabled");
     await expect(fab).not.toBeClickable();
   });
 
   it("enchanted-fab - should render extended state with label", async () => {
-    renderComponent(html`<enchanted-fab type="contained" label="Extended FAB" extended></enchanted-fab>`);
+    renderComponent(html`<enchanted-fab type="${EnchantedFabType.CONTAINED}" label="Extended FAB" extended></enchanted-fab>`);
     const fab = await $("enchanted-fab");
     const label = await fab.shadow$("span[part='label']");
     await expect(label).toBeExisting();

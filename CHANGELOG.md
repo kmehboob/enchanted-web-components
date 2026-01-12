@@ -3,7 +3,7 @@
 ## Unreleased
 
 ### Added
--Added new `enchanted-fab` component with support for badges and AI icons, accompanied by comprehensive unit tests, snapshots, and Storybook documentation.
+- Added new `enchanted-fab` component with support for badges and AI icons, accompanied by comprehensive unit tests, snapshots, and Storybook documentation.
 - Added story for `enchanted-badge`
 
 ### Fixed
@@ -14,8 +14,6 @@
 - Added new property `color, border, badge, text` for `enchanted-badge`
 
 ### Breaking changes
-- Enable badge="dot" in opensearch for filter
-- Enable badge="text" text=${this.count} for advance search
 
 ## 3.0.0
 

@@ -642,3 +642,31 @@ export enum FAB_PARTS {
   BADGE = 'badge',
   ICON= 'icon',
 }
+
+export enum EnchantedFabType {
+  CONTAINED = 'contained',
+  OUTLINED = 'outlined',
+  AI = 'AI',
+}
+
+export enum EnchantedBadgeColor {
+  PRIMARY = 'primary',
+  ERROR = 'error',
+  ERROR_INVERSE = 'error-inverse',
+  PRIMARY_INVERSE = 'primary-inverse',
+}
+
+export enum EnchantedBadgeBorder {
+  PAPER = 'paper',
+  DEFAULT = 'default',
+  SECONDARY = 'secondary',
+  TERTIARY = 'tertiary',
+  DARK = 'dark',
+  DARKER = 'darker',
+  NONE = 'none',
+}
+
+export enum EnchantedBadgeType {
+  TEXT = 'text',
+  DOT = 'dot',
+}
