@@ -5,11 +5,15 @@
 ### Added
 
 ### Fixed
-- Fixed the alignment issue of the action and clear icons in the enchanted-textfield component.
 
 ### Changed
 
 ### Breaking changes
+
+## 4.0.1
+
+### Fixed
+- Fixed the alignment issue of the action and clear icons in the enchanted-textfield component.
 
 ## 4.0.0
 
