@@ -13,78 +13,103 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import { LitElement, TemplateResult, html, nothing } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 
+// Helper imports
+import { getCurrentDirection } from "../localization";
+import { LOCALE_DIRECTIONS } from "../constants";
+import { FAB_PARTS } from '../../types/cssClassEnums';
+import  "./enchanted-badge";
 
 @customElement('enchanted-fab')
 export class EnchantedFab extends LitElement {
-@property({ reflect: true }) type: 'contained' | 'outlined' | 'AI' = 'contained';
-@property({ type:Boolean,reflect: true }) extended= false;
-@property({type: Boolean, reflect: true }) disabled= false;
-@property({type: Object }) icon?: TemplateResult;
-@property({ type: String }) label= "";
-@property({type:Boolean, reflect: true }) badge= false;
+  @property({ reflect: true }) type: 'contained' | 'outlined' | 'AI' = 'contained';
+  @property({ type: Boolean, reflect: true }) extended = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Object }) icon?: TemplateResult;
+  @property({ type: String }) label = "";
+  @property({ type: Boolean, reflect: true }) badge = false;
 
-private get iconColor(): string {
+  @state()
+  private isLTR: boolean = getCurrentDirection() === 'ltr';
+
+  private get iconColor(): string {
     if (this.disabled) {
-        return 'rgba(0,0,0,0.38)';
+      return 'rgba(0, 0, 0, 0.38)'; // Disabled color
     }
     switch (this.type) {
-        case 'contained':
-            return '#FFFFFF';
-        case 'outlined':
-            return '#0550dc';
-        case 'AI':
-            return '#0550dc';
-        default:
-            return '#0550dc';
+      case 'contained':
+        return '#FFFFFF'; // White for contained
+      case 'outlined':
+        return '#0550dc'; // Primary color for outlined
+      case 'AI':
+        return '#0550dc'; // Accent color for AI
+      default:
+        return '#0550dc'; // Fallback to primary color
     }
-}
-private normalizeIcon(element: HTMLElement) {
+  }
+
+  private normalizeIcon(element: HTMLElement) {
     element.style.width = '24px';
     element.style.height = '24px';
     element.style.color = this.iconColor;
-}
+  }
 
-private handleSlotChange(event: Event) {
+  private handleSlotChange(event: Event) {
     const slot = event.target as HTMLSlotElement;
     const assignedElements = slot.assignedElements({ flatten: true });
     assignedElements.forEach((el) => {
-        this.normalizeIcon(el as HTMLElement);
+      this.normalizeIcon(el as HTMLElement);
     });
-}
-protected updated(changed: Map<string, unknown>) {
-    if(changed.has('type') || changed.has('disabled')) {
-        const slot = this.renderRoot.querySelector('slot[name="icon"]')as HTMLSlotElement | null;
-        slot?.assignedElements({ flatten: true }).forEach((el) => {
-            this.normalizeIcon(el as HTMLElement);
-            
-        }); 
+  }
+
+  protected updated(changed: Map<string, unknown>) {
+    super.updated(changed);
+
+    // Adjust layout for localization (LTR/RTL)
+    this.isLTR = getCurrentDirection() === LOCALE_DIRECTIONS.LTR;
+
+    if (changed.has('type') || changed.has('disabled')) {
+      const slot = this.renderRoot.querySelector('slot[name="icon"]') as HTMLSlotElement | null;
+      slot?.assignedElements({ flatten: true }).forEach((el) => {
+        this.normalizeIcon(el as HTMLElement);
+      });
     }
+  }
+
+  render() {
+    const localizationPart = this.isLTR ? '' : FAB_PARTS.FAB_RTL;
+
+    return html`
+      <button
+        part="${FAB_PARTS.FAB} ${localizationPart}"
+        ?disabled=${this.disabled}
+        exportparts="icon, ${FAB_PARTS.LABEL}, ${FAB_PARTS.BADGE}"
+        aria-label=${this.label || ''}
+      >
+        <span part="${FAB_PARTS.ICON}">
+          <slot name="icon" @slotchange=${this.handleSlotChange}>
+            ${this.icon ? this.icon : nothing}
+          </slot>
+        </span>
+        ${this.badge
+          ? html`<enchanted-badge
+              badge="text"
+              text="1"
+              border="none"
+              color="primary"
+            ></enchanted-badge>`
+          : nothing}
+        ${this.extended && this.label
+          ? html`<span part="${FAB_PARTS.LABEL}">${this.label}</span>`
+          : nothing}
+      </button>
+    `;
+  }
 }
 
-    render() 
-    {
-        return html`
-        <button
-            part="fab"
-            ?disabled=${this.disabled}
-            exportparts="icon, label, badge"
-            aria-label=${this.label || ''}
-        >
-            <span part="icon">
-                <slot name="icon" @slotchange=${this.handleSlotChange}>
-                    ${this.icon ? this.icon : nothing}
-                </slot>
-            </span>
-            ${this.badge ? html`<enchanted-badge part="badge" badge=" "></enchanted-badge>` : nothing}
-            ${this.extended && this.label ? html`<span part="label">${this.label}</span>` : nothing}
-        </button>
-        `;
-    }
-}
 declare global {
-    interface HTMLElementTagNameMap {
-        'enchanted-fab': EnchantedFab;
-    }
+  interface HTMLElementTagNameMap {
+    'enchanted-fab': EnchantedFab;
+  }
 }

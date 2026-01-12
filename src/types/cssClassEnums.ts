@@ -633,3 +633,12 @@ export enum POPOVER_PARTS {
   POPOVER_CLOSE_ICON_RTL = 'close-icon-rtl',
   POPOVER_TARGET = 'target'
 }
+
+export enum FAB_PARTS {
+  FAB = 'fab',
+  FAB_RTL = 'fab-rtl',
+  LABEL = 'label',
+  LABEL_RTL = 'label-rtl',
+  BADGE = 'badge',
+  ICON= 'icon',
+}
