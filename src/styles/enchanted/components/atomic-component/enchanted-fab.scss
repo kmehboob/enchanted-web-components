@@ -106,6 +106,7 @@ enchanted-fab[type="outlined"]::part(fab):hover{
 }
 enchanted-fab[type="outlined"]::part(fab):focus{
     outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
+    border: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
     outline-offset: 1px;
     border-radius: 7px;
 }
@@ -115,7 +116,6 @@ enchanted-fab[type="outlined"]::part(fab):hover:focus{
     outline-offset: 1px;
     border-radius: 7px;
     color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
-
 }
 
 
