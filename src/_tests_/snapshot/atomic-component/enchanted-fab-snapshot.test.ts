@@ -29,6 +29,7 @@ import '@hcl-software/enchanted-icons-web-component/dist/apps/es/ai--sparkle';
 
 // Component import
 import "../../../components/atomic-component/enchanted-fab";
+import "../../../components/atomic-component/enchanted-badge";
 
 describe("enchanted-fab - snapshot tests", () => {
   before(async () => {
@@ -43,43 +44,93 @@ describe("enchanted-fab - snapshot tests", () => {
     document.head.removeChild(link);
   });
 
-  it("should match snapshot for contained type", async () => {
-    renderComponent(html`<enchanted-fab type="contained" label="Contained FAB"></enchanted-fab>`);
+  it("should match snapshot for FAB with text badge", async () => {
+    renderComponent(html`
+      <enchanted-fab type="contained" badge .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}>
+        <enchanted-badge slot="badge" badge="text" text="5" color="primary"></enchanted-badge>
+      </enchanted-fab>
+    `);
     const fab = await $("enchanted-fab");
-    await browser.checkElement(fab, "enchanted-fab-snapshot-contained");
+    await browser.checkElement(fab, "enchanted-fab-snapshot-text-badge");
   });
 
-  it("should match snapshot for outlined type", async () => {
-    renderComponent(html`<enchanted-fab type="outlined" label="Outlined FAB" badge .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}></enchanted-fab>`);
+  it("should match snapshot for FAB with dot badge", async () => {
+    renderComponent(html`
+      <enchanted-fab type="contained" badge .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}>
+        <enchanted-badge slot="badge" badge="dot" color="error"></enchanted-badge>
+      </enchanted-fab>
+    `);
     const fab = await $("enchanted-fab");
-    await browser.checkElement(fab, "enchanted-fab-snapshot-outlined");
+    await browser.checkElement(fab, "enchanted-fab-snapshot-dot-badge");
   });
 
-  it("should match snapshot for extended FAB", async () => {
-    renderComponent(html`<enchanted-fab type="contained" label="Extended FAB" extended .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}></enchanted-fab>`);
+  it("should match snapshot for FAB with primary badge color", async () => {
+    renderComponent(html`
+      <enchanted-fab type="contained" badge .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}>
+        <enchanted-badge slot="badge" badge="text" text="3" color="primary"></enchanted-badge>
+      </enchanted-fab>
+    `);
     const fab = await $("enchanted-fab");
-    await browser.checkElement(fab, "enchanted-fab-snapshot-extended");
+    await browser.checkElement(fab, "enchanted-fab-snapshot-badge-primary");
   });
 
-  it("should match snapshot for FAB with icon", async () => {
-    renderComponent(html`<enchanted-fab
-      type="contained"
-      .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}
-    ></enchanted-fab>`);
+  it("should match snapshot for FAB with error badge color", async () => {
+    renderComponent(html`
+      <enchanted-fab type="contained" badge .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}>
+        <enchanted-badge slot="badge" badge="text" text="99" color="error"></enchanted-badge>
+      </enchanted-fab>
+    `);
     const fab = await $("enchanted-fab");
-    await browser.checkElement(fab, "enchanted-fab-snapshot-icon");
+    await browser.checkElement(fab, "enchanted-fab-snapshot-badge-error");
   });
 
-  it("should match snapshot for disabled FAB", async () => {
-    renderComponent(html`<enchanted-fab type="contained" label="Disabled FAB" disabled .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}></enchanted-fab>`);
+  it("should match snapshot for FAB with primary-inverse badge color", async () => {
+    renderComponent(html`
+      <enchanted-fab type="contained" badge .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}>
+        <enchanted-badge slot="badge" badge="text" text="7" color="primary-inverse"></enchanted-badge>
+      </enchanted-fab>
+    `);
     const fab = await $("enchanted-fab");
-    await browser.checkElement(fab, "enchanted-fab-snapshot-disabled");
+    await browser.checkElement(fab, "enchanted-fab-snapshot-badge-primary-inverse");
   });
 
-  it("should match snapshot for FAB with badge enabled", async () => {
-    renderComponent(html`<enchanted-fab type="contained" label="FAB with Badge" badge></enchanted-fab>`);
+  it("should match snapshot for FAB with error-inverse badge color", async () => {
+    renderComponent(html`
+      <enchanted-fab type="contained" badge .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}>
+        <enchanted-badge slot="badge" badge="text" text="12" color="error-inverse"></enchanted-badge>
+      </enchanted-fab>
+    `);
     const fab = await $("enchanted-fab");
-    await browser.checkElement(fab, "enchanted-fab-snapshot-badge-enabled");
+    await browser.checkElement(fab, "enchanted-fab-snapshot-badge-error-inverse");
   });
 
+  it("should match snapshot for extended FAB with badge", async () => {
+    renderComponent(html`
+      <enchanted-fab type="contained" extended label="Extended" badge .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}>
+        <enchanted-badge slot="badge" badge="text" text="8" color="primary"></enchanted-badge>
+      </enchanted-fab>
+    `);
+    const fab = await $("enchanted-fab");
+    await browser.checkElement(fab, "enchanted-fab-snapshot-extended-badge");
+  });
+
+  it("should match snapshot for outlined FAB with badge", async () => {
+    renderComponent(html`
+      <enchanted-fab type="outlined" badge .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}>
+        <enchanted-badge slot="badge" badge="text" text="4" color="primary"></enchanted-badge>
+      </enchanted-fab>
+    `);
+    const fab = await $("enchanted-fab");
+    await browser.checkElement(fab, "enchanted-fab-snapshot-outlined-badge");
+  });
+
+  it("should match snapshot for RTL direction with badge", async () => {
+    renderComponent(html`
+      <enchanted-fab type="contained" dir="rtl" badge .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}>
+        <enchanted-badge slot="badge" badge="text" text="6" color="error"></enchanted-badge>
+      </enchanted-fab>
+    `);
+    const fab = await $("enchanted-fab");
+    await browser.checkElement(fab, "enchanted-fab-snapshot-rtl-badge");
+  });
 });
