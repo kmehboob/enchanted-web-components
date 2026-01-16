@@ -51,7 +51,7 @@ export const Default: Story = {
   },
   render: ({ badge, text, color, border }) => {
     return html`
-      <div style=" position: absolute;display: flex; justify-content: center; align-items: center; width: 20px; height: 20px; top: 50px; left: 50px; border: 2px solid gray; border-radius: 4px;">
+      <div style=" position: absolute;display: flex; justify-content: center; align-items: center; width: 20px; height: 20px; top: 50px; left: 50px;">
         <enchanted-badge badge="${badge}" text="${text}" color="${color}" border="${border}">
         </enchanted-badge>
       </div>

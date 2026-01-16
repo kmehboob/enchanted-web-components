@@ -42,7 +42,7 @@ export interface EnchantedFabProps {
 }
 
 const meta: Meta<EnchantedFabProps> = {
-  title: 'Inputs/enchanted-fab',
+  title: 'Input/enchanted-fab',
   tags: ['autodocs'],
   argTypes: {
     badge: {
