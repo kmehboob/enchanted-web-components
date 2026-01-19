@@ -8,7 +8,7 @@ import '../components/atomic-component/enchanted-badge';
 import { EnchantedBadgeColor, EnchantedBadgeBorder, EnchantedBadgeType } from '../types/cssClassEnums';
 
 const meta: Meta = {
-  title: 'Components/enchanted-badge',
+  title: 'Data display/enchanted-badge',
   component: 'enchanted-badge',
   tags: ['autodocs'],
   argTypes: {
