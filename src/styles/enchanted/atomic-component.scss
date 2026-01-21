@@ -53,6 +53,10 @@ enchanted-link {
   @include enchanted-link.enchanted-link-base-styles;
 }
 
+enchanted-avatar {
+  @include enchanted-avatar.enchanted-avatar-base-styles;
+}
+
 enchanted-fab {
   @include enchanted-badge.enchanted-badge-base-styles;
 }

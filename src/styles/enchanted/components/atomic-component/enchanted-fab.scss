@@ -57,7 +57,7 @@ enchanted-fab::part(label) {
 }
 // Icon styles
 enchanted-fab::part(icon) {
-   --_icon-instance-size: 24px;
+    --_icon-instance-size: 24px;
 }
 enchanted-fab[type="contained"]::part(icon) {
     --_icon-instance-color: map.get(themeMap.$enchantedPalette, "WHITE100P");
@@ -92,7 +92,6 @@ enchanted-fab[type="contained"]::part(fab):hover:focus{
 }
 
 // Outlined FAB styles
-
 enchanted-fab[type="outlined"]::part(fab){
     background: map.get(themeMap.$enchantedPalette, "WHITE100P");
     outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
@@ -104,12 +103,14 @@ enchanted-fab[type="outlined"]::part(fab):hover{
     border-color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
     color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
 }
+
 enchanted-fab[type="outlined"]::part(fab):focus{
     outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
     border: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
     outline-offset: 1px;
     border-radius: 7px;
 }
+
 enchanted-fab[type="outlined"]::part(fab):hover:focus{
     background: rgba(0,0,0,0.04);
     outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
@@ -120,7 +121,6 @@ enchanted-fab[type="outlined"]::part(fab):hover:focus{
 
 
 // Disabled FAB styles
-
 enchanted-fab::part(fab):disabled{
     background: map.get(themeMap.$enchantedPalette, "NG150");
     color: map.get(themeMap.$enchantedPalette, "BLACK38P");
@@ -132,6 +132,7 @@ enchanted-fab::part(fab):disabled{
         0 6px 30px 5px rgba(0,0,0,0.12);
     cursor: not-allowed;
 }
+
 enchanted-fab::part(fab):disabled:hover,
 enchanted-fab::part(fab):disabled:focus{
     background: map.get(themeMap.$enchantedPalette, "NG150") ;
