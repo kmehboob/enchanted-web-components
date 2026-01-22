@@ -60,7 +60,7 @@ enchanted-fab::part(icon) {
     --_icon-instance-size: 24px;
 }
 enchanted-fab[type="contained"]::part(icon) {
-    --_icon-instance-color: map.get(themeMap.$enchantedPalette, "WHITE100P");
+    --_icon-instance-color: map.get(themeMap.$enchantedPalette, "WHITE93P");
 }
 enchanted-fab[type="outlined"]::part(icon) {
     --_icon-instance-color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
@@ -70,12 +70,12 @@ enchanted-fab[type="outlined"]::part(icon) {
 
 enchanted-fab[type="contained"]::part(fab){
     background: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
-    color:  map.get(themeMap.$enchantedPalette, "WHITE100P");
+    color:  map.get(themeMap.$enchantedPalette, "WHITE93P");
 }
 
 enchanted-fab[type="contained"]::part(fab):hover{
     background: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
-    color:  map.get(themeMap.$enchantedPalette, "WHITE100P");
+    color:  map.get(themeMap.$enchantedPalette, "WHITE93P");
 }
 
 enchanted-fab[type="contained"]::part(fab):focus{
@@ -85,10 +85,10 @@ enchanted-fab[type="contained"]::part(fab):focus{
 }
 
 enchanted-fab[type="contained"]::part(fab):hover:focus{
-    outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
+    outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
     outline-offset: 1px;
     border-radius: 7px;
-    color: map.get(themeMap.$enchantedPalette, "WHITE100P");
+    color: map.get(themeMap.$enchantedPalette, "WHITE93P");
 }
 
 // Outlined FAB styles
@@ -106,14 +106,14 @@ enchanted-fab[type="outlined"]::part(fab):hover{
 
 enchanted-fab[type="outlined"]::part(fab):focus{
     outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
-    border: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
+    border: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
     outline-offset: 1px;
     border-radius: 7px;
 }
 
 enchanted-fab[type="outlined"]::part(fab):hover:focus{
     background: rgba(0,0,0,0.04);
-    outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
+    outline: 2px solid map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
     outline-offset: 1px;
     border-radius: 7px;
     color: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE07_DARK");
@@ -124,7 +124,6 @@ enchanted-fab[type="outlined"]::part(fab):hover:focus{
 enchanted-fab::part(fab):disabled{
     background: map.get(themeMap.$enchantedPalette, "NG150");
     color: map.get(themeMap.$enchantedPalette, "BLACK38P");
-    // border-color: transparent;
     outline: none;
     box-shadow: 
         0 8px 10px -5px rgba(0,0,0,0.20),
@@ -160,7 +159,7 @@ enchanted-fab::part(label-rtl) {
 
 enchanted-fab[type="contained"]::part(fab-rtl) {
     background: map.get(themeMap.$enchantedPalette, "HCLSOFTWAREBLUE06");
-    color: map.get(themeMap.$enchantedPalette, "WHITE100P");
+    color: map.get(themeMap.$enchantedPalette, "WHITE93P");
 }
 
 enchanted-fab[type="outlined"]::part(fab-rtl) {

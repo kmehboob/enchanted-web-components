@@ -123,7 +123,7 @@ const meta: Meta<EnchantedFabProps> = {
     type: EnchantedFabType.CONTAINED,
     extended: false,
     disabled: false,
-    label: 'Default FAB',
+    label: 'Text',
     icon: html`<icon-ai-sparkle></icon-ai-sparkle>`,
   },
   parameters: {
@@ -307,7 +307,7 @@ export const AllStates: Story = {
       
       <div style="font-weight: bold; font-size: 14px; position: absolute; top: 120px; left: 800px;">[Extended + Disabled]</div>
       <enchanted-fab
-        style="position: relative; top: 130px; right: 240px;"
+        style="position: relative; top: 80px; left: 800px;"
         .type=${EnchantedFabType.OUTLINED}
         .extended=${true}
         .disabled=${true}
