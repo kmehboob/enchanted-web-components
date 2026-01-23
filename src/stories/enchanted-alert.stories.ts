@@ -142,7 +142,7 @@ export const AllStates: Story = {
         alertTitle="Error" 
         message="An error occurred while processing your request" 
         severity="${ALERT_SEVERITY.ALERT_ERROR}" 
-        variant="${ALERT_VARIANTS.ALERT_OUTLINED}"
+        variant="${ALERT_VARIANTS.ALERT_CONTAINED}"
         width="400">
       </enchanted-alert>
     </div>
