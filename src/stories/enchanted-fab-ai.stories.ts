@@ -205,7 +205,6 @@ export const AllStates: Story = {
         .extended=${true}
         .badge=${true}
         .label=${'Text'}
-        .type=${'outlined'}
         .icon=${html`<icon-ai-sparkle></icon-ai-sparkle>`}
       >
         <enchanted-badge
