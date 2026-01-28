@@ -17,10 +17,6 @@
 @use "../../common/palette";
 @use "../../common/themeMap.module";
 
-// ==========================================
-// MIXIN - Reusable FAB styles
-// ==========================================
-
 @mixin enchanted-fab-base-styles {
     // Position fixed
     position: fixed;
