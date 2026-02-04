@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- Added a new property to enable adding a label, such as the text 'Thinking,' after the circular progress in `enchanted-circular-progress`.
 
 ### Fixed
 
