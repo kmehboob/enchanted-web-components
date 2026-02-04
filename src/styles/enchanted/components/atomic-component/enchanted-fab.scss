@@ -31,7 +31,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap:8px;
         width: 40px;
         height: 40px;
         outline: none;
@@ -48,8 +47,9 @@
     }
 
     &[extended]::part(fab),
-    &[extended]::part(fab-rtl){
+    &[extended]::part(fab-rtl) {
         width: auto;
+        gap: 8px;
         padding-inline: 12px;
     }
 
@@ -57,7 +57,6 @@
     &::part(label-rtl) {
         text-align: start;
         white-space: nowrap;
-        padding: 4px;
     }
 
     // Icon styles

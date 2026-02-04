@@ -3,10 +3,13 @@
 ## Unreleased
 
 ### Added
+- Added new `enchanted-fab-ai` component with unit-test and story-book.
 
 ### Fixed
+- Fixed `enchanted-fab` extended mode layout to properly center label text when no icon is selected, resolving spacing issue caused by flexbox gap.
 
 ### Changed
+- Updated `enchanted-fab` component to support optional icon - icon property can now be undefined, allowing extended FAB with label only.
 
 ### Breaking changes
 

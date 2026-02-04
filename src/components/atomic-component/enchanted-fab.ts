@@ -45,11 +45,13 @@ export class EnchantedFab extends EnchantedAcBaseElement {
         exportparts="${FAB_PARTS.ICON}, ${FAB_PARTS.LABEL}"
         aria-label=${this.label || ''}
       >
-        <span part="${FAB_PARTS.ICON}">
-          <slot name="icon">
-            ${this.icon ? this.icon : nothing}
-          </slot>
-        </span>
+        ${this.icon 
+          ? html`<span part="${FAB_PARTS.ICON}">
+              <slot name="icon">
+                ${this.icon}
+              </slot>
+            </span>`
+          : nothing}
         ${this.extended && this.label
           ? html`<span part="${FAB_PARTS.LABEL}">${this.label}</span>`
           : nothing}

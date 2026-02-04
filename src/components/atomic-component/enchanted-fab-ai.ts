@@ -40,7 +40,7 @@ export class EnchantedFabAi extends EnchantedAcBaseElement {
   @property() 
   icon?: TemplateResult;
 
-  @property({ type: Boolean }) 
+  @property({ type: Boolean, reflect: true }) 
   badge = false;
 
   render() {
