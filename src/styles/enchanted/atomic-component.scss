@@ -39,6 +39,7 @@
 @use 'components/atomic-component/enchanted-preview.scss';
 @use 'components/atomic-component/enchanted-alert.scss';
 @use 'components/atomic-component/enchanted-chip.scss';
+@use 'components/atomic-component/enchanted-fab-ai.scss';
 @use 'components/atomic-component/enchanted-circular-progress.scss';
 @use 'components/atomic-component/enchanted-header.scss';
 @use 'components/atomic-component/enchanted-switch.scss';
@@ -59,7 +60,12 @@ enchanted-avatar {
 }
 
 enchanted-fab {
-  @include enchanted-badge.enchanted-badge-base-styles;
+  @include enchanted-fab.enchanted-fab-base-styles;
+}
+
+enchanted-fab-ai {
+  @include enchanted-fab.enchanted-fab-base-styles;
+  @include enchanted-fab-ai.enchanted-fab-ai-base-styles;
 }
 
 enchanted-button {

@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2025 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -12,8 +12,10 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-import { LitElement, TemplateResult, html, nothing } from "lit";
+import { TemplateResult, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { EnchantedAcBaseElement } from './enchanted-ac-base-element';
+
 
 // Helper imports
 import { getCurrentDirection } from "../localization";
@@ -24,7 +26,7 @@ import { FAB_PARTS, EnchantedFabType } from '../../types/cssClassEnums';
 import  "./enchanted-badge";
 
 @customElement('enchanted-fab')
-export class EnchantedFab extends LitElement {
+export class EnchantedFab extends EnchantedAcBaseElement {
   @property({ reflect: true }) type: EnchantedFabType = EnchantedFabType.CONTAINED;
   @property({ type: Boolean, reflect: true }) extended = false;
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -43,11 +45,13 @@ export class EnchantedFab extends LitElement {
         exportparts="${FAB_PARTS.ICON}, ${FAB_PARTS.LABEL}"
         aria-label=${this.label || ''}
       >
-        <span part="${FAB_PARTS.ICON}">
-          <slot name="icon">
-            ${this.icon ? this.icon : nothing}
-          </slot>
-        </span>
+        ${this.icon 
+          ? html`<span part="${FAB_PARTS.ICON}">
+              <slot name="icon">
+                ${this.icon}
+              </slot>
+            </span>`
+          : nothing}
         ${this.extended && this.label
           ? html`<span part="${FAB_PARTS.LABEL}">${this.label}</span>`
           : nothing}
