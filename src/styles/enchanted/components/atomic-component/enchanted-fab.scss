@@ -51,7 +51,6 @@
     &[extended]::part(fab-rtl) {
         width: auto;
         gap: 8px;
-        // padding-inline: 12px;
     }
 
     &::part(label),
@@ -59,7 +58,7 @@
         text-align: start;
         white-space: nowrap;
         @include typography.subtitle2;
-        padding: 4px 4px 4px 0;
+        padding: 5px 4px 5px 0;
     }
 
     // Icon styles
