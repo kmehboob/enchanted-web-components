@@ -14,7 +14,7 @@
  * ======================================================================== */
 // External imports
 import { html, nothing, TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { localized } from '@lit/localize';
 import { debounce } from 'lodash';
 import createDebug from 'debug';
@@ -29,13 +29,13 @@ import { EnchantedInputFieldType } from '../../types/enchanted-select';
 import { INPUT_TEXTFIELD_PARTS } from '../../types/cssClassEnums';
 import { AutoCompleteTextfieldEnum } from '../../types/enchanted-textfield';
 import { KeyboardInputKeys } from '../../utils/keyboardEventKeys';
+import { ENCHANTED_TEXTFIELD_TAG_NAME } from '../tags';
 
-const debug = createDebug('enchanted-web-components:components:ac:enchanted-textfield.ts');
+const debug = createDebug('enchanted-web-components:components:atomic-component:enchanted-textfield.ts');
 
 /**
  * Textfield component.
  */
-@customElement('enchanted-textfield')
 @localized()
 export class EnchantedInputTextfield extends EnchantedAcBaseElement {
   static override shadowRootOptions = {
@@ -276,8 +276,8 @@ export class EnchantedInputTextfield extends EnchantedAcBaseElement {
   }
 }
 
-declare global {
-  interface HTMLElementTagNameMap {
-    'enchanted-textfield': EnchantedInputTextfield
-  }
-} 
+if (!customElements.get(ENCHANTED_TEXTFIELD_TAG_NAME)) {
+  customElements.define(ENCHANTED_TEXTFIELD_TAG_NAME, EnchantedInputTextfield);
+} else {
+  debug('Component (%s) is currently registered and not possible to registrate again.', ENCHANTED_TEXTFIELD_TAG_NAME);
+}

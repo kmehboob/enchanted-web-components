@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2025 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -12,47 +12,20 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
+import { defineConfig, loadEnv } from 'vite';
 
-@use "sass:map";
-@use "../../common/palette";
-@use "../../common/themeMap.module";
-@use "../../common/typography";
+// ...existing code...
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  const componentPrefix = env.VITE_COMPONENT_PREFIX ? env.VITE_COMPONENT_PREFIX : '';
 
-$label-horizontal-padding: 10px;
-
-@mixin enchanted-accordion-summary-base-styles {
-  &::part(summary),
-  &::part(summary-rtl) {
-    display: flex;
-    flex-direction: column;
-    padding: 4px;
-    transition: background-color 0.3s ease;
-    border-radius: 0;
-    cursor: pointer;
-  }
-
-  &::part(label),
-  &::part(label-rtl) {
-    color: palette.clr('light', 'text', 'primary');
-    padding: 0px 0px;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 14px;
-  }
-
-  &::part(secondary),
-  &::part(secondary-rtl) {
-    @include typography.caption;
-    color: map.get(themeMap.$enchantedPalette, BLACK55P);
-    padding-left: 0px;
-  }
-
-  &[disabled] {
-    &::part(label),
-    &::part(label-rtl),
-    &::part(secondary),
-    &::part(secondary-rtl) {
-      color: palette.clr("light", "text", "disabled");
-    }
-  }
-}
+  return {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `$component-prefix: "${componentPrefix}";`,
+        },
+      },
+    },
+  };
+});

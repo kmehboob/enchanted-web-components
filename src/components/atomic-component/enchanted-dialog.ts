@@ -13,10 +13,12 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 // External imports
-import { html, nothing } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { nothing } from 'lit';
+import { html } from 'lit/static-html.js';
+import { property } from 'lit/decorators.js';
 import { localized } from '@lit/localize';
 import { debounce } from 'lodash';
+import createDebug from 'debug';
 
 // Component imports
 import { EnchantedAcBaseElement } from './enchanted-ac-base-element';
@@ -31,11 +33,13 @@ import { KeyboardInputKeys } from '../../utils/keyboardEventKeys';
 
 // Icon imports
 import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/close';
+import { generateIconTagName, ENCHANTED_DIALOG_TAG_NAME, ENCHANTED_TEXTFIELD_TAG_NAME, ENCHANTED_BUTTON_TAG_NAME, ENCHANTED_ICON_BUTTON_TAG_NAME } from '../tags';
 
-@customElement('enchanted-dialog')
+const debug = createDebug('enchanted-web-components:components:atomic-component:enchanted-dialog.ts');
+
 @localized()
 export class EnchantedDialog extends EnchantedAcBaseElement {
-  private static readonly FOCUSABLE_SELECTOR = 'enchanted-textfield, enchanted-button, enchanted-icon-button, button, input, [tabindex]:not([tabindex="-1"])';
+  private static readonly FOCUSABLE_SELECTOR = `${ENCHANTED_TEXTFIELD_TAG_NAME}, ${ENCHANTED_BUTTON_TAG_NAME}, ${ENCHANTED_ICON_BUTTON_TAG_NAME}, button, input, [tabindex]:not([tabindex="-1"])`;
   private static readonly MAX_FOCUS_DEPTH = 10;
 
   @property({ type: Boolean, reflect: true })
@@ -298,7 +302,7 @@ export class EnchantedDialog extends EnchantedAcBaseElement {
                         ${this.dialogTitle}
                       </p>
                       <div part=${DIALOG_PARTS.ICON_ROOT}>
-                        <icon-close
+                        <${generateIconTagName('icon-close')}
                           part=${DIALOG_PARTS.ICON_CLOSE}
                           color="rgba(0, 0, 0, 0.60)"
                           size="20"
@@ -306,7 +310,7 @@ export class EnchantedDialog extends EnchantedAcBaseElement {
                           @keydown=${this.handleCloseByEnterKey}
                           tabindex="0"
                         >
-                        </icon-close>
+                        </${generateIconTagName('icon-close')}>
                       </div>
                     </div>`}
               </div>
@@ -329,9 +333,8 @@ export class EnchantedDialog extends EnchantedAcBaseElement {
   }
 }
 
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'enchanted-dialog': EnchantedDialog
-  }
+if (!customElements.get(ENCHANTED_DIALOG_TAG_NAME)) {
+  customElements.define(ENCHANTED_DIALOG_TAG_NAME, EnchantedDialog);
+} else {
+  debug('Component (%s) is currently registered and not possible to registrate again.', ENCHANTED_DIALOG_TAG_NAME);
 }
