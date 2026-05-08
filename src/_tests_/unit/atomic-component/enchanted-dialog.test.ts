@@ -552,10 +552,12 @@ describe(`${ENCHANTED_DIALOG_TAG_NAME} component testing`, () => {
         `,
         document.body
       );
-      let component = await $(ENCHANTED_DIALOG_TAG_NAME).getElement();
+      const component = document.querySelector(ENCHANTED_DIALOG_TAG_NAME) as EnchantedDialog;
       await expect(component).toBeDisplayed();
-      let backdrop = await component.$(`>>>[part="${DIALOG_PARTS.BACKDROP}"]`).getElement();
-      await backdrop.click();
+
+      const backdrop = component?.shadowRoot?.querySelector(`[part="${DIALOG_PARTS.BACKDROP}"]`) as HTMLElement;
+      backdrop?.dispatchEvent(new MouseEvent('click', { bubbles: true, composed: true, cancelable: true }));
+
       await browser.pause(400);
       await expect(component).toHaveAttribute('open');
     });
