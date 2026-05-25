@@ -3,11 +3,13 @@
 ## Unreleased
 
 ### Added
+- FocusIn and FocusOut behaviour for popover component.
 
 ### Fixed
 
 ### Changed
 - Changed `SHADOW_ROOT_MODE_KEY` constant value to `enchanted.useOpenAcShadowRoot` for consistency
+- Changed Enchanted-Popover property from `disableHover` to `disablePopover`.
 
 ### Breaking changes
 
