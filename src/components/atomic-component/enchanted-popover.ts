@@ -62,12 +62,12 @@ export class EnchantedPopover extends EnchantedAcBaseElement {
   private _onFocusIn = () => {
     if (this.disablePopover) return;
     this.open = true;
-  }
+  };
 
   private _onFocusOut = () => {
     if (this.disablePopover) return;
     this.open = false;
-  }
+  };
 
   private _hidePopover = () => {
     if (this.disablePopover) return;
