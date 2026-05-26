@@ -9,9 +9,9 @@
 
 ### Changed
 - Changed `SHADOW_ROOT_MODE_KEY` constant value to `enchanted.useOpenAcShadowRoot` for consistency
-- Changed Enchanted-Popover property from `disableHover` to `disablePopover`.
 
 ### Breaking changes
+- Changed Enchanted-Popover property from `disableHover` to `disablePopover`.
 
 ## 5.3.0
 

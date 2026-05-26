@@ -126,7 +126,7 @@ const meta: Meta<EnchantedPopoverProps> = {
     },
     disablePopover: {
       control: { type: 'boolean' },
-      description: 'Disables hover-based show/hide behavior. When true, popover must be controlled via the open property or click events. Prevents accidental dismissal.',
+      description: 'Disables Popover open behavior. When true, popover must be controlled via the open property or click events. Prevents accidental dismissal.',
       table: { category: 'Behavior', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     buttontext: {
