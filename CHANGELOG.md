@@ -6,12 +6,20 @@
 - FocusIn and FocusOut behaviour for popover component.
 
 ### Fixed
+- fix(enchanted-circular-progress): resolve animation not working due to `@keyframes` scope mismatch with Shadow DOM `::part()` selectors.
 
 ### Changed
-- Changed `SHADOW_ROOT_MODE_KEY` constant value to `enchanted.useOpenAcShadowRoot` for consistency
 
 ### Breaking changes
 - Changed Enchanted-Popover property from `disableHover` to `disablePopover`.
+
+## 5.4.0
+
+### Added
+- Added `disableBackdropClick` property to `enchanted-dialog` component to disable closing dialog from backdrop click.
+
+### Changed
+- Changed `SHADOW_ROOT_MODE_KEY` constant value to `enchanted.useOpenAcShadowRoot` for consistency
 
 ## 5.3.0
 

@@ -544,5 +544,38 @@ describe(`${ENCHANTED_DIALOG_TAG_NAME} component testing`, () => {
       
       await expect(mockRenderRoot.querySelector('input')).toBe(focusableInRenderRoot);
     });
+
+    it('should NOT close dialog on backdrop click when disableBackdropClick is true', async () => {
+      render(
+        html`
+          <${ENCHANTED_DIALOG_TAG} open disableBackdropClick .localization=${localization}></${ENCHANTED_DIALOG_TAG}>
+        `,
+        document.body
+      );
+      const component = document.querySelector(ENCHANTED_DIALOG_TAG_NAME) as EnchantedDialog;
+      await expect(component).toBeDisplayed();
+
+      const backdrop = component?.shadowRoot?.querySelector(`[part="${DIALOG_PARTS.BACKDROP}"]`) as HTMLElement;
+      backdrop?.dispatchEvent(new MouseEvent('click', { bubbles: true, composed: true, cancelable: true }));
+
+      await browser.pause(400);
+      await expect(component).toHaveAttribute('open');
+    });
+
+    it('should still close dialog via close icon when disableBackdropClick is true', async () => {
+      render(
+        html`
+          <${ENCHANTED_DIALOG_TAG} open disableBackdropClick .localization=${localization}></${ENCHANTED_DIALOG_TAG}>
+        `,
+        document.body
+      );
+      let component = await $(ENCHANTED_DIALOG_TAG_NAME).getElement();
+      await expect(component).toBeDisplayed();
+      let closeButton = await component.$('>>>[part="icon-close"]').getElement();
+      await closeButton.click();
+      await browser.pause(400);
+      await expect(component).not.toHaveAttribute('open');
+    });
+
   });
 });

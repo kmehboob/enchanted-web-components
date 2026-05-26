@@ -5,7 +5,7 @@
   "types": "dist/index.d.ts",
   "author": "Hanjo Hagemeier <hanjo.hagemeier@hcl.com>",
   "license": "Apache-2.0",
-  "version": "5.3.0",
+  "version": "5.4.0",
   "type": "module",
   "homepage": "https://github.com/HCL-TECH-SOFTWARE/enchanted-web-components#readme",
   "repository": {
@@ -38,7 +38,7 @@
     "watch-enchanted-css": "rm -f ./enchanted.css && sass --watch --no-source-map ./src/styles/enchanted/enchanted.scss:enchanted.css",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_b91762b136f3f72"
+    "chromatic": "npx chromatic --project-token=chpt_f299987ece7d70a"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -80,9 +80,6 @@
     "@types/debug": "^4.1.12",
     "dayjs": "^1.11.13",
     "debug": "^4.4.3"
-  },
-  "engines": {
-    "node": ">=20.X"
   },
   "overrides": {
     "glob": "^10.2.2",
