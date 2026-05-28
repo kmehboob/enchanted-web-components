@@ -47,7 +47,7 @@ export class EnchantedPopover extends EnchantedAcBaseElement {
 
   @property({ type: Boolean }) withpadding = false;
 
-  @property({ type: Boolean }) disableHover = false;
+  @property({ type: Boolean }) disablePopover = false;
 
   // Used getter to make sure if the direction changes should update
   private get isLTR(): boolean {
@@ -55,12 +55,22 @@ export class EnchantedPopover extends EnchantedAcBaseElement {
   }
   
   private _showPopover = () => { 
-    if (this.disableHover) return; // <-- Block hover
+    if (this.disablePopover) return; // <-- Block popover
     this.open = true;
   };
 
+  private _onFocusIn = () => {
+    if (this.disablePopover) return;
+    this.open = true;
+  };
+
+  private _onFocusOut = () => {
+    if (this.disablePopover) return;
+    this.open = false;
+  };
+
   private _hidePopover = () => {
-    if (this.disableHover) return;
+    if (this.disablePopover) return;
     this.open = false;
   };
 
@@ -83,6 +93,8 @@ export class EnchantedPopover extends EnchantedAcBaseElement {
         name="target"
         @pointerenter=${this._showPopover}
         @pointerleave=${this._hidePopover}
+        @focusin=${this._onFocusIn}
+        @focusout=${this._onFocusOut}
       ></slot>
     </div>
     <div part="${POPOVER_PARTS.POPOVER_WRAPPER}" ?inverse=${this.inverse} aria-label=${this.label}>

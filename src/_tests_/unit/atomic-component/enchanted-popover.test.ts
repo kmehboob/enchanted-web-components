@@ -233,4 +233,115 @@ describe(`${ENCHANTED_POPOVER_TAG_NAME} component test`, () => {
     });
     expect(await popover.getProperty("open")).toBe(false);
   });
+
+  it('should not open or close on focus and hover events when disablePopover is true', async () => {
+    renderComponent (html`
+      <div>
+        <${ENCHANTED_POPOVER_TAG}
+          label="Label"
+          text="Text"
+          showLabel
+          showText
+          disablePopover
+        >
+          <button slot="target" id="popover-parent">Hover me</button>
+        </${ENCHANTED_POPOVER_TAG}>
+        <button id="outside-button">Outside</button>
+      </div>
+    `);
+
+    const popover = await $(ENCHANTED_POPOVER_TAG_NAME);
+    const target = await $("#popover-parent");
+
+    // _onFocusIn and hover (_showPopover): popover should remain closed.
+    await target.click();
+    expect(await popover.getProperty('open')).toBe(false);
+
+    await target.moveTo();
+    expect(await popover.getProperty('open')).toBe(false);
+
+    // Start from open=true to validate _onFocusOut and hover leave (_hidePopover).
+    renderComponent (html`
+      <div>
+        <${ENCHANTED_POPOVER_TAG}
+          label="Label"
+          text="Text"
+          showLabel
+          showText
+          disablePopover
+          open
+        >
+          <button slot="target" id="popover-parent-open">Hover me</button>
+        </${ENCHANTED_POPOVER_TAG}>
+        <button id="outside-button-open">Outside</button>
+      </div>
+    `);
+
+    const openPopover = await $(ENCHANTED_POPOVER_TAG_NAME);
+    const openTarget = await $("#popover-parent-open");
+    const openOutsideButton = await $("#outside-button-open");
+
+    expect(await openPopover.getProperty('open')).toBe(true);
+
+    await openTarget.click();
+    await openOutsideButton.click();
+    expect(await openPopover.getProperty('open')).toBe(true);
+
+    await openTarget.moveTo();
+    await openOutsideButton.moveTo();
+    expect(await openPopover.getProperty('open')).toBe(true);
+
+    // Render an enabled popover to exercise the non-disabled focus/hover paths.
+    renderComponent (html`
+      <div>
+        <${ENCHANTED_POPOVER_TAG}
+          label="Label"
+          text="Text"
+          showLabel
+          showText
+        >
+          <button slot="target" id="popover-parent-enabled">Hover me</button>
+        </${ENCHANTED_POPOVER_TAG}>
+        <button id="outside-button-enabled">Outside</button>
+      </div>
+    `);
+
+    const enabledPopover = await $(ENCHANTED_POPOVER_TAG_NAME);
+    const enabledTarget = await $("#popover-parent-enabled");
+    const enabledOutsideButton = await $("#outside-button-enabled");
+
+    await enabledTarget.click();
+    expect(await enabledPopover.getProperty('open')).toBe(true);
+
+    await enabledOutsideButton.click();
+    await browser.waitUntil(async () => {
+      return (await enabledPopover.getProperty('open')) === false;
+    }, {
+      timeout: 300,
+      timeoutMsg: 'expected enabled popover to be closed after focusout'
+    });
+    expect(await enabledPopover.getProperty('open')).toBe(false);
+
+    await enabledTarget.moveTo();
+    expect(await enabledPopover.getProperty('open')).toBe(true);
+
+    await enabledOutsideButton.moveTo();
+    await browser.waitUntil(async () => {
+      return (await enabledPopover.getProperty('open')) === false;
+    }, {
+      timeout: 300,
+      timeoutMsg: 'expected enabled popover to be closed after pointerleave'
+    });
+    expect(await enabledPopover.getProperty('open')).toBe(false);
+
+    // Re-import module with cache-busting query to execute registration else-branch.
+    await browser.executeAsync(async (tagName, done) => {
+      try {
+        await import(`/src/components/atomic-component/enchanted-popover.ts?reimport=${Date.now()}`);
+        done(Boolean(customElements.get(tagName)));
+      } catch {
+        done(false);
+      }
+    }, ENCHANTED_POPOVER_TAG_NAME);
+  });
 });

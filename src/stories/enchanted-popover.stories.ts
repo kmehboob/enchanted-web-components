@@ -33,7 +33,7 @@ import { ENCHANTED_BUTTON_TAG, ENCHANTED_POPOVER_TAG } from '../components/tags'
  * @property inverse - Dark theme when true, light theme when false
  * @property arrow - Position of the arrow pointing to the target
  * @property withpadding - Applies internal padding to the popover content
- * @property disableHover - Disables hover-based show/hide behavior
+ * @property disablePopover - Disables popover show/hide behavior
  * @property buttontext - Button text for the target element
  */
 export interface EnchantedPopoverProps {
@@ -46,7 +46,7 @@ export interface EnchantedPopoverProps {
   inverse?: boolean;
   arrow?: EnchantedPopoverArrowPosition;
   withpadding?: boolean;
-  disableHover?: boolean;
+  disablePopover?: boolean;
   buttontext?: string;
 }
 
@@ -91,7 +91,7 @@ const meta: Meta<EnchantedPopoverProps> = {
     },
     showCloseIcon: {
       control: { type: 'boolean' },
-      description: 'Displays a close button inside the popover. Allows users to explicitly dismiss the popover. Useful when disableHover is true.',
+      description: 'Displays a close button inside the popover. Allows users to explicitly dismiss the popover. Useful when disablePopover is true.',
       table: { category: 'Display', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     inverse: {
@@ -124,9 +124,9 @@ const meta: Meta<EnchantedPopoverProps> = {
       description: 'Applies internal padding to the popover content. When true, adds spacing around label and text for better readability.',
       table: { category: 'Layout', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
-    disableHover: {
+    disablePopover: {
       control: { type: 'boolean' },
-      description: 'Disables hover-based show/hide behavior. When true, popover must be controlled via the open property or click events. Prevents accidental dismissal.',
+      description: 'Disables Popover open behavior. When true, popover must be controlled via the open property or click events. Prevents accidental dismissal.',
       table: { category: 'Behavior', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
     buttontext: {
@@ -145,7 +145,7 @@ const meta: Meta<EnchantedPopoverProps> = {
     inverse: true,
     arrow: EnchantedPopoverArrowPosition.RIGHT,
     withpadding: true,
-    disableHover: false,
+    disablePopover: false,
     buttontext: 'Hover on Me',
   },
 };
@@ -168,7 +168,7 @@ export const EnchantedPopoverStory: Story = {
       ?inverse=${args.inverse}
       .arrow=${args.arrow}
       ?withpadding=${args.withpadding}
-      ?disableHover=${args.disableHover}
+      ?disablePopover=${args.disablePopover}
       style="position: absolute; top: 50%; left: 45%;"
     >
       <${ENCHANTED_BUTTON_TAG} slot="target" buttontext="${args.buttontext}"></${ENCHANTED_BUTTON_TAG}>
@@ -546,7 +546,7 @@ export const AllStates: Story = {
               ?showCloseIcon=${true}
               .arrow=${EnchantedPopoverArrowPosition.TOP}
               ?withpadding=${true}
-              ?disableHover=${true}
+              ?disablePopover=${true}
             >
               <${ENCHANTED_BUTTON_TAG} slot="target" buttontext="No Hover"></${ENCHANTED_BUTTON_TAG}>
             </${ENCHANTED_POPOVER_TAG}>
