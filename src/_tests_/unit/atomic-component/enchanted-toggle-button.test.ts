@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2025 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -12,198 +12,293 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-// External imports
-import { render, nothing } from 'lit';
+
 import { html } from 'lit/static-html.js';
-import { expect, $ } from '@wdio/globals';
-import { waitFor } from '@testing-library/dom';
+import { expect, $, browser } from '@wdio/globals';
 
-// Component imports
+import { initSessionStorage, renderComponent } from '../../utils';
 import '../../../components/atomic-component/enchanted-toggle-button';
-import { svgIconSearch } from '../../assets/svg-search';
+import '../../../components/atomic-component/enchanted-badge';
+import '../../../components/atomic-component/enchanted-tooltip';
+import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/add';
 
-// Helper imports
-import { initSessionStorage } from '../../utils';
+import { EnchantedToggleButton } from '../../../components/atomic-component/enchanted-toggle-button';
 import { TOGGLE_BUTTON_PARTS } from '../../../types/cssClassEnums';
-import { ENCHANTED_BADGE_TAG_NAME, ENCHANTED_ICON_BUTTON_TAG_NAME, ENCHANTED_TOGGLE_BUTTON_TAG, ENCHANTED_TOGGLE_BUTTON_TAG_NAME } from '../../../components/tags';
+import {
+  ENCHANTED_TOGGLE_BUTTON_TAG,
+  ENCHANTED_TOGGLE_BUTTON_TAG_NAME,
+  ENCHANTED_TOOLTIP_TAG_NAME,
+} from '../../../components/tags';
 
-describe(`${ENCHANTED_TOGGLE_BUTTON_TAG_NAME} component testing`, () => {
+afterEach(() => {
+  document.body.innerHTML = '';
+});
+
+const getToggleButton = async (): Promise<EnchantedToggleButton> => {
+  const component = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
+  await component.waitForExist();
+  return document.querySelector(ENCHANTED_TOGGLE_BUTTON_TAG_NAME) as EnchantedToggleButton;
+};
+
+describe(`${ENCHANTED_TOGGLE_BUTTON_TAG_NAME} - unit test`, () => {
   before(async () => {
     await initSessionStorage();
-    render(nothing, document.body);
   });
 
-  afterEach(() => {
-    render(nothing, document.body);
+  it('should render with expected default property values', async () => {
+    renderComponent(html`<${ENCHANTED_TOGGLE_BUTTON_TAG}></${ENCHANTED_TOGGLE_BUTTON_TAG}>`);
+
+    const toggleButton = await getToggleButton();
+    await expect(toggleButton.toggleOn).toBe(false);
+    await expect(toggleButton.showBadge).toBe(false);
+    await expect(toggleButton.disabled).toBe(false);
+    await expect(toggleButton.padding).toBe(false);
+    await expect(toggleButton.size).toBe('large');
+    await expect(toggleButton.iconSize).toBe('16');
+    await expect(toggleButton.tooltipText).toBe('');
+    await expect(toggleButton.firstType).toBe(true);
+    await expect(toggleButton.lastType).toBe(true);
+    await expect(toggleButton.ariaLabel).toBe('');
   });
 
-  it('should render without crashing', async () => {
-    let component = document.createElement(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
-    document.body.appendChild(component);
-    await expect(document.body.contains(component)).toBeTruthy();
-    document.body.removeChild(component);
-    component.remove();
+  it('should render single button with expected default part tokens', async () => {
+    renderComponent(html`
+      <${ENCHANTED_TOGGLE_BUTTON_TAG} ariaLabel="Toggle">
+        <icon-add slot="icon"></icon-add>
+      </${ENCHANTED_TOGGLE_BUTTON_TAG}>
+    `);
+
+    const host = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
+    const button = await host.$('>>>button[data-testid="enchanted-toggle-single-button"]');
+    await expect(button).toBeExisting();
+
+    const part = await button.getAttribute('part');
+    await expect(part).toContain(TOGGLE_BUTTON_PARTS.TOGGLE_SINGLE_BUTTON);
+    await expect(part).toContain(TOGGLE_BUTTON_PARTS.TOGGLE_BUTTON_LARGE);
+    await expect(part).not.toContain(TOGGLE_BUTTON_PARTS.TOGGLE_BUTTON_WITH_PADDING);
   });
 
-  it('should remove component from document body and validate removal', async () => {
-    let component = document.createElement(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
-    document.body.appendChild(component);
-    document.body.removeChild(component);
-    await expect(document.body.contains(component)).toBeFalsy();
-    component.remove();
+  it('should include small-size and padding part tokens when configured', async () => {
+    renderComponent(html`
+      <${ENCHANTED_TOGGLE_BUTTON_TAG} size="small" padding ariaLabel="Toggle">
+        <icon-add slot="icon"></icon-add>
+      </${ENCHANTED_TOGGLE_BUTTON_TAG}>
+    `);
+
+    const host = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
+    const button = await host.$('>>>button[data-testid="enchanted-toggle-single-button"]');
+    const part = await button.getAttribute('part');
+
+    await expect(part).toContain(TOGGLE_BUTTON_PARTS.TOGGLE_BUTTON_SMALL);
+    await expect(part).toContain(TOGGLE_BUTTON_PARTS.TOGGLE_BUTTON_WITH_PADDING);
   });
 
-  it('should validate null for non-existent attributes', async () => {
-    let component = document.createElement(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
-    await expect(component.getAttribute('nonExistentAttribute')).toBeNull();
-    component.remove();
+  it('should render badge slot only when showBadge is true', async () => {
+    renderComponent(html`
+      <${ENCHANTED_TOGGLE_BUTTON_TAG} ariaLabel="Toggle" showBadge>
+        <icon-add slot="icon"></icon-add>
+        <enchanted-badge slot="badge" badge="text" text="5"></enchanted-badge>
+      </${ENCHANTED_TOGGLE_BUTTON_TAG}>
+    `);
+
+    const hostWithBadge = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
+    const badgeSlot = await hostWithBadge.$('>>>slot[name="badge"]');
+    await expect(badgeSlot).toBeExisting();
+
+    renderComponent(html`
+      <${ENCHANTED_TOGGLE_BUTTON_TAG} ariaLabel="Toggle">
+        <icon-add slot="icon"></icon-add>
+      </${ENCHANTED_TOGGLE_BUTTON_TAG}>
+    `);
+
+    const hostWithoutBadge = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
+    const missingBadgeSlot = await hostWithoutBadge.$('>>>slot[name="badge"]');
+    await expect(missingBadgeSlot).not.toExist();
   });
 
-  it('should validate default value of attributes', async () => {
-    let component = document.createElement(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
-    document.body.appendChild(component);
-    await expect(component).toHaveElementProperty('disabled', false);
-    await expect(component).toHaveElementProperty('outlined', false);
-    component.remove();
+  it('should render tooltip wrapper only when tooltipText has non-whitespace content', async () => {
+    renderComponent(html`
+      <${ENCHANTED_TOGGLE_BUTTON_TAG} tooltipText="  Has tooltip  " ariaLabel="Toggle">
+        <icon-add slot="icon"></icon-add>
+      </${ENCHANTED_TOGGLE_BUTTON_TAG}>
+    `);
+
+    const host = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
+    const tooltip = await host.$(`>>>${ENCHANTED_TOOLTIP_TAG_NAME}`);
+    await expect(tooltip).toBeExisting();
+
+    renderComponent(html`
+      <${ENCHANTED_TOGGLE_BUTTON_TAG} tooltipText="   " ariaLabel="Toggle">
+        <icon-add slot="icon"></icon-add>
+      </${ENCHANTED_TOGGLE_BUTTON_TAG}>
+    `);
+
+    const hostNoTooltip = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
+    const missingTooltip = await hostNoTooltip.$(`>>>${ENCHANTED_TOOLTIP_TAG_NAME}`);
+    await expect(missingTooltip).not.toExist();
   });
 
-  it('should render component and validate attributes for outlined', async () => {
-    let wasClicked = false;
-    let selectedView = 'iconOne';
+  it('should toggle state and dispatch toggle-change event when clicked', async () => {
+    renderComponent(html`
+      <${ENCHANTED_TOGGLE_BUTTON_TAG} ariaLabel="Toggle">
+        <icon-add slot="icon"></icon-add>
+      </${ENCHANTED_TOGGLE_BUTTON_TAG}>
+    `);
 
-    render(
-      html`
-        <${ENCHANTED_TOGGLE_BUTTON_TAG}
-          .iconUrls=${[
-            'iconOneUrl', 'iconTwoUrl'
-          ]}
-          .values=${['iconOne', 'iconTwo']}
-          selectedValue=${selectedView}
-          ?outlined=${true}
-          @click=${() => { wasClicked = true; selectedView = 'iconTwo'; }}
-        >
-        </${ENCHANTED_TOGGLE_BUTTON_TAG}>
-      `,
-      document.body
-    );
-    await expect(wasClicked).toBe(false);
-    let component = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME).getElement();
-    await expect(component).toBeDisplayed();
-    await expect(component).toHaveElementProperty('selectedValue', 'iconOne');
-    await expect(component).toHaveElementProperty('outlined', true);
-    let firstButtonElement = await component.$('>>>button[data-testid="enchanted-toggle-button-first"]').getElement();
-    let firstImgElement = await firstButtonElement.$('>>>img[data-testid="enchanted-toggle-button-img"]').getElement();
-    let secondButtonElement = await component.$('>>>button[data-testid="enchanted-toggle-button-second"]').getElement();
-    let secondImgElement = await secondButtonElement.$('>>>img[data-testid="enchanted-toggle-button-img"]').getElement();
-    await expect(firstImgElement).toHaveAttribute('src', 'iconOneUrl');
-    await expect(secondImgElement).toHaveAttribute('src', 'iconTwoUrl');
-
-    await waitFor(async () => {
-      await secondButtonElement.click();
+    const toggleButton = await getToggleButton();
+    let emittedValue: boolean | undefined;
+    toggleButton.addEventListener('toggle-change', (event: Event) => {
+      emittedValue = (event as CustomEvent<{ toggleOn: boolean }>).detail.toggleOn;
     });
-    await expect(wasClicked).toBe(true);
-    await expect(selectedView).toBe('iconTwo'); 
+
+    const host = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
+    const button = await host.$('>>>button[data-testid="enchanted-toggle-single-button"]');
+    await browser.execute((el: HTMLElement) => { el.click(); }, button);
+
+    await expect(toggleButton.toggleOn).toBe(true);
+    await expect(emittedValue).toBe(true);
+
+    await browser.execute((el: HTMLElement) => { el.click(); }, button);
+    await expect(toggleButton.toggleOn).toBe(false);
   });
 
-  it('should render component and validate attributes for non-outlined', async () => {
-    let wasClicked = false;
-    let selectedView = 'iconTwo';
+  it('should not toggle or emit when disabled', async () => {
+    renderComponent(html`
+      <${ENCHANTED_TOGGLE_BUTTON_TAG} disabled ariaLabel="Toggle">
+        <icon-add slot="icon"></icon-add>
+      </${ENCHANTED_TOGGLE_BUTTON_TAG}>
+    `);
 
-    render(
-      html`
-        <${ENCHANTED_TOGGLE_BUTTON_TAG}
-          .iconUrls=${[
-            'iconOneUrl', 'iconTwoUrl'
-          ]}
-          .values=${['iconOne', 'iconTwo']}
-          selectedValue=${selectedView}
-          ?outlined=${false}
-          @click=${() => { wasClicked = true; selectedView = 'iconOne'; }}
-        >
-        </${ENCHANTED_TOGGLE_BUTTON_TAG}>
-      `,
-      document.body
-    );
-    await expect(wasClicked).toBe(false);
-    let component = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME).getElement();
-    await expect(component).toBeDisplayed();
-    await expect(component).toHaveElementProperty('selectedValue', 'iconTwo');
-    await expect(component).toHaveElementProperty('outlined', false);
-    let firstButtonElement = await component.$('>>>button[data-testid="enchanted-toggle-button-first"]').getElement();
-    let firstImgElement = await firstButtonElement.$('>>>img[data-testid="enchanted-toggle-button-img"]').getElement();
-    let secondButtonElement = await component.$('>>>button[data-testid="enchanted-toggle-button-second"]').getElement();
-    let secondImgElement = await secondButtonElement.$('>>>img[data-testid="enchanted-toggle-button-img"]').getElement();
-    await expect(firstImgElement).toHaveAttribute('src', 'iconOneUrl');
-    await expect(secondImgElement).toHaveAttribute('src', 'iconTwoUrl');
-
-    await waitFor(async () => {
-      await firstButtonElement.click();
+    const toggleButton = await getToggleButton();
+    let emissionCount = 0;
+    toggleButton.addEventListener('toggle-change', () => {
+      emissionCount += 1;
     });
-    await expect(wasClicked).toBe(true);
-    await expect(selectedView).toBe('iconOne'); 
+
+    const host = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
+    const button = await host.$('>>>button[data-testid="enchanted-toggle-single-button"]');
+    await browser.execute((el: HTMLElement) => { el.click(); }, button);
+
+    await expect(toggleButton.toggleOn).toBe(false);
+    await expect(emissionCount).toBe(0);
   });
 
-  it('should render single button element', async () => {
-    render(
-      html`
-        <${ENCHANTED_TOGGLE_BUTTON_TAG}
-          data-testid="enchanted-filter-button"
-          id='enchanted-filter-button'
-          ?singleButton=${true}
-          singleButtonTitle="test"
-          singleButtonAria="test"
-          .icon=${html `${svgIconSearch}`}
-          >
-        </${ENCHANTED_TOGGLE_BUTTON_TAG}>
-      `,
-      document.body
-    );
-    let component = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME).getElement();
-    await expect(component).toBeDisplayed();
-    let enchantedButtonElement = await component.$$(`>>>${ENCHANTED_ICON_BUTTON_TAG_NAME}[data-testid="enchanted-toggle-single-button"]`).getElements();
-    await expect(enchantedButtonElement.length).toBe(1);
-    
-    const attributes = await enchantedButtonElement[0].getAttribute('part');
-    await expect(attributes).toContain(`${TOGGLE_BUTTON_PARTS.TOGGLE_OFF_SINGLE_BUTTON}`);
+  it('should early-return in click handler when disabled flag is true', async () => {
+    renderComponent(html`
+      <${ENCHANTED_TOGGLE_BUTTON_TAG} ariaLabel="Toggle">
+        <icon-add slot="icon"></icon-add>
+      </${ENCHANTED_TOGGLE_BUTTON_TAG}>
+    `);
+
+    const toggleButton = await getToggleButton();
+    toggleButton.disabled = true;
+    await toggleButton.updateComplete;
+
+    let emitted = false;
+    toggleButton.addEventListener('toggle-change', () => {
+      emitted = true;
+    });
+
+    (toggleButton as unknown as { handleClick: (event: Event) => void }).handleClick(new Event('click'));
+
+    await expect(toggleButton.toggleOn).toBe(false);
+    await expect(emitted).toBe(false);
   });
 
-  it('should render single button element with toggle on state', async () => {
-    render(
-      html`
-        <${ENCHANTED_TOGGLE_BUTTON_TAG}
-          ?singleButton=${true}
-          ?toggleOn=${true}
-          .icon=${html `${svgIconSearch}`}
-          >
-        </${ENCHANTED_TOGGLE_BUTTON_TAG}>
-      `,
-      document.body
-    );
-    let component = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME).getElement();
-    await expect(component).toBeDisplayed();
-    let enchantedButtonElement = component.$(`>>>${ENCHANTED_ICON_BUTTON_TAG_NAME}[data-testid="enchanted-toggle-single-button"]`);
-    await expect(enchantedButtonElement).toBeDisplayed();
+  it('should update assigned icon size only when iconSize changes', async () => {
+    renderComponent(html`
+      <${ENCHANTED_TOGGLE_BUTTON_TAG} ariaLabel="Toggle">
+        <icon-add slot="icon"></icon-add>
+      </${ENCHANTED_TOGGLE_BUTTON_TAG}>
+    `);
 
-    const attributes = await enchantedButtonElement.getAttribute('part');
-    await expect(attributes).toContain(`${TOGGLE_BUTTON_PARTS.TOGGLE_ON_SINGLE_BUTTON}`);
+    const toggleButton = await getToggleButton();
+    const icon = toggleButton.querySelector('[slot="icon"]') as HTMLElement & { size?: string };
+
+    await expect(icon.size).toBe('16');
+
+    toggleButton.tooltipText = 'No icon resize update expected';
+    await toggleButton.updateComplete;
+    await expect(icon.size).toBe('16');
+
+    toggleButton.iconSize = '20';
+    await toggleButton.updateComplete;
+    await expect(icon.size).toBe('20');
   });
 
-  it('should render single button element with badge', async () => {
-    render(
-      html`
-        <${ENCHANTED_TOGGLE_BUTTON_TAG}
-          ?showBadge=${true}
-          ?singleButton=${true}
-          ?toggleOn=${true}
-          .icon=${html `${svgIconSearch}`}
-          >
-        </${ENCHANTED_TOGGLE_BUTTON_TAG}>
-      `,
-      document.body
-    );
-    let component = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME).getElement();
-    await expect(component).toBeDisplayed();
-    let enchantedBadgeElement = await component.$(`>>>${ENCHANTED_BADGE_TAG_NAME}[data-testid="enchanted-badge"]`).getElement();
-    await expect(await enchantedBadgeElement.getHTML()).toContain(ENCHANTED_BADGE_TAG_NAME);
+  it('should safely ignore icon size update when no icon is assigned', async () => {
+    renderComponent(html`<${ENCHANTED_TOGGLE_BUTTON_TAG} ariaLabel="Toggle"></${ENCHANTED_TOGGLE_BUTTON_TAG}>`);
+
+    const toggleButton = await getToggleButton();
+    toggleButton.iconSize = '20';
+    await toggleButton.updateComplete;
+
+    await expect(toggleButton.iconSize).toBe('20');
+  });
+
+  it('should safely handle iconSize update when icon slot lookup returns null', async () => {
+    renderComponent(html`
+      <${ENCHANTED_TOGGLE_BUTTON_TAG} ariaLabel="Toggle">
+        <icon-add slot="icon"></icon-add>
+      </${ENCHANTED_TOGGLE_BUTTON_TAG}>
+    `);
+
+    const toggleButton = await getToggleButton();
+    const renderRoot = toggleButton.renderRoot as ShadowRoot & {
+      querySelector: (selector: string) => Element | null;
+    };
+    const originalQuerySelector = renderRoot.querySelector.bind(renderRoot);
+    renderRoot.querySelector = () => {
+      return null;
+    };
+
+    toggleButton.iconSize = '20';
+    await toggleButton.updateComplete;
+
+    renderRoot.querySelector = originalQuerySelector;
+    await expect(toggleButton.iconSize).toBe('20');
+  });
+
+  it('should treat non-string tooltipText as empty and render without tooltip wrapper', async () => {
+    renderComponent(html`
+      <${ENCHANTED_TOGGLE_BUTTON_TAG} ariaLabel="Toggle">
+        <icon-add slot="icon"></icon-add>
+      </${ENCHANTED_TOGGLE_BUTTON_TAG}>
+    `);
+
+    const toggleButton = await getToggleButton();
+    (toggleButton as unknown as { tooltipText: unknown }).tooltipText = 123;
+    toggleButton.requestUpdate();
+    await toggleButton.updateComplete;
+
+    const host = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
+    const tooltip = await host.$(`>>>${ENCHANTED_TOOLTIP_TAG_NAME}`);
+    await expect(tooltip).not.toExist();
+  });
+
+  it('should execute already-registered module branch without errors', async () => {
+    const initialDefinition = customElements.get(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
+    await expect(!!initialDefinition).toBe(true);
+    await expect(initialDefinition?.name).toBe('EnchantedToggleButton');
+  });
+
+  it('should reflect firstType and lastType attributes when changed', async () => {
+    renderComponent(html`<${ENCHANTED_TOGGLE_BUTTON_TAG}></${ENCHANTED_TOGGLE_BUTTON_TAG}>`);
+
+    const toggleButton = await getToggleButton();
+    toggleButton.firstType = false;
+    toggleButton.lastType = false;
+    await toggleButton.updateComplete;
+
+    const host = await $(ENCHANTED_TOGGLE_BUTTON_TAG_NAME);
+    await expect(host).not.toHaveAttribute('firsttype');
+    await expect(host).not.toHaveAttribute('lasttype');
+
+    toggleButton.firstType = true;
+    toggleButton.lastType = true;
+    await toggleButton.updateComplete;
+
+    await expect(host).toHaveAttribute('firsttype');
+    await expect(host).toHaveAttribute('lasttype');
   });
 });

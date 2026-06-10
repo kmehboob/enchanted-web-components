@@ -82,19 +82,16 @@ export enum CHIP_PARTS {
 }
 
 export enum TOGGLE_BUTTON_PARTS {
-  TOGGLE_BUTTON = 'toggle-button',
-  TOGGLE_BUTTON_SELECTED = 'toggle-button-selected',
   TOGGLE_BUTTON_DISABLED = 'toggle-button-disabled',
   TOGGLE_BUTTON_DIV = 'toggle-button-div',
-  TOGGLE_BUTTON_DIV_OUTLINED = 'toggle-button-div-outlined',
   TOGGLE_BUTTON_ICON = 'toggle-button-icon',
-  FIRST_BUTTON = 'first-button',
-  SECOND_BUTTON = 'second-button',
   TOGGLE_SINGLE_BUTTON = 'toggle-single-button',
-  TOGGLE_ON_SINGLE_BUTTON = 'toggle-on-single-button',
-  TOGGLE_OFF_SINGLE_BUTTON = 'toggle-off-single-button',
-  TOGGLE_BUTTON_BADGE = 'badge-dot',
-  TOGGLE_BUTTON_BADGE_RTL = 'badge-dot-rtl',
+
+// new additions for size parts
+  TOGGLE_BUTTON_SMALL = 'toggle-button-small',
+  TOGGLE_BUTTON_LARGE = 'toggle-button-large',
+  TOGGLE_BUTTON_WITH_PADDING = 'toggle-button-with-padding',
+  TOGGLE_BUTTON_GROUP_CONTAINER = 'toggle-button-group-container',
 }
 
 export enum TAG_CLOUD_PARTS {
