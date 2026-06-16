@@ -21,7 +21,6 @@ import './enchanted-toggle-button';
 import { ENCHANTED_TOGGLE_BUTTON_GROUP_TAG_NAME } from "../tags";
 import { TOGGLE_BUTTON_PARTS } from "../../types/cssClassEnums";
 import { EnchantedToggleButton } from "./enchanted-toggle-button";
-// import { EnchantedToggleButtonGroupProps } from "../../types/enchanted-toggle-button-group";
 
 const debug = createDebug('enchanted-web-components:components:atomic-component:enchanted-toggle-button-group.ts');
 
