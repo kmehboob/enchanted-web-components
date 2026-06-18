@@ -25,8 +25,7 @@ const containerStyle = [
   'display: flex',
   'justify-content: center',
   'align-items: center',
-  'min-height: 400px',
-  'padding: 40px'
+  'min-height: 100px',
 ].join('; ') + ';';
 
 /**
@@ -48,7 +47,7 @@ export interface EnchantedMenuProps {
 }
 
 const meta: Meta<EnchantedMenuProps> = {
-  title: 'Navigation/enchanted-menu',
+  title: 'Navigation/Enchanted Menu',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {
     items: {
@@ -152,30 +151,6 @@ export const AllStates: Story = {
       'font-size: 14px',
       'color: #333'
     ].join('; ') + ';';
-
-    // Open all menus via their public toggle to trigger internal scroll-lock/anchor
-    setTimeout(() => {
-      const menus = document.querySelectorAll('enchanted-menu');
-      menus.forEach((menu) => {
-        // eslint-why: Accessing component instance methods for testing convenience
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const menuElement = menu as any;
-
-        // Call the component's toggle once to open and lock scroll on its container
-        if (!menuElement.openMenu && typeof menuElement.toggleMenuOpen === 'function') {
-          menuElement.toggleMenuOpen(new MouseEvent('click'));
-        }
-
-        // Keep it open for snapshots: ignore subsequent toggles that would close
-        const originalToggle = menuElement.toggleMenuOpen;
-        menuElement.toggleMenuOpen = function(evt: MouseEvent | KeyboardEvent) {
-          if (!menuElement.openMenu) {
-            originalToggle.call(menuElement, evt);
-          }
-          // Do nothing if already open (prevents closing)
-        };
-      });
-    }, 200);
 
     return html`
       <div style="${gridStyle}">

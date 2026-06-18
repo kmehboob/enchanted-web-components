@@ -19,15 +19,26 @@ import '../components/atomic-component/enchanted-theme-inspector';
 import { ENCHANTED_THEME_INSPECTOR_TAG } from '../components/tags';
 
 const meta: Meta = {
-  title: 'Utilities/enchanted-theme-inspector',
+  title: 'Utilities/Enchanted Theme Inspector',
   component: 'enchanted-theme-inspector',
   tags: ['autodocs', 'a11y-addon'],
+  decorators: [
+    (Story) => html`
+    <div 
+    style="
+    display: flex; 
+    justify-content: center; 
+    align-items: center;">
+      ${Story()}
+    </div>`,
+  ],
   parameters: {
     docs: {
       description: {
         component:
-          `A utility component that displays all color palettes and theme values from the Enchanted design system. 
-            Use this to inspect available colors, shades, and theme tokens for both light and dark modes.`
+         ' A utility component that displays all color palettes and theme values from the Enchanted design system.'
+          + 'Use this to inspect available colors, shades, and theme tokens for both light and dark modes.'
+          ,
       },
     },
   },
@@ -45,14 +56,5 @@ export const ColorInspector: Story = {
         <${ENCHANTED_THEME_INSPECTOR_TAG}></${ENCHANTED_THEME_INSPECTOR_TAG}>
       </div>
     `;
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          `This inspector displays all available color palettes (including BLUE, GREEN, RED, ORANGE, etc.) with their various shades,
-            as well as theme tokens for light and dark modes. Use this as a reference when styling components or selecting colors.`,
-      },
-    },
   },
 };

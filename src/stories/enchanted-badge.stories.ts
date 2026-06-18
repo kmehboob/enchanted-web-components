@@ -23,9 +23,31 @@ import { EnchantedBadgeColor, EnchantedBadgeBorder, EnchantedBadgeType } from '.
 import { ENCHANTED_BADGE_TAG } from '../components/tags';
 
 const meta: Meta = {
-  title: 'Data display/enchanted-badge',
+  title: 'Data display/Enchanted Badge',
   component: 'enchanted-badge',
   tags: ['autodocs', 'a11y-addon'],
+  decorators: [
+    (Story) => html`
+    <div 
+    style="
+    display: flex; 
+    flex-direction: column;
+    position: absolute;
+    justify-content: center; 
+    min-height: 30px;
+    align-items: center;">
+      ${Story()}
+    </div>`,
+  ],
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'Badge component for displaying notifications or status indicators. Supports multiple types (text, icon), colors, and border styles.'
+      }
+    }
+  },
+
   argTypes: {
     badge: {
       control: { type: 'select' },
@@ -66,20 +88,15 @@ export const Default: Story = {
   },
   render: ({ badge, text, color, border }) => {
     return html`
-      <div style=" position: absolute;display: flex; justify-content: center; align-items: center; width: 20px; height: 20px; top: 50px; left: 50px;">
         <${ENCHANTED_BADGE_TAG} badge="${badge}" text="${text}" color="${color}" border="${border}">
         </${ENCHANTED_BADGE_TAG}>
-      </div>
-    </div>
     `;
   },
 };
 
-export const AllVariants: Story = {
+export const AllStates: Story = {
   render: () => {
     return html`
-    <div style="display: flex; flex-direction: column; gap: 24px;">
-      <div>
         <h3>Badge Variants - Text</h3>
         <div style="display: flex; gap: 18px; flex-wrap: wrap; align-items: center;">
           ${Object.values(EnchantedBadgeColor).map((color) => {
@@ -92,9 +109,7 @@ export const AllVariants: Story = {
             `;
           })}
         </div>
-      </div>
-
-      <div>
+      
         <h3>Badge Variants - Dot</h3>
         <div style="display: flex; gap: 18px; flex-wrap: wrap; align-items: center;">
           ${Object.values(EnchantedBadgeColor).map((color) => {
@@ -107,9 +122,7 @@ export const AllVariants: Story = {
             `;
           })}
         </div>
-      </div>
 
-      <div>
         <h3>Badge Borders</h3>
         <div style="display: flex; gap: 18px; flex-wrap: wrap; align-items: center;">
           ${Object.values(EnchantedBadgeBorder).map((border) => {
@@ -122,8 +135,6 @@ export const AllVariants: Story = {
             `;
           })}
         </div>
-      </div>
-    </div>
   `;
   },
 };

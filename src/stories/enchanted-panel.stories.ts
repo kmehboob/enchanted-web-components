@@ -34,8 +34,14 @@ export interface EnchantedPanelProps {
 }
 
 const meta: Meta<EnchantedPanelProps> = {
-  title: 'Overlay/enchanted-panel',
+  title: 'Overlay/Enchanted Panel',
   tags: ['autodocs', 'a11y-addon'],
+  decorators: [
+    (Story) => html`
+    <div style="position: relative; min-height: 200px; width: 100%;">
+      ${Story()}
+    </div>`,
+  ],
   argTypes: {
     open: {
       control: { type: 'boolean' },

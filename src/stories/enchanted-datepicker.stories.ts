@@ -19,7 +19,7 @@ import { DEFAULT_CALENDAR_LOCALE } from '../types/enchanted-datepicker';
 import { ENCHANTED_DATEPICKER_TAG } from '../components/tags';
 
 const meta: Meta = {
-  title: 'Input/enchanted-datepicker',
+  title: 'Input/Enchanted Datepicker',
   component: 'enchanted-datepicker',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {

@@ -56,7 +56,7 @@ export interface EnchantedFabAiProps {
 }
 
 const meta: Meta<EnchantedFabAiProps> = {
-  title: 'Input/enchanted-fab-ai',
+  title: 'Input/Enchanted Fab AI',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {
     badge: {
@@ -134,6 +134,7 @@ const meta: Meta<EnchantedFabAiProps> = {
     icon: html`<${generateIconTagName('icon-ai-sparkle')}></${generateIconTagName('icon-ai-sparkle')}>`,
   },
   parameters: {
+    layout: 'padded',
     docs: {
       description: {
         component: 'AI Button component using composition pattern. ' +
@@ -156,6 +157,7 @@ const meta: Meta<EnchantedFabAiProps> = {
       : args.icon || html``;
 
     return html`
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%; padding: 32px;">
       <${ENCHANTED_FAB_AI_TAG}
         .badge=${args.badge}
         .extended=${args.extended}
@@ -171,6 +173,7 @@ const meta: Meta<EnchantedFabAiProps> = {
           color="${args.badgeColor}"
         ></${ENCHANTED_BADGE_TAG}>
       </${ENCHANTED_FAB_AI_TAG}>
+    </div>
     `;
   },
 };

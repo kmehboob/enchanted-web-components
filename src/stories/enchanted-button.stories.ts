@@ -55,7 +55,7 @@ export interface EnchantedButtonProps {
 }
 
 const meta: Meta<EnchantedButtonProps> = {
-  title: 'Input/enchanted-button',
+  title: 'Input/Enchanted Button',
   component: 'enchanted-button',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {

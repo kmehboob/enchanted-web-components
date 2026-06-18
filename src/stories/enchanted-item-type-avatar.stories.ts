@@ -31,8 +31,15 @@ export interface EnchantedItemTypeAvatarProps {
 }
 
 const meta: Meta<EnchantedItemTypeAvatarProps> = {
-  title: 'Data Display/enchanted-item-type-avatar',
+  title: 'Data Display/Enchanted Item Type Avatar',
   tags: ['autodocs', 'a11y-addon'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A versatile avatar component that displays an icon or image based on the provided item type or image URL. '
+      },
+    },
+  },
   argTypes: {
     itemType: {
       control: { type: 'select' },

@@ -87,7 +87,7 @@ const sampleData: EnchantedDataGridContextType = {
 };
 
 const meta: Meta<EnchantedDataGridGenericProps> = {
-  title: 'Data display/enchanted-data-grid-generic',
+  title: 'Data display/Enchanted Data Grid Generic',
   component: 'enchanted-data-grid-generic',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {
