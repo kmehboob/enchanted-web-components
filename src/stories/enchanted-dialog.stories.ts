@@ -23,7 +23,7 @@ const meta: Meta = {
   component: 'enchanted-dialog',
   tags: ['autodocs', 'a11y-addon'],
   decorators: [
-    (Story) => html`
+    (Story) => {return html`
     <div 
     style="
     display: flex; 
@@ -32,9 +32,9 @@ const meta: Meta = {
     min-height: 200px;
     padding: 20px;">
       ${Story()}
-    </div>`,
+    </div>`;},
   ],
-   parameters: {
+  parameters: {
     layout: 'padded',
     docs: {
       description: {

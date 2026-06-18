@@ -54,8 +54,8 @@ const meta: Meta<EnchantedPopoverProps> = {
   title: 'Display/Enchanted Popover',
   component: 'enchanted-popover',
   tags: ['autodocs', 'a11y-addon'],
-    decorators: [
-    (Story) => html`
+  decorators: [
+    (Story) => {return html`
     <div 
     style="
     display: flex; 
@@ -63,7 +63,7 @@ const meta: Meta<EnchantedPopoverProps> = {
     align-items: center; 
     min-height: 100px;">
       ${Story()}
-    </div>`,
+    </div>`;},
   ],
   parameters: {
     docs: {

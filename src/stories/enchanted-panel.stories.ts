@@ -37,10 +37,10 @@ const meta: Meta<EnchantedPanelProps> = {
   title: 'Overlay/Enchanted Panel',
   tags: ['autodocs', 'a11y-addon'],
   decorators: [
-    (Story) => html`
+    (Story) => {return html`
     <div style="position: relative; min-height: 200px; width: 100%;">
       ${Story()}
-    </div>`,
+    </div>`;},
   ],
   argTypes: {
     open: {

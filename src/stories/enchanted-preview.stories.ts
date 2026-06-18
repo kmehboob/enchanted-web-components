@@ -16,7 +16,6 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit/static-html.js';
 import '../components/atomic-component/enchanted-preview';
 import { ENCHANTED_PREVIEW_TAG } from '../components/tags';
-import { HEADER_LAYOUT_PARTS } from '../types/cssClassEnums';
 
 /**
  * @typedef AssetRendition
@@ -94,8 +93,8 @@ const meta: Meta<EnchantedPreviewProps> = {
   title: 'Overlay/Enchanted Preview',
   component: 'enchanted-preview',
   tags: ['autodocs', 'a11y-addon'],
-    decorators: [
-    (Story) => html`
+  decorators: [
+    (Story) => {return html`
     <div 
     style="
     display: flex; 
@@ -104,7 +103,7 @@ const meta: Meta<EnchantedPreviewProps> = {
     min-height: 300px;
     padding: 20px;">
       ${Story()}
-    </div>`,
+    </div>`;},
   ],
   parameters: {
     layout: 'fullscreen',

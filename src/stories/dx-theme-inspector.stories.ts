@@ -23,14 +23,14 @@ const meta: Meta = {
   component: 'enchanted-theme-inspector',
   tags: ['autodocs', 'a11y-addon'],
   decorators: [
-    (Story) => html`
+    (Story) => {return html`
     <div 
     style="
     display: flex; 
     justify-content: center; 
     align-items: center;">
       ${Story()}
-    </div>`,
+    </div>`;},
   ],
   parameters: {
     docs: {
@@ -38,7 +38,7 @@ const meta: Meta = {
         component:
          ' A utility component that displays all color palettes and theme values from the Enchanted design system.'
           + 'Use this to inspect available colors, shades, and theme tokens for both light and dark modes.'
-          ,
+        ,
       },
     },
   },

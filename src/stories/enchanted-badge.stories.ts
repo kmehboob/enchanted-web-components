@@ -27,7 +27,7 @@ const meta: Meta = {
   component: 'enchanted-badge',
   tags: ['autodocs', 'a11y-addon'],
   decorators: [
-    (Story) => html`
+    (Story) => {return html`
     <div 
     style="
     display: flex; 
@@ -37,7 +37,7 @@ const meta: Meta = {
     min-height: 30px;
     align-items: center;">
       ${Story()}
-    </div>`,
+    </div>`;},
   ],
   parameters: {
     layout: 'padded',
