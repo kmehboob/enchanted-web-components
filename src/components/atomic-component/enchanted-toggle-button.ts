@@ -119,6 +119,7 @@ export class EnchantedToggleButton extends EnchantedAcBaseElement {
         part="${TOGGLE_BUTTON_PARTS.TOGGLE_SINGLE_BUTTON} ${this.getSizepart()} ${this.getPaddingPart()}"
         data-testid="enchanted-toggle-single-button"
       >
+        <span part=${TOGGLE_BUTTON_PARTS.TOGGLE_BUTTON_FOCUS_RING}></span>
         <slot name="icon"
         part="${TOGGLE_BUTTON_PARTS.TOGGLE_BUTTON_ICON}"></slot>
       </button>

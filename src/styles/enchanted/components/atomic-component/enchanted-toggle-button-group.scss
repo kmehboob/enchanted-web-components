@@ -34,8 +34,10 @@
         flex-direction: column;
         align-items: flex-start;
     }
-    & enchanted-toggle-button {
-        --_toggle-button-focus-outline-offset: 0px;
+
+    /* Increase z-index on focus to layer focused button above neighbors */
+    & enchanted-toggle-button:focus-within {
+        z-index: 1;
     }
 
     & enchanted-toggle-button[firstType]:not([lastType])[disabled]::part(toggle-single-button),

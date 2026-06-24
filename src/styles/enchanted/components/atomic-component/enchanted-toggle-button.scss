@@ -45,6 +45,7 @@
     border-radius: 2px;
     padding: 2px;
     border: 1px solid var(--border-secondary, rgba(0, 0, 0, 0.20));
+    position: relative;
   }
 
   /* -------------*/
@@ -94,28 +95,38 @@
     border: 1px solid var(--primary-dark, #0029A9);
   }
 
+  &::part(toggle-single-button):focus,
   &::part(toggle-single-button):focus-visible {
-    outline: 2px solid var(--actions-focus, #0550DC);
-    outline-offset: var(--_toggle-button-focus-outline-offset, 1px);
-    border-radius: 2px;
-  }
-  &[toggleOn]::part(toggle-single-button):focus-visible {
-    outline: 2px solid var(--primary-dark, #0550DC);
-    outline-offset: var(--_toggle-button-focus-outline-offset, 1px);
-    border-radius: 2px;
+    outline: none;
   }
 
+    /* -------------*/
+  /* Focus Ring */
+  /* -------------*/
+  &::part(focus-ring) {
+    position: absolute;
+    inset: -4px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    pointer-events: none;
+    transition: border-color 0.2s ease;
+  }
+
+    &:focus-within::part(focus-ring) {
+      border-color: var(--actions-focus, #0550DC);
+    }
+
+    &[toggleOn]:focus-within::part(focus-ring) {
+      border-color: var(--primary-dark, #0550DC);
+    }
+  
   //hover + focus state
   &::part(toggle-single-button):hover:focus-visible {
     background: var(--actions-hover, rgba(0, 0, 0, 0.07));
-    outline: 2px solid var(--actions-focus, #0550DC);
-    outline-offset: var(--_toggle-button-focus-outline-offset, 1px);
   }
   &[toggleOn]::part(toggle-single-button):hover:focus-visible {
     background: rgba(5, 80, 220, 0.20);
-    border: 1px solid var(--primary-dark, #0029A9);
-    outline: 2px solid var(--primary-dark, #0550DC);
-    outline-offset: var(--_toggle-button-focus-outline-offset, 1px);
+    // border: 1px solid var(--primary-dark, #0029A9);
   }
 
   &[disabled]::part(toggle-single-button) {
