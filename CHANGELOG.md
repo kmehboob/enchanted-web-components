@@ -8,6 +8,7 @@
 - added `enchanted-toggle-button-group` component along with story-book 
 
 ### Fixed
+- Reduced WebdriverIO (wdio) console warnings across unit tests by removing deprecated synchronous .getElement() chaining and refactoring async/await element handling.
 
 ### Changed
 - Refactored SCSS color usage to shared theme/palette tokens (including shadow token mapping where applicable), replacing hardcoded `rgba`/hex literals across: `enchanted-accordion`, `enchanted-badge`, `enchanted-data-grid`, `enchanted-data-grid-generic`, `enchanted-datepicker`, `enchanted-fab`, `enchanted-multiple-select-chip`, and `enchanted-popover`.
