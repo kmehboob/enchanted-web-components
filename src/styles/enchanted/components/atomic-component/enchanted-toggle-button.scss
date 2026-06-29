@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2025 HCL America Inc.                                          *
+ * Copyright 2025, 2026 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -13,45 +13,194 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
+@use "sass:map";
 @use "../../common/palette";
+@use "../../common/themeMap.module";
 
 @mixin enchanted-toggle-button-base-styles {
-  &::part(badge-dot) {
-    border: 2px solid palette.clr('light', 'action', 'selected');
-    border-radius: 10px;
-    background-color: palette.clr('light', 'action', 'selected');
+  position: relative;
+  display: inline-flex;
+
+  &::part(toggle-button-div) {
+    display: flex;
+    position: relative;
+  }
+
+  &::part(toggle-button-badge-wrapper) {
     position: absolute;
-    right: 6px;
-    top: 6px;
-    height: 8px;
-    width: 8px;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+    display: flex;
+  }
+
+  &::part(toggle-single-button) {
     display: inline-flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: transparent;
+    border-radius: 2px;
+    padding: 2px;
+    border: 1px solid var(--border-secondary, rgba(0, 0, 0, 0.20));
+    position: relative;
   }
 
-  &::part(toggle-off-single-button) {
-    border: 1px solid  palette.clr('light', 'border', 'secondary');
-    height: 28px;
+  /* -------------*/
+  /* Toggle-Size */
+  /* -------------*/
+  &::part(toggle-button-small) {
+    width: 20px;
+    height: 20px;
+  }
+  &::part(toggle-button-large) {
+    width: 24px;
+    height: 24px;
+  }
+
+  &[padding]::part(toggle-single-button) {
+    padding: 4px;
+  }
+
+  &[padding]::part(toggle-button-small) {
+    width: 24px;
+    height: 24px;
+  }
+
+  &[padding]::part(toggle-button-large) {
     width: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &::part(toggle-on-single-button) {
-    border: 1px solid palette.clr('light', 'action', 'selected');
-    background-color: palette.clr('light', 'action', 'selectedOpacity');
-    color: palette.clr('light', 'action', 'selected');
     height: 28px;
-    width: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
-  &::part(badge-dot-rtl) {
-    right: auto;
-    left: 6px;
+  /* -------------*/
+  /* Button State */
+  /* -------------*/
+  &[toggleOn]::part(toggle-single-button) {
+    background: var(--actions-selectedOpacity, rgba(5, 80, 220, 0.08));
+    border: 1px solid var(--actions-selected, #0550DC);
+    --_icon-instance-color: rgba(5, 80, 220, 1);
+  }
+
+  /* -------------*/
+  /* Button State - Interaction */
+  /* -------------*/
+
+  &::part(toggle-single-button):hover {
+    background-color: rgba(0, 0, 0, 0.07);
+  }
+  &[toggleOn]::part(toggle-single-button):hover {
+    background: rgba(5, 80, 220, 0.20);
+    border: 1px solid var(--primary-dark, #0029A9);
+  }
+
+  &::part(toggle-single-button):focus,
+  &::part(toggle-single-button):focus-visible {
+    outline: none;
+  }
+
+    /* -------------*/
+  /* Focus Ring */
+  /* -------------*/
+  &::part(focus-ring) {
+    position: absolute;
+    inset: -4px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    pointer-events: none;
+    transition: border-color 0.2s ease;
+  }
+
+    &:focus-within::part(focus-ring) {
+      border-color: var(--actions-focus, #0550DC);
+    }
+
+    &[toggleOn]:focus-within::part(focus-ring) {
+      border-color: var(--primary-dark, #0550DC);
+    }
+  
+  //hover + focus state
+  &::part(toggle-single-button):hover:focus-visible {
+    background: var(--actions-hover, rgba(0, 0, 0, 0.07));
+  }
+  &[toggleOn]::part(toggle-single-button):hover:focus-visible {
+    background: rgba(5, 80, 220, 0.20);
+    // border: 1px solid var(--primary-dark, #0029A9);
+  }
+
+  &[disabled]::part(toggle-single-button) {
+    background-color: transparent;
+    border: 1px solid var(--border-secondary, rgba(0, 0, 0, 0.20));
+  }
+  &[toggleOn][disabled]::part(toggle-single-button) {
+    background: rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-secondary, rgba(0, 0, 0, 0.20));
+  }
+
+  /* -------------*/
+  /* Icon */
+  /* -------------*/
+  &::part(toggle-button-icon) {
+  --_icon-instance-color: rgba(0, 0, 0, 0.60);
+  }
+
+  &[disabled]::part(toggle-button-icon),
+  &[toggleOn][disabled]::part(toggle-button-icon) {
+    --_icon-instance-color: rgba(0, 0, 0, 0.38) !important;
+  }
+
+  &[toggleOn]::part(toggle-button-icon) {
+    --_icon-instance-color: rgba(5, 80, 220, 1);
+  }
+
+  &[toggleOn]::part(toggle-button-icon):hover {
+    --_icon-instance-color: #0029A9;
+  }
+
+  /* -------------*/
+  /* Grouped Button Styles */
+  /* -------------*/
+
+  
+  // firstType=true, lastType=false when toggleOn=true.
+  &[firstType][toggleOn]:not([lastType])::part(toggle-single-button) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  // firstType=true, lastType=false when toggleOn=false.
+  &[firstType]:not([lastType]):not([toggleOn])::part(toggle-single-button) {
+    border-top-right-radius: 0;
+    border-right: 1px solid transparent;
+    border-bottom-right-radius: 0;
+  }
+
+  // firstType=false, lastType=false when toggleOn=true.
+  &:not([firstType]):not([lastType])[toggleOn]::part(toggle-single-button) {
+    border-radius: 0;
+  }
+
+  // firstType=false, lastType=false when toggleOn=false.
+  &:not([firstType]):not([lastType]):not([toggleOn])::part(toggle-single-button) {
+    border-right: 1px solid transparent;
+    border-radius: 0;
+  }
+
+  // firstType=false, lastType=true for both toggleOn states.
+  &:not([firstType])[lastType][toggleOn]::part(toggle-single-button),
+  &:not([firstType])[lastType]:not([toggleOn])::part(toggle-single-button) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  // Allow group to collapse disabled seam for selected non-last buttons.
+  &[firstType][toggleOn][disabled]:not([lastType])::part(toggle-single-button),
+  &:not([firstType]):not([lastType])[toggleOn][disabled]::part(toggle-single-button) {
+    border-right-color: var(--_toggle-group-disabled-seam-border-right-color, transparent);
+  }
+
+  &[firstType]:not([lastType])::part(toggle-single-button),
+  &:not([firstType]):not([lastType])::part(toggle-single-button) {
+    margin-right: -1px;
   }
 }
