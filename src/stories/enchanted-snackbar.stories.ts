@@ -32,7 +32,7 @@ export interface EnchantedSnackbarProps {
 }
 
 const meta: Meta<EnchantedSnackbarProps> = {
-  title: 'Feedback/enchanted-snackbar',
+  title: 'Feedback/Enchanted Snackbar',
   tags: ['autodocs', 'a11y-addon'],
   parameters: {
     docs: {

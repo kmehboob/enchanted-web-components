@@ -48,7 +48,7 @@ export interface EnchantedTooltipProps {
 }
 
 const meta: Meta<EnchantedTooltipProps> = {
-  title: 'Feedback/enchanted-tooltip',
+  title: 'Feedback/Enchanted Tooltip',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {
     tooltiptext: {

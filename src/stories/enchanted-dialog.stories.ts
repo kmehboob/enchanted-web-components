@@ -19,9 +19,32 @@ import { DialogSizes } from '../types/enchanted-dialog';
 import { ENCHANTED_DIALOG_TAG } from '../components/tags';
 
 const meta: Meta = {
-  title: 'Feedback/enchanted-dialog',
+  title: 'Feedback/Enchanted Dialog',
   component: 'enchanted-dialog',
   tags: ['autodocs', 'a11y-addon'],
+  decorators: [
+    (Story) => {return html`
+    <div 
+    style="
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 200px;
+    padding: 20px;">
+      ${Story()}
+    </div>`;},
+  ],
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'Dialog component for displaying modal content with backdrop overlay. Features multiple size variants (xl to xs), customizable title, ' +
+          'slotted content areas (title, content, footer), and accessibility support with focus management and ARIA announcements. ' +
+          'Supports keyboard navigation (Escape to close) and automatic screen reader notifications.'
+      }
+    }
+  },
+
   argTypes: {
     dialogTitle: {
       control: { type: 'text' },
@@ -64,15 +87,6 @@ const meta: Meta = {
     removeBorder: false,
     disableBackdropClick: false,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: 'Dialog component for displaying modal content with backdrop overlay. Features multiple size variants (xl to xs), customizable title, ' +
-          'slotted content areas (title, content, footer), and accessibility support with focus management and ARIA announcements. ' +
-          'Supports keyboard navigation (Escape to close) and automatic screen reader notifications.'
-      }
-    }
-  }
 };
 
 export default meta;
@@ -85,7 +99,6 @@ type Story = StoryObj<{
   removeBorder: boolean;
   disableBackdropClick: boolean;
 }>;
-
 export const EnchantedDialog: Story = {
   render: (args) => {
     return html`
@@ -230,6 +243,7 @@ export const AllStates: StoryObj = {
     `;
   },
   parameters: {
+    layout: 'fullscreen',
     docs: {
       description: {
         story: 'Comprehensive showcase of all dialog sizes and variations. Demonstrates 5 size variants (xl, lg, md, sm, xs) and various configurations including ' +

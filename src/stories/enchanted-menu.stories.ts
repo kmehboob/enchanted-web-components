@@ -13,6 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { userEvent, within } from 'storybook/test';
 import { html } from 'lit/static-html.js';
 import '../components/atomic-component/enchanted-menu';
 import '../components/atomic-component/enchanted-menu-item';
@@ -25,8 +26,7 @@ const containerStyle = [
   'display: flex',
   'justify-content: center',
   'align-items: center',
-  'min-height: 400px',
-  'padding: 40px'
+  'min-height: 100px',
 ].join('; ') + ';';
 
 /**
@@ -48,7 +48,7 @@ export interface EnchantedMenuProps {
 }
 
 const meta: Meta<EnchantedMenuProps> = {
-  title: 'Navigation/enchanted-menu',
+  title: 'Navigation/Enchanted Menu',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {
     items: {
@@ -92,6 +92,10 @@ const meta: Meta<EnchantedMenuProps> = {
   },
   parameters: {
     docs: {
+      story: {
+        inline: false,
+        iframeHeight: 300,
+      },
       description: {
         component: 'Menu component that displays a dropdown list of menu items anchored to a target element. ' +
           'Supports customizable placement, size variants, delay timing, and automatic positioning with viewport awareness. ' +
@@ -108,7 +112,7 @@ const meta: Meta<EnchantedMenuProps> = {
           placement=${args.placement}
           size=${args.size}
         >
-          <${ENCHANTED_BUTTON_TAG} slot="target-anchor" variant="contained" size="large" buttontext="Menu"></${ENCHANTED_BUTTON_TAG}>
+          <${ENCHANTED_BUTTON_TAG} data-testid="menu-trigger" slot="target-anchor" variant="contained" size="large" buttontext="Menu"></${ENCHANTED_BUTTON_TAG}>
           ${args.items && args.items.map((item) => { return html`
             <${ENCHANTED_MENU_ITEM_TAG} slot="menu-items" text="${item.text}" value="${item.value}"></${ENCHANTED_MENU_ITEM_TAG}>
           `; })}
@@ -121,7 +125,15 @@ const meta: Meta<EnchantedMenuProps> = {
 export default meta;
 type Story = StoryObj<EnchantedMenuProps>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvasElement, viewMode }: { canvasElement: HTMLElement; viewMode: 'docs' | 'story' }) => {
+    if (viewMode === 'docs') {
+      return;
+    }
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByTestId('menu-trigger'));
+  },
+};
 
 export const AllStates: Story = {
   render: () => {
@@ -152,30 +164,6 @@ export const AllStates: Story = {
       'font-size: 14px',
       'color: #333'
     ].join('; ') + ';';
-
-    // Open all menus via their public toggle to trigger internal scroll-lock/anchor
-    setTimeout(() => {
-      const menus = document.querySelectorAll('enchanted-menu');
-      menus.forEach((menu) => {
-        // eslint-why: Accessing component instance methods for testing convenience
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const menuElement = menu as any;
-
-        // Call the component's toggle once to open and lock scroll on its container
-        if (!menuElement.openMenu && typeof menuElement.toggleMenuOpen === 'function') {
-          menuElement.toggleMenuOpen(new MouseEvent('click'));
-        }
-
-        // Keep it open for snapshots: ignore subsequent toggles that would close
-        const originalToggle = menuElement.toggleMenuOpen;
-        menuElement.toggleMenuOpen = function(evt: MouseEvent | KeyboardEvent) {
-          if (!menuElement.openMenu) {
-            originalToggle.call(menuElement, evt);
-          }
-          // Do nothing if already open (prevents closing)
-        };
-      });
-    }, 200);
 
     return html`
       <div style="${gridStyle}">

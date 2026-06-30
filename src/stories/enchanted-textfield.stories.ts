@@ -55,7 +55,7 @@ export interface EnchantedInputTextfieldProps {
 }
 
 const meta: Meta<EnchantedInputTextfieldProps> = {
-  title: 'Input/enchanted-textfield',
+  title: 'Input/Enchanted Textfield',
   tags: ['autodocs', 'a11y-addon'],
   parameters: {
     docs: {

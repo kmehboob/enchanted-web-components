@@ -55,7 +55,7 @@ export interface EnchantedToggleButtonProps {
 
 
 const meta: Meta<EnchantedToggleButtonProps> = {
-  title: 'Input/enchanted-toggle-button',
+  title: 'Input/Enchanted Toggle Button',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {
     singleButton: { control: 'boolean', description: 'Single button mode', table: { defaultValue: { summary: 'false' } } },
