@@ -58,7 +58,7 @@ export interface EnchantedFabProps {
 }
 
 const meta: Meta<EnchantedFabProps> = {
-  title: 'Input/enchanted-fab',
+  title: 'Input/Enchanted Fab',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {
     badge: {
@@ -130,6 +130,7 @@ const meta: Meta<EnchantedFabProps> = {
       },
     },
   },
+  
   args: {
     badge: true,
     badgeType: EnchantedBadgeType.TEXT,
@@ -143,6 +144,7 @@ const meta: Meta<EnchantedFabProps> = {
     icon: undefined,
   },
   parameters: {
+    layout: 'padded',
     docs: {
       description: {
         component: 'Floating Action Button (FAB) component with support for badges, multiple types, and extended mode. ' +
@@ -163,6 +165,7 @@ const meta: Meta<EnchantedFabProps> = {
       : args.icon;
 
     return html`
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%; padding: 32px;">
       <${ENCHANTED_FAB_TAG}
         .badge=${args.badge}
         .type=${args.type}
@@ -179,6 +182,7 @@ const meta: Meta<EnchantedFabProps> = {
           color="${args.badgeColor}"
         ></${ENCHANTED_BADGE_TAG}>
       </${ENCHANTED_FAB_TAG}>
+    </div>
     `;
   },
 };

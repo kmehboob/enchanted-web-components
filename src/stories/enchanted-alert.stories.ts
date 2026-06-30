@@ -19,7 +19,7 @@ import { ALERT_SEVERITY, ALERT_VARIANTS } from '../types/cssClassEnums';
 import { ENCHANTED_ALERT_TAG } from '../components/tags';
 
 const meta: Meta = {
-  title: 'Feedback/enchanted-alert',
+  title: 'Feedback/Enchanted Alert',
   component: 'enchanted-alert',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {

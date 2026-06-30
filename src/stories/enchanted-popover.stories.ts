@@ -51,9 +51,20 @@ export interface EnchantedPopoverProps {
 }
 
 const meta: Meta<EnchantedPopoverProps> = {
-  title: 'Display/enchanted-popover',
+  title: 'Display/Enchanted Popover',
   component: 'enchanted-popover',
   tags: ['autodocs', 'a11y-addon'],
+  decorators: [
+    (Story) => {return html`
+    <div 
+    style="
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100px;">
+      ${Story()}
+    </div>`;},
+  ],
   parameters: {
     docs: {
       description: {

@@ -19,7 +19,7 @@ import { HEADER_VARIANT } from '../types/cssClassEnums';
 import { ENCHANTED_HEADER_TAG } from '../components/tags';
 
 const meta: Meta = {
-  title: 'Navigation/enchanted-header',
+  title: 'Navigation/Enchanted Header',
   component: 'enchanted-header',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {

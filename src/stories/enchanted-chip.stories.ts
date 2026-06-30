@@ -20,7 +20,7 @@ import '@hcl-software/enchanted-icons-web-component/dist/carbon/es/close';
 import { generateIconTagName, ENCHANTED_CHIP_TAG } from '../components/tags';
 
 const meta: Meta = {
-  title: 'Data display/enchanted-chip',
+  title: 'Data display/Enchanted Chip',
   component: 'enchanted-chip',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {

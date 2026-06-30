@@ -36,7 +36,7 @@ export interface EnchantedTablePaginationProps {
 }
 
 const meta: Meta<EnchantedTablePaginationProps> = {
-  title: 'Table/enchanted-table-pagination',
+  title: 'Table/Enchanted Table Pagination',
   component: 'enchanted-table-pagination',  
   tags: ['autodocs', 'a11y-addon'],
   parameters: {

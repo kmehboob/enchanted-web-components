@@ -18,7 +18,7 @@ import '../components/atomic-component/enchanted-circular-progress';
 import { ENCHANTED_CIRCULAR_PROGRESS_TAG } from '../components/tags';
 
 const meta: Meta = {
-  title: 'Feedback/enchanted-circular-progress',
+  title: 'Feedback/Enchanted Circular Progress',
   component: 'enchanted-circular-progress',
   tags: ['autodocs', 'a11y-addon'],
   argTypes: {

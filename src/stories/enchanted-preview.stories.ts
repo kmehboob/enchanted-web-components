@@ -90,10 +90,23 @@ const PREVIEW_ITEMS: PreviewItem[] = [
 ];
 
 const meta: Meta<EnchantedPreviewProps> = {
-  title: 'Overlay/enchanted-preview',
+  title: 'Overlay/Enchanted Preview',
   component: 'enchanted-preview',
   tags: ['autodocs', 'a11y-addon'],
+  decorators: [
+    (Story) => {return html`
+    <div 
+    style="
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 300px;
+    padding: 20px;">
+      ${Story()}
+    </div>`;},
+  ],
   parameters: {
+    layout: 'fullscreen',
     docs: {
       description: {
         component: 'The Preview component displays media items in a full-screen overlay with navigation controls. Supports images, videos, and documents with multiple ' +
