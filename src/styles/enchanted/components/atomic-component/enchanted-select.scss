@@ -130,10 +130,10 @@
   &::part(unordered-list) {
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 4px 0 4px 0;
     background-color: palette.clr(light, background, paper);
-    border: 1px solid palette.clr(light, action, disabled);
-    border-radius: 2px;
+    box-shadow: #{map.get(themeMap.$enchantedPalette, shadows6)};
+    border-radius: 4px;
     list-style: none;
     position:absolute;
     z-index: 10; // TODO - we need z-index layout ... I don't know if this z-index is correct
@@ -168,6 +168,15 @@
     color: palette.clr(light, background, paper);
   }
 
+
+  &::part(list-item):focus,
+  &::part(list-item-selected):focus,
+  &::part(list-item):focus-visible,
+  &::part(list-item-selected):focus-visible {
+    outline: map.get(themeMap.$enchantedPalette, HCLSOFTWAREBLUE06) 2px solid;
+    outline-offset: -2px;
+  }
+
   &::part(list-item):hover {
     background-color: palette.clr(light, action, activeOpacity);
     color: map.get(themeMap.$enchantedPalette, BLACK100P);
@@ -180,9 +189,14 @@
   }
   &::part(#{$part-button}):focus,
   &::part(#{$part-button-outlined}):focus,
-  &::part(#{$part-button-outlined-focused}):focus{
+  &::part(#{$part-button-outlined-focused}):focus {
     border-radius: 2px;
-    border: 2px solid map.get(themeMap.$enchantedPalette, HCLSOFTWAREBLUE06); 
+    border: 2px solid map.get(themeMap.$enchantedPalette, HCLSOFTWAREBLUE06);
+  }
+
+  &::part(#{$part-button-contained-focused}) {
+    border-radius: 2px;
+    border: 2px solid map.get(themeMap.$enchantedPalette, HCLSOFTWAREBLUE06);
   }
 
   &::part(div):focus-within &::part(label) {
