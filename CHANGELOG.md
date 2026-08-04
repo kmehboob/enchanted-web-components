@@ -3,15 +3,18 @@
 ## Unreleased
 
 ### Added
-- Added custom Storybook MDX documentation pages.
-- Added remark-gfm support for Markdown tables.
 
 ### Fixed
-- Standardized storybook documentation by adding CSS Part descriptions and slot descriptions.
 
 ### Changed
 
 ### Breaking changes
+
+## 7.1.1
+
+### Fixed
+- Standardized storybook documentation by adding CSS Part descriptions and slot descriptions.
+- Disable Jekyll processing to allow Storybook assets with leading underscores to load correctly.
 
 ## 7.1.0
 
@@ -40,6 +43,7 @@
 
 ### Breaking changes
 - Refactored `enchanted-toggle-button` component and replaced singleButton, outlined, selectedValue, iconUrls, singleButtonTitle, singleButtonAria properties  with padding, iconSize, tooltipText, lastType, firstType, ariaLabel properties.
+- Application that using wdio for its testing framework and vite for build tool need to update their wdio config to include `debug` in `optimizeDeps.include` to ensure Vite pre-bundles the debug logging dependency used by enchanted-web-components, preventing module resolution failures during unit tests.
 
 ## 6.0.0
 
